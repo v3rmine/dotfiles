@@ -1,0 +1,73 @@
+#  _ _____ _     _            _
+# (_)___ /| |__ | | ___   ___| | _____
+# | | |_ \| '_ \| |/ _ \ / __| |/ / __|
+# | |___) | |_) | | (_) | (__|   <\__ \
+# |_|____/|_.__/|_|\___/ \___|_|\_\___/
+
+command=~/.i3/i3scripts/$BLOCK_NAME
+align=center
+separator=false
+separator_block_width=20
+markup=pango
+
+[mediaplayer]
+instance=spotify
+interval=5
+signal=10
+color=#a9e185
+
+[arch_update.py]
+command=printf "\\uf303 " && ~/.i3/i3scripts/arch_update.py -b "#FFFFFF" -u "#FFFFFF"
+interval=3600
+color=#1793D1
+
+#[home]
+#command=printf "\\uf015 " && ~/.i3/i3scripts/disk
+#instance=/home/
+#interval=3600
+#color=#ffb86c
+
+[root]
+command=printf "\\uf292 " && ~/.i3/i3scripts/disk
+instance=/
+interval=3600
+color=#ff79c6
+
+[temperature]
+interval=2
+color=#a9e185
+
+[cpu_usage]
+interval=2
+color=#8be9fd
+
+[memory]
+#command=printf "\\uf013 " && ~/.i3/i3scripts/memory
+command=printf "\\uf013 " && echo `free -h | awk '/free/ {getline; x=$2; print $3}'`
+interval=2
+color=#ffb86c
+
+[volume]
+interval=1
+signal=10
+color=#ff79c6
+
+[battery]
+interval=2
+color=#a9e185
+
+[wifi]
+command=printf "\\uf1eb " && ~/.i3/i3scripts/wifi
+instance=wlo1
+interval=5
+color=#8be9fd
+
+[time]
+command=printf "\\uf017 " && date '+%I:%M'
+interval=1
+color=#ffb86c
+
+[date]
+command=printf "\\uf073 " && date '+%A %e '
+interval=60
+color=#ff79c6

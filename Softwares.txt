@@ -1,0 +1,29 @@
+# Soft List to Install
+## Languages
+- Rust (Rustup)
+- Go
+- VLang (?)
+
+## Softs
+- lsd (Cargo)
+- Bat (Cargo)
+- Neovim
+- Docker (+docker-compose)
+- Visual Studio Code
+- Brave
+- Zsh (+oh-my-zsh)
+- LightDM (i3-gaps)
+- ranger
+- cmus
+- neofetch
+- nerd-fonts-complete (Aur)
+- betterlockscreen (Aur)
+- feh
+- xbindkeys
+
+## Theme
+- Pop light slim [theme]
+- Numix [icons]
+- Bibata ice [cursor]
+
+## VScode exts
