@@ -145,6 +145,7 @@ alias c="cmus"
 alias h="htop"
 alias vim="nvim"
 alias ssh-setup="eval \"`ssh-agent`\" ssh-add"
+alias clean="clear"
 
 ## Fun aliases
 alias please="sudo"

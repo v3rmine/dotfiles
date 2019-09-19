@@ -20,6 +20,9 @@
 - betterlockscreen (Aur)
 - feh
 - xbindkeys
+- youtube-dl
+- id3v2
+- brasero
 
 ## Theme
 - Pop light slim [theme]

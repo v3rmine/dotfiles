@@ -1,0 +1,16 @@
+{
+	"Chromeapp": {
+		"Icon": "brave",
+		"Terminal": false,
+		"templating": {
+			"Exec": "brave --app=\"{url}\""
+		}
+	},
+	"Sampleguiapp": {
+		"Icon": "{exec_name}",
+		"Terminal": false,
+		"templating": {
+			"Exec": "{command}"
+		}
+	}
+}

@@ -4,17 +4,17 @@
 ###########################
 
 # Increase volume
-"pulseaudio-ctl up"
+"amixer sset 'Master' 5%+"
    m:0x0 + c:123
    XF86AudioRaiseVolume
 
 # Decrease volume
-"pulseaudio-ctl down"
+"amixer sset 'Master' 5%-"
    m:0x0 + c:122
    XF86AudioLowerVolume
 
 # Mute
-"pulseaudio-ctl mute"
+"amixer sset 'Master' toggle"
    m:0x0 + c:121
    XF86AudioMute
 

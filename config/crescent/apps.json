@@ -1,0 +1,14 @@
+{
+	"TweetDeck": {
+		"template": "Chromeapp",
+		"templating": {
+			"url": "https://tweetdeck.twitter.com"
+		}
+	},
+	"Typora": {
+		"template": "Sampleguiapp",
+		"templating": {
+			"command": "/home/kuro/Apps/Typora-linux-x64/Typora"
+		}
+	}
+}
