@@ -22,6 +22,8 @@
         ~/.gitmessage: gitmessage
         ~/.monitor.sh: monitor.sh
         ~/.pacman.sh: pacman.sh
+        "~/.config/Code - OSS/User/settings.json": vscode_settings.json
+        ~/.ctags: ctags
 
 - shell:
         - [git submodule update --init --recursive, Installing submodules]

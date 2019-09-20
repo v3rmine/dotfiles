@@ -110,7 +110,7 @@ plugins=(git
          cargo
 	 rust
          history-substring-search
-         zsh-autosuggestions
+#         zsh-autosuggestions
          zsh-completions
          zsh-syntax-highlighting
 	 wd)
@@ -149,6 +149,7 @@ alias clean="clear"
 
 ## Fun aliases
 alias please="sudo"
-alias pls="fuck"
+alias update="pacman -Syyu"
+alias install="pacman -S"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

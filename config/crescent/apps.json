@@ -5,6 +5,18 @@
 			"url": "https://tweetdeck.twitter.com"
 		}
 	},
+	"Facebook": {
+		"template": "Chromeapp",
+		"templating": {
+			"url": "https://facebook.com"
+		}
+	},
+	"Messenger": {
+		"template": "Chromeapp",
+		"templating": {
+			"url": "https://messenger.com"
+		}
+	},
 	"Typora": {
 		"template": "Sampleguiapp",
 		"templating": {

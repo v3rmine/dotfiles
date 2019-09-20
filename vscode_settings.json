@@ -1,0 +1,7 @@
+{
+    "workbench.colorTheme": "fairyfloss",
+    "editor.fontFamily": "'Fira Code', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 2000,
+    "editor.fontLigatures": true
+}

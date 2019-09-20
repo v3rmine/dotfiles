@@ -23,6 +23,9 @@
 - youtube-dl
 - id3v2
 - brasero
+- rofimoji
+- maim
+zsh:1: command not found: q
 
 ## Theme
 - Pop light slim [theme]
