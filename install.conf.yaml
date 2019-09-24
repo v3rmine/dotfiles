@@ -24,6 +24,7 @@
         ~/.pacman.sh: pacman.sh
         "~/.config/Code - OSS/User/settings.json": vscode_settings.json
         ~/.ctags: ctags
+        /etc/default/tlp: tlp
 
 - shell:
         - [git submodule update --init --recursive, Installing submodules]
