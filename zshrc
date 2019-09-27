@@ -108,12 +108,13 @@ plugins=(git
          gitfast
          golang
          cargo
-	 rust
+	     rust
          history-substring-search
-#         zsh-autosuggestions
+         zsh-autosuggestions
          zsh-completions
          zsh-syntax-highlighting
-	 wd)
+	     wd
+         dotenv)
 
 autoload -U compinit && compinit
 source /usr/share/oh-my-zsh/oh-my-zsh.sh
@@ -134,7 +135,7 @@ eval
             }
         
 # Aliases for a few useful commands
-alias mirrorUpdate="sudo reflector --latest 250 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
+alias mirrorUpdate="sudo pacman-mirrors -f"
 alias pacmanGhost="~/.pacman.sh"
 alias cat="bat"
 alias ls="lsd"
