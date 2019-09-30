@@ -22,5 +22,11 @@
 		"templating": {
 			"command": "/home/kuro/Apps/Typora-linux-x64/Typora"
 		}
-	}
+	},
+    "CoqIDE": {
+        "template": "Sampleguiapp",
+        "templating": {
+            "command": "/home/kuro/.opam/default/bin/coqide"
+        }
+    }
 }

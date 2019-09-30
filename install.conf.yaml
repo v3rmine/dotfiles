@@ -9,6 +9,7 @@
                 force: true
 
 - link:
+        ~/.profile: profile
         ~/.xbindkeysrc: xbindkeysrc
         ~/.zshrc: zshrc
         ~/.zprofile: zprofile
