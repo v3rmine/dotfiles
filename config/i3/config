@@ -162,7 +162,10 @@ bindsym $mod+Shift+r restart
 # Exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-
+# Freeze focused window
+bindsym $mod+Shift+e exec notify-send `xprop -id $(xdotool getwindowfocus) | grep '_NET_WM_PID' | grep -oE '[[:digit:]]*$'`
+#bindsym $mod+Shift+e exec kill -STOP `xprop -id $(xdotool getwindowfocus) | grep '_NET_WM_PID' | grep -oE '[[:digit:]]*$'`
+#bindsym $mod+Alt+e exec kill -CONT `xprop -id $(xdotool getwindowfocus) | grep '_NET_WM_PID' | grep -oE '[[:digit:]]*$'`
 
 # Resize window (you can also use the mouse for that)
 #mode "resize"

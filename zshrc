@@ -140,6 +140,7 @@ source /usr/share/oh-my-zsh/oh-my-zsh.sh
 # Aliases for a few useful commands
 alias mirrorUpdate="sudo pacman-mirrors -f"
 alias pacmanGhost="~/.pacman.sh"
+alias rmPacmanOrphans="sudo pacman -Rns $(pacman -Qtdq)"
 alias cat="bat"
 alias ls="lsd"
 alias ip="ip -c"
@@ -150,6 +151,7 @@ alias h="htop"
 alias vim="nvim"
 alias ssh-setup="eval \"`ssh-agent`\" ssh-add"
 alias clean="clear"
+alias pdf="epdfview"
 
 ## Fun aliases
 alias please="sudo"

@@ -6,12 +6,16 @@
 
 ## Softs
 - lsd (Cargo)
-- Bat (Cargo)
-- Neovim
-- Docker (+docker-compose)
-- Visual Studio Code
+- bat (Cargo)
+- neovim
+    - neovim-plug-git
+- docker (+docker-compose)
+- visual-studio-code-bin
 - Brave
 - Zsh (+oh-my-zsh)
+    - zsh-theme-powerlevel9k
+    - powerline-fonts
+    - awesome-terminal-fonts
 - LightDM (i3-gaps)
 - ranger
 - cmus
@@ -19,17 +23,26 @@
 - nerd-fonts-complete (Aur)
 - betterlockscreen (Aur)
 - feh
-- xbindkeys
+- xbindkeys (+xbindkeys_show)
 - youtube-dl
-- id3v2
-- brasero
 - rofimoji
 - maim
-zsh:1: command not found: q
+- ruby (+rbenv)
+- ctags
+- ttf-fira-code
+- evince
+- discord
+- opam (+ocaml)
+- wireshark-cli
+- tor (+torsocks)
+- goland-eap
+- clion-eap
+- lldb gdb cmake
+- zola-bin
+- teensyduino
 
 ## Theme
 - Pop light slim [theme]
 - Numix [icons]
 - Bibata ice [cursor]
 
-## VScode exts
