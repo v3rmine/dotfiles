@@ -928,7 +928,6 @@ _tear_down	dotbot/lib/pyyaml/tests/lib3/test_yaml_ext.py	/^def _tear_down():$/;"
 _test_success	dotbot/dotbot/plugins/link.py	/^    def _test_success(self, command):$/;"	m	class:Link
 _token_to_object	dotbot/lib/pyyaml/ext/_yaml.pyx	/^    cdef object _token_to_object(self, yaml_token_t *token):$/;"	m	class:CParser
 _unicode_open	dotbot/lib/pyyaml/tests/lib/test_input_output.py	/^def _unicode_open(file, encoding, errors='strict'):$/;"	f
-accept_new	gz99.sh	/^accept_new(){$/;"	f
 add_constructor	dotbot/lib/pyyaml/lib/yaml/__init__.py	/^def add_constructor(tag, constructor, Loader=Loader):$/;"	f
 add_constructor	dotbot/lib/pyyaml/lib/yaml/constructor.py	/^    add_constructor = classmethod(add_constructor)$/;"	v	class:BaseConstructor
 add_constructor	dotbot/lib/pyyaml/lib/yaml/constructor.py	/^    def add_constructor(cls, tag, constructor):$/;"	m	class:BaseConstructor
@@ -1587,7 +1586,6 @@ message	i3/i3scripts/arch_update.py	/^message = "<span color='{0}'>{1}<\/span>"$
 metaclass	dotbot/dotbot/util/compat.py	/^    class metaclass(meta):$/;"	c	function:with_metaclass	file:
 mimetypes	dotbot/lib/pyyaml/examples/pygments-lexer/yaml.py	/^    mimetypes = ['text\/x-yaml']$/;"	v	class:YAMLLexer
 mpd	i3/i3scripts/mediaplayer	/^sub mpd {$/;"	s
-myhash	gz99.sh	/^myhash(){$/;"	f
 name	config/gtk-3.0/settings.ini	/^gtk-cursor-theme-name=Bibata_Ice$/;"	k	section:Settings
 name	config/gtk-3.0/settings.ini	/^gtk-font-name=Fira Code 12$/;"	k	section:Settings
 name	config/gtk-3.0/settings.ini	/^gtk-icon-theme-name=Numix$/;"	k	section:Settings

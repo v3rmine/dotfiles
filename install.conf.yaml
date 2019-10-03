@@ -26,7 +26,6 @@
         "~/.config/Code - OSS/User/settings.json": vscode_settings.json
         ~/.ctags: ctags
         /etc/default/tlp: tlp
-        /usr/bin/gz99: gz99.sh
 
 - shell:
         - [git submodule update --init --recursive, Installing submodules]
