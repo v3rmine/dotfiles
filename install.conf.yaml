@@ -1,31 +1,35 @@
 - defaults:
-        link:
-                relink: true
+    link:
+        relink: true
 
 - clean: ["~"]
 
 - clean:
-        ~/.config:
-                force: true
-
+    ~/.config:
+        force: true
+    ~/.local/bin:
+        force: true
 - link:
-        ~/.profile: profile
-        ~/.xbindkeysrc: xbindkeysrc
-        ~/.zshrc: zshrc
-        ~/.zprofile: zprofile
-        ~/.config/:
-                glob: true
-                path: config/*
-        ~/.i3: i3
-        ~/.wallpapers: wallpapers
-        ~/.gitconfig: gitconfig
-        ~/.gitignore: gitignore
-        ~/.gitmessage: gitmessage
-        ~/.monitor.sh: monitor.sh
-        ~/.pacman.sh: pacman.sh
-        "~/.config/Code - OSS/User/settings.json": vscode_settings.json
-        ~/.ctags: ctags
-        /etc/default/tlp: tlp
+    ~/.profile: profile
+    ~/.xbindkeysrc: xbindkeysrc
+    ~/.zshrc: zshrc
+    ~/.zprofile: zprofile
+    ~/.config/:
+        glob: true
+        path: config/*
+    ~/.local/bin/:
+        glob: true
+        path: bin/*
+    ~/.i3: i3
+    ~/.wallpapers: wallpapers
+    ~/.gitconfig: gitconfig
+    ~/.gitignore: gitignore
+    ~/.gitmessage: gitmessage
+    ~/.monitor.sh: monitor.sh
+    ~/.pacman.sh: pacman.sh
+    "~/.config/Code - OSS/User/settings.json": vscode_settings.json
+    ~/.ctags: ctags
+    /etc/default/tlp: tlp
 
 - shell:
-        - [git submodule update --init --recursive, Installing submodules]
+    - [git submodule update --init --recursive, Installing submodules]

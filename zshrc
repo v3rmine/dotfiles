@@ -121,22 +121,9 @@ eval $(opam env)
          
 autoload -U compinit && compinit
 source /usr/share/oh-my-zsh/oh-my-zsh.sh
-#eval 
-#            function fuck () {
-#                TF_PYTHONIOENCODING=$PYTHONIOENCODING;
-#                export TF_SHELL=bash;
-#                export TF_ALIAS=fuck;
-#                export TF_SHELL_ALIASES=$(alias);
-#                export TF_HISTORY=$(fc -ln -10);
-#                export PYTHONIOENCODING=utf-8;
-#                TF_CMD=$(
-#                    thefuck THEFUCK_ARGUMENT_PLACEHOLDER "$@"
-#                ) && eval "$TF_CMD";
-#                unset TF_HISTORY;
-#                export PYTHONIOENCODING=$TF_PYTHONIOENCODING;
-#                history -s $TF_CMD;
-#            }
-        
+
+export PATH="$PATH:$HOME/.local/bin"
+
 # Aliases for a few useful commands
 alias mirrorUpdate="sudo pacman-mirrors -f"
 alias pacmanGhost="~/.pacman.sh"
@@ -144,7 +131,7 @@ alias rmPacmanOrphans="sudo pacman -Rns $(pacman -Qtdq)"
 alias cat="bat"
 alias ls="lsd"
 alias ip="ip -c"
-alias rm="rm -i"
+alias rm="trash.sh" # before it was rm="rm -i" 
 alias x="ranger"
 alias c="cmus"
 alias h="htop"
@@ -152,10 +139,15 @@ alias vim="nvim"
 alias ssh-setup="eval \"`ssh-agent`\" ssh-add"
 alias clean="clear"
 alias pdf="epdfview"
+alias explore-dir="godu"
 
 ## Fun aliases
 alias please="sudo"
 alias update="pacman -Syyu"
 alias install="pacman -S"
 
+# Scripts to run on cli start
+$HOME/.local/bin/trash.sh --auto-clean
+
+# FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
