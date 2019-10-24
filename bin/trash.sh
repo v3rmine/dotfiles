@@ -31,7 +31,10 @@ display_help() {
 }
 
 ## Main script
-if [ "$1" == "" ]; then
+#count=0
+#for arg in "$@"; do
+#    count=count+1
+if [ "$1" == "" ]; then # && "$count" == 0 ]; then
     display_help
 elif [ "$1" == "-f" ]; then
     # Do not move to trash
