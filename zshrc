@@ -123,6 +123,7 @@ autoload -U compinit && compinit
 source /usr/share/oh-my-zsh/oh-my-zsh.sh
 
 export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.luarocks/bin"
 
 # Aliases for a few useful commands
 alias mirrorUpdate="sudo pacman-mirrors -f"
@@ -131,7 +132,7 @@ alias rmPacmanOrphans="sudo pacman -Rns $(pacman -Qtdq)"
 alias cat="bat"
 alias ls="lsd"
 alias ip="ip -c"
-alias rm="trash.sh" # before it was rm="rm -i" 
+alias rm="trash" # before it was rm="rm -i" 
 alias x="ranger"
 alias c="cmus"
 alias h="htop"
@@ -140,6 +141,7 @@ alias ssh-setup="eval \"`ssh-agent`\" ssh-add"
 alias clean="clear"
 alias pdf="epdfview"
 alias explore-dir="godu"
+alias emacs="emacsclient -c -a emacs"
 
 ## Fun aliases
 alias please="sudo"
@@ -147,7 +149,7 @@ alias update="pacman -Syyu"
 alias install="pacman -S"
 
 # Scripts to run on cli start
-$HOME/.local/bin/trash.sh --auto-clean
+$HOME/.local/bin/trash --auto-clean
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

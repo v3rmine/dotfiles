@@ -38,13 +38,13 @@ if [ "$1" == "" ]; then # && "$count" == 0 ]; then
     display_help
 elif [ "$1" == "-f" ]; then
     # Do not move to trash
-    rm -f "$1"
+    /usr/bin/rm -f $1
 elif [ "$1" == "-rf" ]; then
     # Do not move to trash
-    rm -rf "$1"
+    /usr/bin/rm -rf $1
 elif [ "$1" == "--empty" ]; then
     # Empty trash
-    rm -rf "$HOME/.trash/*"
+    /usr/bin/rm -rf "$TRASH"/*
 elif [ "$1" == "--auto-clean" ]; then
     # Remove from trash files where time elapsed > AUTO_CLEAN_TIME (in hours)
     for f in "$TRASH"/*; do
@@ -52,8 +52,8 @@ elif [ "$1" == "--auto-clean" ]; then
         f_time=$(echo "$f" | sed -n -e 's/^.*-\([0-9]\+\)$/\1/p')
         if [ "$f_time" != "" ]; then
             if [ "$(echo "$f_time+$AUTO_CLEAN_TIME*3600" | bc)" -le "$timestamp" ]; then
-                rm -rf "$f"
-                rm -f "$f.meta"
+                /usr/bin/rm -rf "$f"
+                /usr/bin/rm -f "$f.meta"
             fi
         fi
     done
@@ -62,7 +62,7 @@ elif [ "$1" == "--restore" ]; then
 
     if [[ -e "$trashed" ]]; then
         mv "$trashed" "$(cat "$trashed.meta")"
-        rm -f "$trashed.meta"
+        /usr/bin/rm -f "$trashed.meta"
     else
         error "$1 does not exist in trash!"
     fi

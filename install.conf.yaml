@@ -29,6 +29,7 @@
     ~/.pacman.sh: pacman.sh
     "~/.config/Code - OSS/User/settings.json": vscode_settings.json
     ~/.ctags: ctags
+    ~/.spacemacs: spacemacs
     /etc/default/tlp: tlp
 
 - shell:
