@@ -124,6 +124,7 @@ source /usr/share/oh-my-zsh/oh-my-zsh.sh
 
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.luarocks/bin"
+export PATH="$PATH:$HOME/.gem/ruby/2.6.0/bin"
 
 # Aliases for a few useful commands
 alias mirrorUpdate="sudo pacman-mirrors -f"
