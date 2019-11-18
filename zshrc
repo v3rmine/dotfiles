@@ -117,7 +117,7 @@ plugins=(git
          dotenv)
 
 # OPAM (ocaml builder)
-eval $(opam env)
+# eval $(opam env)
          
 autoload -U compinit && compinit
 source /usr/share/oh-my-zsh/oh-my-zsh.sh
@@ -125,6 +125,7 @@ source /usr/share/oh-my-zsh/oh-my-zsh.sh
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.luarocks/bin"
 export PATH="$PATH:$HOME/.gem/ruby/2.6.0/bin"
+export PATH="$PATH:$HOME/.opam/default/bin"
 
 # Aliases for a few useful commands
 alias mirrorUpdate="sudo pacman-mirrors -f"
@@ -142,7 +143,7 @@ alias ssh-setup="eval \"`ssh-agent`\" ssh-add"
 alias clean="clear"
 alias pdf="epdfview"
 alias explore-dir="godu"
-alias emacs="emacsclient -c -a emacs"
+# alias emacs="emacsclient -c -a emacs"
 
 ## Fun aliases
 alias please="sudo"

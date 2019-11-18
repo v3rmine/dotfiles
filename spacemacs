@@ -391,9 +391,9 @@ before packages are loaded. If you are unsure, you should try in setting them
 in `dotspacemacs/user-config' first."
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
-    (add-hook 'web-mode-hook #'(lambda ()
-                                  (enable-minor-mode
-                                  '("\\.jsx?\\'" . prettier-js-mode))))
+  (add-hook 'web-mode-hook #'(lambda ()
+                               (enable-minor-mode
+                                '("\\.jsx?\\'" . prettier-js-mode))))
   )
 
 (defun dotspacemacs/user-config ()
