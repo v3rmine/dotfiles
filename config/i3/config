@@ -12,8 +12,8 @@ set $mod Mod4
 new_window pixel
 
 # i3-gaps
-gaps inner 12
-gaps outer 12
+gaps inner 10 # was 12 before
+gaps outer 10 # was 12 before
 
 # Font for window titles.
 font pango: SauceCodePro Nerd Font Black 11
@@ -149,6 +149,7 @@ assign [class="spotify"] $workspace8
 # Enable float for some windows
 for_window [class="^Pavucontrol$"] floating enable
 for_window [class="^Arandr$"] floating enable
+for_window [class="^Java:.*$"] floating enable
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
