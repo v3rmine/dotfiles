@@ -9,9 +9,10 @@
         force: true
     ~/.local/bin:
         force: true
+    ~/.local/share:
+        force: true
 - link:
     ~/.profile: profile
-    ~/.xbindkeysrc: xbindkeysrc
     ~/.zshrc: zshrc
     ~/.zprofile: zprofile
     ~/.config/:
@@ -20,16 +21,13 @@
     ~/.local/bin/:
         glob: true
         path: bin/*
-    ~/.i3: i3
-    ~/.wallpapers: wallpapers
+    ~/.local/share/:
+        glob: true
+        path: share/*
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
     ~/.gitmessage: gitmessage
-    ~/.monitor.sh: monitor.sh
-    ~/.pacman.sh: pacman.sh
-    "~/.config/Code - OSS/User/settings.json": vscode_settings.json
     ~/.ctags: ctags
-    ~/.spacemacs: spacemacs
     /etc/default/tlp: tlp
 
 - shell:

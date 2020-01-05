@@ -10,15 +10,12 @@ source .zprofile
 # Syntax highlighting and tab completion
 # source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/doc/pkgfile/command-not-found.zsh
+#source /usr/share/doc/pkgfile/command-not-found.zsh
 
 autoload -Uz compinit
 
-# Show OS info when opening a new terminal
-neofetch
-
 # Font mode for powerlevel9k
-P9K_MODE="nerdfont-complete"
+# P9K_MODE="nerdfont-complete"
 
 # Prompt elements
 P9K_LEFT_PROMPT_ELEMENTS=(custom_user dir vcs)
