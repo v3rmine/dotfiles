@@ -20,11 +20,11 @@ Plug 'scrooloose/nerdcommenter'
 "Plug 'honza/vim-snippets'
 
 " Find in files
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
 
 " Find in files name
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 
 " Sidebar undo history
 Plug 'mbbill/undotree'
@@ -41,33 +41,34 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
 Plug 'sebastianmarkow/deoplete-rust'
 Plug 'deoplete-plugins/deoplete-docker'
+Plug 'carlitux/deoplete-ternjs' ", { 'do': 'npm install -g tern' }
 
 " Go lang commands
 Plug 'stamblerre/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/plugged/gocode/vim/symlink.sh' }
 Plug 'fatih/vim-go' ", { 'do': ':GoUpdateBinaries' } 
 
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
+"Plug 'vim-pandoc/vim-pandoc'
+"Plug 'vim-pandoc/vim-pandoc-syntax'
 
 "" Plug 'neomake/neomake'
 
 "" Plug 'terryma/vim-multiple-cursors'
 
 " Indentation help
-"Plug 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides'
 
 " Docker tools
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'kevinhui/vim-docker-tools'
-Plug 'skanehira/docker-compose.vim'
+"Plug 'ekalinin/Dockerfile.vim'
+"Plug 'kevinhui/vim-docker-tools'
+"Plug 'skanehira/docker-compose.vim'
 
 " Coq & Gallina 
-Plug 'let-def/vimbufsync'
+"Plug 'let-def/vimbufsync'
 "Plug 'joxcat/coq.vim'
-Plug 'whonore/coqtail'
+"Plug 'whonore/coqtail'
 
 " Moonscript & Lua
-Plug 'leafo/moonscript-vim'
+"Plug 'leafo/moonscript-vim'
 "Plug 'svermeulen/nvim-moonmaker'
 
 call plug#end()
@@ -87,8 +88,8 @@ let g:UltiSnipsExpandTrigger="<tab>"
 
 " Enable deoplete
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#rust#racer_binary='/home/kuro/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path='/home/kuro/.config/nvim/rust-src/rust/src'
+"let g:deoplete#sources#rust#racer_binary='$HOME/.cargo/bin/racer'
+"let g:deoplete#sources#rust#rust_source_path='$HOME/.config/nvim/rust-src/rust/src'
 
 " Display line number
 set number
@@ -108,8 +109,12 @@ set showmatch
 set smarttab
 
 "" Tabs for Coq
-autocmd Filetype coq setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+"autocmd Filetype coq setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 "" For Coqtail
-filetype plugin indent on
-syntax on
+"filetype plugin indent on
+"syntax on
+
+"" Python
+"let g:python2_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
