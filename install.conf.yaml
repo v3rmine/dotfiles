@@ -7,18 +7,15 @@
 - clean:
     ~/.local/bin:
         force: true
-    ~/.local/share:
-        force: true
 - link:
     ~/.zshrc: zshrc
+    ~/.config/:
+        glob: true
+        path: config/*
     ~/.local/bin/:
         glob: true
         path: bin/*
-    ~/.local/share/:
-        glob: true
-        path: share/*
     ~/.ctags: ctags
-    ~/.config/nvim/init.vim: config-init.vim
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]

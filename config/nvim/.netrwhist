@@ -1,3 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/Users/kuro/Projet/index-parser'
+let g:netrw_dirhist_5='/Users/kuro/Projet/udp-crypt-chat/src'
+let g:netrw_dirhist_4='/Users/kuro/Projet/udp-crypt-chat'
+let g:netrw_dirhist_3='/Users/kuro/Projet/my-app'
+let g:netrw_dirhist_2='/Users/kuro/Projet/index-parser'
 let g:netrw_dirhist_1='/Users/kuro/Git/dotfiles/config/nvim'
