@@ -1,0 +1,4 @@
+= NVIM =
+== Plugins ==
+  * [[vim-surround]] -- Manage quotes and brackets
+  * [[vim-wiki]] -- Theses files

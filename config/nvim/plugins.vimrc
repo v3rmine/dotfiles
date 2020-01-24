@@ -1,19 +1,32 @@
 call plug#begin()
 
-" Bottom bar theme
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" === Editing ===
+" Trailing whitespace highlight & autofix
+Plug 'ntpeters/vim-better-whitespace'
 
-" Sidebar explorer
-"Plug 'scrooloose/nerdtree'
-"Plug 'ryanoasis/vim-devicons'
-
-" Pairs quotes, brackets...
+" auto-close plugin
+"Plug 'rstacruz/vim-closer'
 Plug 'jiangmiao/auto-pairs'
+
+" Surround brackets...
+Plug 'tpope/vim-surround'
+
+" --- Autocomplete ---
+Plug 'Shougo/neoinclude.vim'
+Plug 'jsfaint/coc-neoinclude'
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': '*', 'do': { -> coc#util#install()}}
+
+" autocomplete JSs imports
+Plug 'galooshi/vim-import-js', { 'do': 'npm install -g import-js' }
+
+" Shougo/denite.nvim
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+
+" Print function signature in echo area
+Plug 'Shougo/echodoc.vim'
 
 " Better comments
 Plug 'scrooloose/nerdcommenter'
-"" Plug 'sbdchd/neoformat'
 
 " Autoformat
 Plug 'sbdchd/neoformat'
@@ -21,61 +34,55 @@ Plug 'sbdchd/neoformat'
 " Code Folding
 Plug 'tmhedberg/SimpylFold'
 
-" Snippets management
-"Plug 'SirVer/ultisnips'
-"Plug 'honza/vim-snippets'
+" === UI ===
+" Bottom bar theme
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes', { 'do': 'cp $HOME/.config/nvim/space.vim $HOME/.config/nvim/plugged/vim-airline-themes/autoload/airline/themes/space.vim' }
 
-" Find in files
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'junegunn/fzf.vim'
+" Editor Theme
+"Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'mhartington/oceanic-next'
 
-" Find in files name
-"Plug 'ctrlpvim/ctrlp.vim'
+" Icons
+Plug 'ryanoasis/vim-devicons'
 
 " Sidebar undo history
 Plug 'mbbill/undotree'
 
-" Expand selection
-Plug 'terryma/vim-expand-region'
-
-" Universal cTags 
-"Plug 'ludovicchabant/vim-gutentags'
-"Plug 'majutsushi/tagbar'
-
-" Autocomplete
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
-"Plug 'sebastianmarkow/deoplete-rust'
-"Plug 'deoplete-plugins/deoplete-docker'
-"Plug 'carlitux/deoplete-ternjs' ", { 'do': 'npm install -g tern' }
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = ['coc-snippets', 'coc-highlight', 'coc-git', 'coc-explorer', 'coc-emmet', 'coc-calc', 'coc-tsserver', 'coc-json', 'coc-html', 'coc-json', 'coc-rls']
-
-"Go lang commands
-Plug 'stamblerre/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/plugged/gocode/vim/symlink.sh' }
-Plug 'fatih/vim-go' ", { 'do': ':GoUpdateBinaries' } 
-
-" Syntax analysis
-Plug 'dense-analysis/ale'
-
-" Markdown
-"Plug 'vim-pandoc/vim-pandoc'
-"Plug 'vim-pandoc/vim-pandoc-syntax'
-
-"" Plug 'neomake/neomake'
-
-"" Plug 'terryma/vim-multiple-cursors'
-
 " Indentation help
 Plug 'nathanaelkane/vim-indent-guides'
 
-" Docker tools
-"Plug 'ekalinin/Dockerfile.vim'
-"Plug 'kevinhui/vim-docker-tools'
-"Plug 'skanehira/docker-compose.vim'
+" Local-wiki
+Plug 'vimwiki/vimwiki'
 
-" Typescript
-Plug 'ianks/vim-tsx'
-Plug 'leafgarland/typescript-vim'
+" === Language plugin ===
+" --- Golang ---
+Plug 'stamblerre/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/plugged/gocode/vim/symlink.sh' }
+Plug 'fatih/vim-go' ", { 'do': ':GoUpdateBinaries' }
+
+" --- Markdown ---
+"Plug 'vim-pandoc/vim-pandoc'
+"Plug 'vim-pandoc/vim-pandoc-syntax'
+
+" --- Javascript / Typescript ---
+" Typescript syntax highlighting
+Plug 'HerringtonDarkholme/yats.vim'
+" React JSX syntax highlighting
+Plug 'mxw/vim-jsx'
+
+" Syntax highlighting for javascript libraries
+Plug 'othree/javascript-libraries-syntax.vim'
+" Improved syntax highlighting and indentation
+Plug 'othree/yajs.vim'
+
+" Generate JSDoc based on code
+Plug 'heavenshell/vim-jsdoc'
+
+" --- C/C++ ---
+" Debug / Breakpoints
+Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
+
+" Buffer management
+"Plug 'jeetsukumaran/vim-buffergator'
 
 call plug#end()

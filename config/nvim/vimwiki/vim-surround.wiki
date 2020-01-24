@@ -1,0 +1,6 @@
+= vim-surround =
+== Commands ==
+  * `cs{old_delim}{new_delim}`: to replace
+  * `cst{new_delim}`: to surround the line
+  * `ds{old_delim}`: to remove
+  * `ys{object_type}{new_delim}`: to surround (object like `iw` for a word)
