@@ -4,9 +4,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/kuro/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 DEFAULT_USER="$USER"
 ZSH_THEME="bira"
@@ -16,12 +13,6 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor root line)
 ZSH_HIGHLIGHT_PATTERNS=('rm -rf *' 'fg=white,bold,bg=red')
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -43,7 +34,7 @@ ZSH_HIGHLIGHT_PATTERNS=('rm -rf *' 'fg=white,bold,bg=red')
 # DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -67,15 +58,11 @@ ZSH_HIGHLIGHT_PATTERNS=('rm -rf *' 'fg=white,bold,bg=red')
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
+VSCODE=code-insiders
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git wd)
+plugins=(git wd brew cargo autoenv npm rust vscode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -105,12 +92,29 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# shortcuts
 alias x="exit"
 alias sz="source ~/.zshrc"
 alias hc="history -c"
+
+# rebind classics
 alias cat="bat"
 alias ls="lsd"
 alias vim="nvim"
+
+# tools
+alias disneyplus="echo jasonawilhite@gmail.com:Macy2005"
+
+# github
+alias commit="git commit -am \"$1\""
+alias pull="git fetch && git pull"
+alias fetch="git fetch"
+alias ga="git add"
+alias gc="git commit"
+alias gk="git checkout"
+alias gm="git merge"
+alias gf=fetch
+alias gp=pull
 
 #Include Z
 if command -v brew >/dev/null 2>&1; then
@@ -127,6 +131,4 @@ test -r /Users/kuro/.opam/opam-init/init.zsh && . /Users/kuro/.opam/opam-init/in
 
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
-
-alias disneyplus="echo jasonawilhite@gmail.com:Macy2005"
 
