@@ -111,6 +111,7 @@ alias pull="git fetch && git pull"
 alias fetch="git fetch"
 alias ga="git add"
 alias gc="git commit"
+alias gcm="gc -m"
 alias gk="git checkout"
 alias gm="git merge"
 alias gf=fetch
@@ -132,3 +133,6 @@ test -r /Users/kuro/.opam/opam-init/init.zsh && . /Users/kuro/.opam/opam-init/in
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+export PATH="/usr/local/opt/llvm/bin:$PATH"

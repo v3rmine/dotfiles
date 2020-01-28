@@ -3,7 +3,8 @@ let g:coc_global_extensions = [
       \ 'coc-emmet', 'coc-calc', 'coc-tsserver',
       \ 'coc-json', 'coc-html', 'coc-json',
       \ 'coc-rls', 'coc-prettier', 'coc-eslint',
-      \ 'coc-css', 'coc-python', 'coc-elixir']
+      \ 'coc-css', 'coc-python']
+", 'coc-elixir']
 
 function! s:check_back_space() abort
   let col = col('.') - 1

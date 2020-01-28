@@ -18,11 +18,18 @@
     "languageserver": {
       "ccls": {
         "command": "ccls",
-        "filetypes": ["c", "cpp"],
+        "filetypes": ["c", "cpp", "c++"],
         "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
         "initializationOptions": {
           "cache": {
             "directory": "/tmp/ccls"
+          },
+          "clang": {
+            "resourceDir": "/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0",
+            "extraArgs": [
+              "-I",
+              "/usr/include/c++/4.2.1"
+            ]
           }
         }
       }
