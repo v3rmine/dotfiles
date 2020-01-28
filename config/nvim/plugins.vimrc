@@ -82,6 +82,11 @@ Plug 'heavenshell/vim-jsdoc'
 " Debug / Breakpoints
 Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 
+" --- Elixir ---
+"Plug 'elixir-lang/vim-elixir'
+"Plug 'thinca/vim-ref'
+"Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
+
 " Buffer management
 "Plug 'jeetsukumaran/vim-buffergator'
 

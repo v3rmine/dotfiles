@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =6
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/Users/kuro/Git/fac.courses-s6/LIFASR7/TP1'
 let g:netrw_dirhist_6='/Users/kuro/Projet/index-parser'
 let g:netrw_dirhist_5='/Users/kuro/Projet/udp-crypt-chat/src'
 let g:netrw_dirhist_4='/Users/kuro/Projet/udp-crypt-chat'

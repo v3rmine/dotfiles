@@ -98,3 +98,6 @@ endfunction
 
 " Remap Esc to exit terminal
 "nmap <Esc> <C-\><C-n><CR>
+"
+"nmap <C-W> :set wrap<CR>
+"nmap <C-S-W> :set nowrap<CR>
