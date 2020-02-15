@@ -1,0 +1,10 @@
+= Folding =
+== By syntax ==
+You nedd `set foldmethod=syntax`
+* `z-o`: opens a fold at the cursor
+* `z-S+o`: opens all folds at the cursor
+* `z-c`: closes a fold at the cursor
+* `z-m`: increases the _foldevel_ by one
+* `z-S+m`: closes all open folds
+* `z-r`: decreases the _foldlevel_ by one
+* `z-S+r`: decreases the _foldlevel_ to zero -- all folds will be open
