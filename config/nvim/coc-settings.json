@@ -30,7 +30,9 @@
               "-I",
               "/usr/include/c++/4.2.1",
               "-I",
-              "/Library/Developer/CommandLineTools/usr/include/c++/v1"
+              "/Library/Developer/CommandLineTools/usr/include/c++/v1",
+              "-I",
+              "/opt/X11/include"
             ]
           }
         }

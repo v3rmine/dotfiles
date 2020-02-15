@@ -62,7 +62,7 @@ VSCODE=code-insiders
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git wd brew cargo autoenv npm rust vscode)
+plugins=(poetry git wd brew cargo autoenv npm rust vscode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -116,6 +116,8 @@ alias gk="git checkout"
 alias gm="git merge"
 alias gf=fetch
 alias gp=pull
+alias gst="git status"
+alias gsh="git show"
 
 #Include Z
 if command -v brew >/dev/null 2>&1; then

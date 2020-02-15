@@ -11,6 +11,12 @@ Plug 'jiangmiao/auto-pairs'
 " Surround brackets...
 Plug 'tpope/vim-surround'
 
+" Ctags / Gtags
+Plug 'jsfaint/gen_tags.vim'
+
+" Autoformat
+Plug 'Chiel92/vim-autoformat'
+
 " --- Autocomplete ---
 Plug 'Shougo/neoinclude.vim'
 Plug 'jsfaint/coc-neoinclude'
@@ -86,6 +92,9 @@ Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 "Plug 'elixir-lang/vim-elixir'
 "Plug 'thinca/vim-ref'
 "Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
+
+" --- Toml ---
+Plug 'cespare/vim-toml'
 
 " Buffer management
 "Plug 'jeetsukumaran/vim-buffergator'
