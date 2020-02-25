@@ -1,0 +1,10 @@
+- bat
+- lsd
+- ripgrep
+- treesize
+- skim
+- just
+- hyperfine
+- sniffglue
+- xcompress
+- rm-improved

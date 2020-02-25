@@ -17,6 +17,9 @@ Plug 'jsfaint/gen_tags.vim'
 " Autoformat
 Plug 'Chiel92/vim-autoformat'
 
+" fuzzy file searching
+Plug 'lotabout/skim.vim'
+
 " --- Autocomplete ---
 Plug 'Shougo/neoinclude.vim'
 Plug 'jsfaint/coc-neoinclude'
