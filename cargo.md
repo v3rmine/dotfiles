@@ -8,3 +8,6 @@
 - sniffglue
 - xcompress
 - rm-improved
+- watchexec
+- hors
+- xxv | hexyl

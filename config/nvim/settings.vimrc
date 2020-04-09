@@ -1,6 +1,6 @@
 " Python
-let g:python2_host_prog = '/usr/local/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+"let g:python2_host_prog = '/usr/local/bin/python'
+"let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Neoformat
 let g:neoformat_basic_format_align = 1
@@ -70,3 +70,12 @@ set autoread
 if exists('g:loaded_webdevicons')
   call webdevicons#refresh()
 endif
+
+" Justfile support
+if exists("did_load_filetypes")
+  finish
+endif
+
+augroup filetypedetect
+  au BufNewFile,BufRead justfile setf make
+augroup END

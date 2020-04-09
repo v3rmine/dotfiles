@@ -12,7 +12,8 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(history)
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor root line)
-ZSH_HIGHLIGHT_PATTERNS=('rm -rf *' 'fg=white,bold,bg=red')
+ZSH_HIGHLIGHT_PATTERNS=('rm *' 'fg=white,bold,bg=red')
+#ZSH_HIGHLIGHT_PATTERNS=('rm -rf *' 'fg=white,bold,bg=red')
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -62,7 +63,7 @@ VSCODE=code-insiders
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(poetry git wd brew cargo autoenv npm rust vscode)
+plugins=(poetry git wd brew cargo npm rust vscode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -96,14 +97,19 @@ source $ZSH/oh-my-zsh.sh
 alias x="exit"
 alias sz="source ~/.zshrc"
 alias hc="history -c"
+alias j="just"
 
 # rebind classics
 alias cat="bat"
 alias ls="lsd"
 alias vim="nvim"
+alias rm="rip"
+alias time="hyperfine"
+alias archive="eval export $(grep -v '^#' $HOME/Git/dotfiles/archive.conf); $HOME/Git/archive/ArchiveBox/archive"
 
 # tools
 alias disneyplus="echo jasonawilhite@gmail.com:Macy2005"
+alias trust-ssh="ssh -o UserKnownHostsFile=/dev/null -T $1 /bin/bash -i"
 
 # github
 alias commit="git commit -am \"$1\""
@@ -138,3 +144,11 @@ export PATH="/usr/local/opt/openssl/bin:$PATH"
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export CHROME_PATH=/Applications/Chromium.app/Contents/MacOS/Chromium
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+
+export PATH="/Users/kuro/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
