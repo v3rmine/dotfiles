@@ -8,14 +8,15 @@
     ~/.local/bin:
         force: true
 - link:
-    ~/.zshrc: zshrc
+    #~/.zshrc: zshrc
     ~/.config/:
         glob: true
         path: config/*
     ~/.local/bin/:
         glob: true
         path: bin/*
-    ~/.ctags: ctags
+    ~/.local/share/navi/cheats/kuro_cheats: navi
+    ~/.fishrc: config/fish/config.fish
 
 #- shell:
   #- [git submodule update --init --recursive, Installing submodules]

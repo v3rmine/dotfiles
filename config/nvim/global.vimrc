@@ -68,9 +68,6 @@ set splitbelow
 " Don't dispay mode in command line (airilne already shows it)
 set noshowmode
 
-" Set floating window to be slightly transparent
-set winbl=10
-
 " Make background transparent for many things
 hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE

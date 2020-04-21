@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/kuro/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 DEFAULT_USER="$USER"
@@ -63,7 +63,7 @@ VSCODE=code-insiders
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(poetry git wd brew cargo npm rust vscode)
+plugins=(git wd cargo npm rust vscode ufw zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -105,7 +105,6 @@ alias ls="lsd"
 alias vim="nvim"
 alias rm="rip"
 alias time="hyperfine"
-alias archive="eval export $(grep -v '^#' $HOME/Git/dotfiles/archive.conf); $HOME/Git/archive/ArchiveBox/archive"
 
 # tools
 alias disneyplus="echo jasonawilhite@gmail.com:Macy2005"
@@ -125,30 +124,20 @@ alias gp=pull
 alias gst="git status"
 alias gsh="git show"
 
-#Include Z
-if command -v brew >/dev/null 2>&1; then
-  # Load rupa's z if installed
-  [ -f $(brew --prefix)/etc/profile.d/z.sh ] && source $(brew --prefix)/etc/profile.d/z.sh
-fi
-
-source /usr/local/share/antigen/antigen.zsh
-source /Users/kuro/.profile
-export PATH="/usr/local/opt/openssl/bin:$PATH"
-
-# opam configuration
-test -r /Users/kuro/.opam/opam-init/init.zsh && . /Users/kuro/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+source $HOME/.profile
 
 export PATH="$PATH:$HOME/.local/bin"
-export PATH="/usr/local/opt/openssl/bin:$PATH"
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-export CHROME_PATH=/Applications/Chromium.app/Contents/MacOS/Chromium
-export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
-export PATH="/Users/kuro/.pyenv/bin:$PATH"
+
+export PATH="/home/kuro/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$HOME/.cargo/bin:$PATH"
