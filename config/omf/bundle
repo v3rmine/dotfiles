@@ -5,7 +5,6 @@ package foreign-env
 package fzf
 package fzf-autojump
 package https://github.com/acomagu/fish-async-prompt
-package https://github.com/b4b4r07/enhancd
 package neovim
 package nvm
 package pisces
@@ -13,6 +12,7 @@ package pyenv
 package rustup
 package spark
 package thefuck
+package ufw
 package vish
 package wd
 package weather
