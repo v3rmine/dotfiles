@@ -12,14 +12,20 @@ let g:formatdef_rustfmt = '"rustfmt"'
 let g:formatters_rust = ['rustfmt']
 nmap <Leader>f :Autoformat<CR>
 
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+" Neosnippet
+let g:neosnippet#enable_complete_done = 1
+" LSP
+let g:LanguageClient_serverCommands = {
+\ 'rust': ['rust-analyzer-mac'],
+\ }
+
 " Local wiki
 let g:vimwiki_list = [{'path': '~/.config/nvim/vimwiki/'}]
 
 " Indent guide
 let g:indent_guides_enable_on_vim_startup = 1
-
-" Explorer
-nmap ge :CocCommand explorer<CR>
 
 " UndoTree
 nmap <leader>uu :UndotreeToggle<CR>

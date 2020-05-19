@@ -21,9 +21,18 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'lotabout/skim.vim'
 
 " --- Autocomplete ---
-Plug 'Shougo/neoinclude.vim'
-Plug 'jsfaint/coc-neoinclude'
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'junegunn/fzf'
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+"Plug 'Shougo/neoinclude.vim'
+"Plug 'jsfaint/coc-neoinclude'
+"Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': '*', 'do': { -> coc#util#install()}}
 
 " autocomplete JSs imports
 Plug 'galooshi/vim-import-js', { 'do': 'npm install -g import-js' }

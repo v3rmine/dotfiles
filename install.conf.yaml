@@ -9,6 +9,7 @@
         force: true
 - link:
     ~/.zshrc: zshrc
+    ~/.fishrc: config/fish/config.fish
     ~/.config/:
         glob: true
         path: config/*
