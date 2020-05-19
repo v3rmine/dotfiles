@@ -41,5 +41,6 @@
     "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/snippets"],
     "python.pythonPath": "python3",
     "python.jediPath": "/usr/local/lib/python3.7/site-packages/jedi",
-    "elixir.pathToElixirLS": "~/Git/dotfiles/elixir-ls/language_server.sh"
+    "elixir.pathToElixirLS": "~/Git/dotfiles/elixir-ls/language_server.sh",
+    "solargraph.useBundler": true
 }
