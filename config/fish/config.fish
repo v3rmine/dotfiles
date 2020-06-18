@@ -1,22 +1,17 @@
+# ex: set syntax=fish:
+
 set -g pure_symbol_prompt "\$"
 
 # EXPORTS
 export ENHANCD_FILTER=fzf
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+export PPID=(ps --no-header -p $fish_pid -o ppid | grep -o "[0-9]*")
+export TERM="xterm-256color"
 
 # PATH
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="/usr/local/opt/openssl/bin:$PATH"
-export PATH="/Users/kuro/.pyenv/versions/3.7.7/bin:$PATH"
-
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-#export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
-#export PATH="/usr/local/opt/ruby/bin:$PATH"
-export CHROME_PATH=/Applications/Chromium.app/Contents/MacOS/Chromium
-export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
-export PATH="/Users/kuro/.pyenv/bin:$PATH"
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/usr/local/opt/openssl@1.1"
+#export PATH="$HOME/.nimble/bin:$PATH"
 
 # Shortcuts
 alias x="exit"
@@ -48,5 +43,24 @@ alias gp=pull
 alias gst="git status"
 alias gsh="git show"
 
-set -g fish_user_paths "/usr/local/opt/texinfo/bin" $fish_user_paths
-set -g fish_user_paths "/usr/local/opt/ruby/bin" $fish_user_paths
+source ~/.asdf/asdf.fish
+
+# Snapshot
+if not [ -d /btrfs/snaps/(date -I) ]
+  sudo btrfs subvolume snapshot -r / /btrfs/snaps/(date -I)
+end
+
+# Blur {{{
+#if test $DISPLAY
+  #if test (ps --no-header -p $PPID -o comm | grep -E '^(yakuake|kitty)$')
+    #for wid in (xdotool search --pid $PPID)
+      #xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid
+    #end
+  #end
+#end
+# }}}
+
+# 1Password
+function 1pass
+  eval (op signin my)
+end

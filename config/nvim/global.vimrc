@@ -8,6 +8,10 @@ let g:mapleader=','
 set nonumber
 syntax on
 
+" https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md
+set modelines=1
+set modeline
+
 " Editor
 set mouse=a
 set noshowcmd

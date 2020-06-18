@@ -8,15 +8,14 @@
     ~/.local/bin:
         force: true
 - link:
-    ~/.zshrc: zshrc
-    ~/.fishrc: config/fish/config.fish
     ~/.config/:
         glob: true
         path: config/*
     ~/.local/bin/:
         glob: true
         path: bin/*
-    ~/.ctags: ctags
+    ~/.tool-versions: tool-versions
+    ~/.fishrc: config/fish/config.fish
 
 #- shell:
   #- [git submodule update --init --recursive, Installing submodules]

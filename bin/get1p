@@ -1,0 +1,6 @@
+#!/bin/bash
+uuid=$(op list items | jq -r '(.[] | [.uuid, .overview.title]) | @tsv' | sk | grep -Eo '^.*\s')
+echo UUID: $uuid
+item=$(op get item $uuid | jq -r '(.details.fields[] | [.name, .value]) | @tsv')
+echo $item | grep -oP '(?<=password\s).*' | xclip -sel clip
+echo $item

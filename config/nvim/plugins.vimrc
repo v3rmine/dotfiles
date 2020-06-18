@@ -12,7 +12,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 
 " Ctags / Gtags
-Plug 'jsfaint/gen_tags.vim'
+"Plug 'jsfaint/gen_tags.vim'
 
 " Autoformat
 Plug 'Chiel92/vim-autoformat'
@@ -25,7 +25,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-Plug 'junegunn/fzf'
+"Plug 'junegunn/fzf'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
@@ -75,8 +75,8 @@ Plug 'vimwiki/vimwiki'
 
 " === Language plugin ===
 " --- Golang ---
-Plug 'stamblerre/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/plugged/gocode/vim/symlink.sh' }
-Plug 'fatih/vim-go' ", { 'do': ':GoUpdateBinaries' }
+"Plug 'stamblerre/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/plugged/gocode/vim/symlink.sh' }
+"Plug 'fatih/vim-go' ", { 'do': ':GoUpdateBinaries' }
 
 " --- Markdown ---
 "Plug 'vim-pandoc/vim-pandoc'
@@ -107,6 +107,9 @@ Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 
 " --- Toml ---
 Plug 'cespare/vim-toml'
+
+" --- Fish ---
+Plug 'dag/vim-fish'
 
 " Buffer management
 "Plug 'jeetsukumaran/vim-buffergator'
