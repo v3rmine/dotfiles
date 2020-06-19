@@ -1,6 +1,15 @@
 #!/bin/bash
+# Get UUID of item
 uuid=$(op list items | jq -r '(.[] | [.uuid, .overview.title]) | @tsv' | sk | grep -Eo '^.*\s')
-echo UUID: $uuid
+## echo UUID: $uuid
+# Get password
 item=$(op get item $uuid | jq -r '(.details.fields[] | [.name, .value]) | @tsv')
-echo $item | grep -oP '(?<=password\s).*' | xclip -sel clip
-echo $item
+if [ ! -z "$item" ]; then
+  # Add password to the clipboard
+  echo $item | grep -oP '(?<=password\s).*' | xclip -sel clip
+  # Display the username
+  echo $item | grep -oP '^.*(?=\spassword)'
+  # Cleanup the clipboard after 60s
+  back_run='sleep 60 && echo "" | xclip -sel clip'
+  eval $back_run &
+fi
