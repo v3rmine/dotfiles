@@ -69,3 +69,7 @@ end
 function 1pass
   eval (op signin my)
 end
+
+function fish_greeting
+  fortune -os
+end

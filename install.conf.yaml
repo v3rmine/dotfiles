@@ -13,7 +13,8 @@
         path: config/*
     ~/.local/bin/:
         glob: true
-        path: bin/*
+        path: bin/**
+    ~/.xbindkeysrc: xbindkeysrc
     ~/.tool-versions: tool-versions
     ~/.fishrc: config/fish/config.fish
 
