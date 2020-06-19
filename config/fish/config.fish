@@ -1,6 +1,7 @@
 # ex: set syntax=fish:
 
 set -g pure_symbol_prompt "\$"
+starship init fish | source
 
 # EXPORTS
 export ENHANCD_FILTER=fzf
@@ -23,6 +24,7 @@ alias sz="omf reload"
 #alias cat="bat"
 #alias ls="lsd"
 alias vim="nvim"
+alias findfile="$HOME/.cargo/bin/fd"
 #alias rm="rip"
 #alias time="hyperfine"
 
@@ -59,6 +61,9 @@ end
   #end
 #end
 # }}}
+
+# Yarn
+#set -U fish_user_paths "./node_modules/.bin" $fish_user_paths
 
 # 1Password
 function 1pass
