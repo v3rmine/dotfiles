@@ -1,0 +1,35 @@
+#!/bin/bash
+## $1:NAME $2:VOLUME/POOL $3:BUCKET
+ZFS=/sbin/zfs
+BZIP=/usr/bin/bzip2
+MD5=/bin/md5sum
+S3CMD=/home/kuro/.pyenv/versions/3.7.7/bin/s3cmd
+MULTIPART_SIZE=256
+
+NAME=$1
+TANK=$2
+BUCKET=$3
+
+SNAP="$NAME"_$(date --iso-8601)
+
+$ZFS snapshot $TANK@$SNAP
+echo "[1/7] Snapshot taken"
+FILE=$SNAP
+$ZFS send $TANK@$SNAP > $FILE
+echo "[2/7] Snapshot exported to file"
+
+$BZIP $FILE
+echo "[3/7] File compressed"
+FILE=$FILE.bz2
+$MD5 $FILE > $FILE.md5
+echo "[4/7] Archive md5"
+
+$S3CMD put --progress --multipart-chunk-size-mb=$MULTIPART_SIZE -H $FILE s3://$BUCKET/$FILE
+echo "[5/7] Upload Archive"
+$S3CMD put --progress -H $FILE.md5 s3://$BUCKET/$FILE.md5
+echo "[6/7] Upload md5"
+
+rm $FILE
+rm $FILE.md5
+echo "[7/7] Cleanup"
+

@@ -19,6 +19,7 @@ alias x="exit"
 alias hc="history -c"
 alias j="just"
 alias sz="omf reload"
+alias mirrors_update="sudo pacman-mirrors --fasttrack"
 
 # rebind classics
 #alias cat="bat"
@@ -73,3 +74,4 @@ end
 function fish_greeting
   fortune -os
 end
+xbindkeys --poll-rc
