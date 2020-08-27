@@ -8,7 +8,6 @@
     ~/.local/bin:
         force: true
 - link:
-    ~/.zshrc: zshrc
     ~/.fishrc: config/fish/config.fish
     ~/.config/:
         glob: true
@@ -16,7 +15,7 @@
     ~/.local/bin/:
         glob: true
         path: bin/*
-    ~/.ctags: ctags
+    ~/.tool-versions: asdf-versions
 
 #- shell:
   #- [git submodule update --init --recursive, Installing submodules]
