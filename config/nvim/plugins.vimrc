@@ -56,7 +56,6 @@ Plug 'tmhedberg/SimpylFold'
 " Bottom bar theme
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes', { 'do': 'cp $HOME/.config/nvim/space.vim $HOME/.config/nvim/plugged/vim-airline-themes/autoload/airline/themes/space.vim' }
-
 " Editor Theme
 "Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'mhartington/oceanic-next'

@@ -4,19 +4,11 @@ set -g pure_symbol_prompt "\$"
 export ENHANCD_FILTER=fzf
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+export TERM="xterm-256color"
 
 # PATH
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
-export PATH="/Users/kuro/.pyenv/versions/3.7.7/bin:$PATH"
-
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-#export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
-#export PATH="/usr/local/opt/ruby/bin:$PATH"
-export CHROME_PATH=/Applications/Chromium.app/Contents/MacOS/Chromium
-export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
-export PATH="/Users/kuro/.pyenv/bin:$PATH"
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/usr/local/opt/openssl@1.1"
 
 # Shortcuts
 alias x="exit"
