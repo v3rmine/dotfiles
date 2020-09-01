@@ -17,7 +17,7 @@ alias j="just"
 alias sz="omf reload"
 
 # rebind classics
-#alias cat="bat"
+alias cat="bat"
 #alias ls="lsd"
 alias vim="nvim"
 #alias rm="rip"
