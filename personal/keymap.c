@@ -185,19 +185,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case MOD_WIN:
             if (record->event.pressed) {
                 set_unicode_input_mode(UC_WINC);
-                layer_off(MACDEFA);
+                //layer_off(MACDEFA);
             }
             return false;
         case MOD_LUX:
             if (record->event.pressed) {
                 set_unicode_input_mode(UC_LNX);
-                layer_off(MACDEFA);
+                //layer_off(MACDEFA);
             }
             return false;
         case MOD_MAC:
             if (record->event.pressed) {
                 set_unicode_input_mode(UC_MAC);
-                layer_on(MACDEFA);
+                //layer_on(MACDEFA);
             }
             return false;
         case KC_RALT:
