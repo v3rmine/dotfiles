@@ -5,6 +5,7 @@ export ENHANCD_FILTER=fzf
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 export TERM="xterm-256color"
+export GPG_TTY=(tty)
 
 # PATH
 export PATH="$HOME/.local/bin:$PATH"
