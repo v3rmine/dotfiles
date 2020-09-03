@@ -185,19 +185,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case MOD_WIN:
             if (record->event.pressed) {
                 set_unicode_input_mode(UC_WINC);
-                //layer_off(MACDEFA);
+                layer_off(MACDEFA);
             }
             return false;
         case MOD_LUX:
             if (record->event.pressed) {
                 set_unicode_input_mode(UC_LNX);
-                //layer_off(MACDEFA);
+                layer_off(MACDEFA);
             }
             return false;
         case MOD_MAC:
             if (record->event.pressed) {
                 set_unicode_input_mode(UC_MAC);
-                //layer_on(MACDEFA);
+                layer_on(MACDEFA);
             }
             return false;
         case KC_RALT:
@@ -210,6 +210,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 led_instruction_t led_instructions[] = {
     { .flags = LED_FLAG_MATCH_LAYER | LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .layer = DEFAULT, .id0 = 4294967295, .id1 = 4294967295, .id2 = 7, .r = 0, .g = 255, .b = 30 },
+    { .flags = LED_FLAG_MATCH_LAYER | LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .layer = MACDEFA, .id0 = 4294967295, .id1 = 4294967295, .id2 = 7, .r = 0, .g = 255, .b = 30 },
 
     { .flags = LED_FLAG_MATCH_LAYER | LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .layer = FUN, .id0 = 8190, .r = 255, .g = 0, .b = 0},
     { .flags = LED_FLAG_MATCH_LAYER | LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .layer = FUN, .id0 = 771768320, .id1 = 33687552, .r = 255, .g = 255, .b = 255},
