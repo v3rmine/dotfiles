@@ -6,6 +6,7 @@ export VISUAL=nvim
 export EDITOR="$VISUAL"
 export TERM="xterm-256color"
 export GPG_TTY=(tty)
+export CHROME_PATH="/Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser"
 
 # PATH
 export PATH="$HOME/.local/bin:$PATH"

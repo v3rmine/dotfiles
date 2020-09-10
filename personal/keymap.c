@@ -3,7 +3,7 @@
 #include "keymap_french.h"
 #include <print.h>
 
-#define RGB_MATRIX_STARTUP_MODE 
+#define RGB_MATRIX_STARTUP_MODE
 #define TG_NKRO MAGIC_TOGGLE_NKRO //Toggle 6KRO / NKRO mode
 
 enum alt_keycodes {
@@ -112,20 +112,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, X(EURO),   X(ET), _______, _______, _______,  X(UUU), _______,  X(OEU), _______, _______, _______, _______, _______, \
         _______,X(AGRAV), _______,  X(HEY), _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, \
    MO(SHIFTALT), _______, _______, X(SSEY), _______, _______, KC_TILD,  KC_GRV, _______, _______, _______, _______,          _______, _______, \
-MO(CTRLALT), _______, _______,                            WHOKNOWS,                           _______, _______, _______, _______, _______  \
+    MO(CTRLALT), _______, _______,                           WHOKNOWS,                            _______, _______, _______, _______, _______  \
     ),
     [SHIFTALT] = LAYOUT_65_ansi_blocker(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
         _______, _______, _______,  X(MET), _______, _______, _______, X(MUUU), _______, X(MOEU), _______, _______, _______, _______, _______, \
         _______,X(MAGRAV),_______, X(MHEY), _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, \
         _______, _______, _______,X(MSSEY), _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, \
-MO(CTRLSHIFTALT), _______, _______,                            FLIP_IT,                            _______, _______, _______, _______, _______  \
+MO(CTRLSHIFTALT),_______, _______,                            FLIP_IT,                            _______, _______, _______, _______, _______  \
     ),
     [CTRLALT] = LAYOUT_65_ansi_blocker(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
         _______,  X(AEU), _______,  X(EPO), _______, _______, _______,  X(UPO), _______,  X(OPO), _______, _______, _______, _______, _______, \
         _______,  X(APO), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, \
-MO(CTRLSHIFTALT), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, \
+MO(CTRLSHIFTALT),_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, \
         _______, _______, _______,                            _______,                            _______, _______, _______, _______, _______  \
     ),
     [CTRLSHIFTALT] = LAYOUT_65_ansi_blocker(
@@ -155,9 +155,9 @@ void matrix_init_user(void) {
 void matrix_scan_user(void) {
 };
 
-#define MODS_SHIFT  (get_mods() & MOD_BIT(KC_LSHIFT) || get_mods() & MOD_BIT(KC_RSHIFT))
+/*#define MODS_SHIFT  (get_mods() & MOD_BIT(KC_LSHIFT) || get_mods() & MOD_BIT(KC_RSHIFT))
 #define MODS_CTRL  (get_mods() & MOD_BIT(KC_LCTL) || get_mods() & MOD_BIT(KC_RCTRL))
-#define MODS_ALT  (get_mods() & MOD_BIT(KC_LALT) || get_mods() & MOD_BIT(KC_RALT))
+#define MODS_ALT  (get_mods() & MOD_BIT(KC_LALT) || get_mods() & MOD_BIT(KC_RALT))*/
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     static uint32_t key_timer;
@@ -200,17 +200,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_on(MACDEFA);
             }
             return false;
-        case KC_RALT:
-        case KC_LSHIFT:
-        case KC_LCTRL:
         default:
             return true; //Process all other keycodes normally
     }
 }
 
 led_instruction_t led_instructions[] = {
-    { .flags = LED_FLAG_MATCH_LAYER | LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .layer = DEFAULT, .id0 = 4294967295, .id1 = 4294967295, .id2 = 7, .r = 0, .g = 255, .b = 30 },
-    { .flags = LED_FLAG_MATCH_LAYER | LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .layer = MACDEFA, .id0 = 4294967295, .id1 = 4294967295, .id2 = 7, .r = 0, .g = 255, .b = 30 },
+    { .flags = LED_FLAG_MATCH_LAYER | LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .layer = DEFAULT, .id0 = 4294967295, .id1 = 4294967295, .id2 = 7, .r = 255, .g = 255, .b = 255},//.r = 0, .g = 255, .b = 30 },
+    { .flags = LED_FLAG_MATCH_LAYER | LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .layer = MACDEFA, .id0 = 4294967295, .id1 = 4294967295, .id2 = 7, .r = 255, .g = 255, .b = 255},//.r = 0, .g = 255, .b = 30 },
 
     { .flags = LED_FLAG_MATCH_LAYER | LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .layer = FUN, .id0 = 8190, .r = 255, .g = 0, .b = 0},
     { .flags = LED_FLAG_MATCH_LAYER | LED_FLAG_MATCH_ID | LED_FLAG_USE_RGB, .layer = FUN, .id0 = 771768320, .id1 = 33687552, .r = 255, .g = 255, .b = 255},
