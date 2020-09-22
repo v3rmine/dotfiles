@@ -13,4 +13,3 @@ package vish
 package wd
 package weather
 theme default
-theme pure

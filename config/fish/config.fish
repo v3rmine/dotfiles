@@ -11,6 +11,7 @@ export CHROME_PATH="/Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Brows
 # PATH
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PATH="/usr/local/share/android-sdk/build-tools/29.0.3:$PATH"
 
 # Shortcuts
 alias x="exit"
@@ -46,3 +47,5 @@ set -g fish_user_paths "/usr/local/opt/texinfo/bin" $fish_user_paths
 set -g fish_user_paths "/usr/local/opt/ruby/bin" $fish_user_paths
 
 source (brew --prefix asdf)/asdf.fish
+
+starship init fish | source
