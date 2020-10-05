@@ -5,8 +5,10 @@ set t_Co=256
 set nocompatible
 filetype plugin on
 let g:mapleader=','
-set nonumber
 syntax on
+" Line number
+set number
+set nu
 
 " Editor
 set mouse=a
@@ -22,6 +24,15 @@ try
 catch
   colorscheme slate
 endtry
+
+" ignore case when searching
+set ignorecase
+
+" if the search string has an upper case letter in it, the search will be case sensitive
+set smartcase
+
+" Automatically re-read file if a change was detected outside of vim
+set autoread
 
 " Add custom highlights in method that is executed every time a colorscheme is sourced
 " See https://gist.github.com/romainl/379904f91fa40533175dfaec4c833f2f for details
@@ -68,36 +79,5 @@ set splitbelow
 " Don't dispay mode in command line (airilne already shows it)
 set noshowmode
 
-" Set floating window to be slightly transparent
-set winbl=10
-
-" Make background transparent for many things
-hi! Normal ctermbg=NONE guibg=NONE
-hi! NonText ctermbg=NONE guibg=NONE
-hi! LineNr ctermfg=NONE guibg=NONE
-hi! SignColumn ctermfg=NONE guibg=NONE
-hi! StatusLine guifg=#16252b guibg=#6699CC
-hi! StatusLineNC guifg=#16252b guibg=#16252b
-
-" Try to hide vertical spit and end of buffer symbol
-hi! VertSplit gui=NONE guifg=#17252c guibg=#17252c
-hi! EndOfBuffer ctermbg=NONE ctermfg=NONE guibg=#17252c guifg=#17252c
-
-" Call method on window enter
-augroup WindowManagement
-  autocmd!
-  autocmd WinEnter * call Handle_Win_Enter()
-augroup END
-
-" Change highlight group of preview window when open
-function! Handle_Win_Enter()
-  if &previewwindow
-    setlocal winhighlight=Normal:MarkdownError
-  endif
-endfunction
-
-" Remap Esc to exit terminal
-"nmap <Esc> <C-\><C-n><CR>
-"
 "nmap <C-W> :set wrap<CR>
 "nmap <C-S-W> :set nowrap<CR>

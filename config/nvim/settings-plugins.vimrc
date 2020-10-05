@@ -12,10 +12,6 @@ let g:formatdef_rustfmt = '"rustfmt"'
 let g:formatters_rust = ['rustfmt']
 nmap <Leader>f :Autoformat<CR>
 
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-" Neosnippet
-let g:neosnippet#enable_complete_done = 1
 " LSP
 let g:LanguageClient_serverCommands = {
 \ 'rust': ['rust-analyzer-mac'],
@@ -28,21 +24,7 @@ let g:vimwiki_list = [{'path': '~/.config/nvim/vimwiki/'}]
 let g:indent_guides_enable_on_vim_startup = 1
 
 " UndoTree
-nmap <leader>uu :UndotreeToggle<CR>
-
-" Echodoc
-let g:echodoc#enable_at_startup = 1
-
-" vim-javascript
-" Enable syntax highlighting for JSDoc
-let g:javascript_plugin_jsdoc = 1
-
-" vim-jsx
-" Highlight jsx syntax even in non .jsx files
-let g:jsx_ext_required = 0
-
-" javascript-libraries-syntax
-let g:used_javascript_libs = 'underscore,requirejs,chai,jquery'
+" nmap <leader>uu :UndotreeToggle<CR>
 
 " === Remap
 " vim-better-whitespace
@@ -58,20 +40,6 @@ nmap <silent> <leader>/ :nohlsearch<CR>
 " Allows you to save files you opened without write permissions via sudo
 cmap w!! w !sudo tee %
 
-" vim-jsdoc shortcuts
-" Generate jsdoc for function under cursor
-nmap <leader>z :JsDoc<CR>
-
-" === Misc
-" ignore case when searching
-set ignorecase
-
-" if the search string has an upper case letter in it, the search will be case sensitive
-set smartcase
-
-" Automatically re-read file if a change was detected outside of vim
-set autoread
-
 " Reload icons after init source
 if exists('g:loaded_webdevicons')
   call webdevicons#refresh()
@@ -85,3 +53,15 @@ endif
 augroup filetypedetect
   au BufNewFile,BufRead justfile setf make
 augroup END
+
+" Gitlab review
+call glaive#Install()
+
+let g:gitlab_private_token = '3XRhcahbyAKyyWE-qFHT'
+
+nnoremap <unique> <silent> <leader>mc :MRInterfaceAddComment<CR>
+nnoremap <unique> <silent> <leader>md :MRInterfaceAddGeneralDiscussionThread<CR>
+nnoremap <unique> <silent> <leader>mC :MRInterfaceAddCodeDiscussionThread<CR>
+nnoremap <unique> <silent> <leader>mo :MRInterfaceAddCodeDiscussionThreadOnOldCode<CR>
+nnoremap <unique> <silent> <leader>mn :MRInterfaceAddCodeDiscussionThreadOnNewCode<CR>
+nnoremap <unique> <silent> <leader>ma :MRInterfaceAddDefaultToCache<CR>

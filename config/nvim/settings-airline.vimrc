@@ -1,6 +1,6 @@
 try
 " Enable extensions
-let g:airline_extensions = ['branch', 'coc']
+let g:airline_extensions = ['branch']
 
 " Update section z to just have line number
 let g:airline_section_z = airline#section#create(['linenr'])

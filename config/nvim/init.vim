@@ -1,10 +1,7 @@
+" Plugins list
 source $HOME/.config/nvim/plugins.vimrc
+" Settings neovim
 source $HOME/.config/nvim/global.vimrc
-source $HOME/.config/nvim/settings.vimrc
-source $HOME/.config/nvim/settings-denite.vimrc
-"source $HOME/.config/nvim/settings-coc.vimrc
+" Settings for simple plugins
+source $HOME/.config/nvim/settings-plugins.vimrc
 source $HOME/.config/nvim/settings-airline.vimrc
-
-" Display line number
-set number
-set nu
