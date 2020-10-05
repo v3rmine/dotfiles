@@ -1,0 +1,20 @@
+[user]
+name = Johan Planchon
+email = johan.planchon@simplx.fr
+	signingkey = A0054799DA402879
+
+[commit]
+  gpgsign = true
+
+[gpg]
+	program = gpg
+
+[pull]
+	ff = only
+
+[alias]
+  files = !git diff --name-only $(git merge-base HEAD \"$REVIEW_BASE\")
+  stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
+  review = !nvim -p $(git files) +\"tabdo Gvdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
+  reviewone = !nvim -p +\"tabdo Gvdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
+

@@ -16,6 +16,7 @@
         glob: true
         path: bin/*
     ~/.tool-versions: asdf-versions
+    ~/.gitconfig: gitconfig
 
 #- shell:
   #- [git submodule update --init --recursive, Installing submodules]
