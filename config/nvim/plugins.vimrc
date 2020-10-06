@@ -10,6 +10,9 @@ Plug 'jiangmiao/auto-pairs'
 " Surround brackets...
 Plug 'tpope/vim-surround'
 
+" Jump in file
+Plug 'easymotion/vim-easymotion'
+
 " fuzzy searching
 Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
 Plug 'lotabout/skim.vim'

@@ -100,3 +100,6 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \}
 let g:ale_linters_explicit = 1
+
+" Easymotion
+" https://github.com/easymotion/vim-easymotion "
