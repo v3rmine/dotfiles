@@ -84,3 +84,15 @@ set noshowmode
 
 nmap <C-W> :set wrap<CR>
 nmap <C-S-W> :set nowrap<CR>
+
+" Go to tab by number
+noremap <leader>t1 1gt
+noremap <leader>t2 2gt
+noremap <leader>t3 3gt
+noremap <leader>t4 4gt
+noremap <leader>t5 5gt
+noremap <leader>t6 6gt
+noremap <leader>t7 7gt
+noremap <leader>t8 8gt
+noremap <leader>t9 9gt
+noremap <leader>t0 :tablast<cr>

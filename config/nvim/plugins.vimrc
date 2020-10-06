@@ -10,11 +10,11 @@ Plug 'jiangmiao/auto-pairs'
 " Surround brackets...
 Plug 'tpope/vim-surround'
 
-" fuzzy file searching
+" fuzzy searching
 Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
 Plug 'lotabout/skim.vim'
 
-" Search in files
+" Search filename
 Plug 'ctrlpvim/ctrlp.vim'
 
 " --- Autocomplete ---
