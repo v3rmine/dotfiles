@@ -5,23 +5,23 @@ call plug#begin()
 Plug 'ntpeters/vim-better-whitespace'
 
 " auto-close plugin
-" Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 
 " Surround brackets...
 Plug 'tpope/vim-surround'
 
 " fuzzy file searching
-" Plug 'lotabout/skim.vim'
+Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
+Plug 'lotabout/skim.vim'
+
+" Search in files
+Plug 'ctrlpvim/ctrlp.vim'
 
 " --- Autocomplete ---
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-" Plug 'junegunn/fzf'
+Plug 'dense-analysis/ale'
 
 " Print function signature in echo area
-" Plug 'Shougo/echodoc.vim'
+Plug 'Shougo/echodoc.vim'
 
 " Better comments
 Plug 'scrooloose/nerdcommenter'
@@ -38,15 +38,16 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Gitlab Review
-Plug 'google/vim-maktaba'
-Plug 'google/vim-glaive'
-Plug 'LucHermitte/lh-vim-lib'
-Plug 'omrisarig13/vim-mr-interface'
+"" Plug 'google/vim-maktaba'
+"" Plug 'google/vim-glaive'
+"" Plug 'LucHermitte/lh-vim-lib'
+"" Plug 'omrisarig13/vim-mr-interface'
 
 " === UI ===
 " Bottom bar theme
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes', { 'do': 'cp $HOME/.config/nvim/space.vim $HOME/.config/nvim/plugged/vim-airline-themes/autoload/airline/themes/space.vim' }
+Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
+
 " Editor Theme
 "Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'mhartington/oceanic-next'

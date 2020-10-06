@@ -76,7 +76,7 @@ set fillchars+=vert:.
 " Set preview window to appear at bottom
 set splitbelow
 
-" Don't dispay mode in command line (airilne already shows it)
+" Don't dispay mode in command line (lightline already shows it)
 set noshowmode
 
 "nmap <C-W> :set wrap<CR>
