@@ -68,12 +68,19 @@ command! -bang -nargs=* Rg call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_pr
 let g:lightline = {
       \ 'colorscheme': 'jellybeans',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ]
+      \   'left': [ [ 'mode', 'paste' ], 
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
       \ },
       \ 'tabline': {
       \   'left': [ ['buffers'] ],
       \   'right': [ ['close'] ]
       \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ }
       \ 'component_expand': {
       \   'buffers': 'lightline#bufferline#buffers'
       \ },
@@ -96,6 +103,7 @@ endif
 
 " ALE
 " https://github.com/dense-analysis/ale "
+let g:ale_completion_enabled = 1
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \}
@@ -103,3 +111,6 @@ let g:ale_linters_explicit = 1
 
 " Easymotion
 " https://github.com/easymotion/vim-easymotion "
+
+" Gitgutter
+hi clear SignColumn

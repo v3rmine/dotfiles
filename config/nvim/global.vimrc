@@ -1,25 +1,28 @@
 scriptencoding utf-8
+" (Force Vim to NOT behave like Vi)
+set nocompatible
 " General Settings
 set encoding=UTF-8
+set backspace=indent,eol,start
+set ruler
+set number
+set noshowcmd
+set incsearch
+set hlsearch
+" Enable syntax and plugins (for `netrw`)
+syntax on
+filetype plugin indent on
+
+" Enable mouse
+set mouse=a
+
 " 256 Colors
 set t_Co=256
 " Enable true color support
 set termguicolors
-" (Force Vim to NOT behave like Vi)
-set nocompatible
-" Enable syntax and plugins (for `netrw`)
-filetype plugin on
-syntax enable
-" Line number
-set number
-set nu
 
 " Remap leader key
 let g:mapleader=','
-
-" Editor
-set mouse=a
-set noshowcmd
 
 " Search down into subfolders
 " Provides tab-completion for all file-related tasks
@@ -94,8 +97,46 @@ nmap <leader>t8 8gt
 nmap <leader>t9 9gt
 nmap <leader>t0 :tablast<cr>
 
-nmap <C-T> :tabfind scratch<cr>
+nmap <C-T> :tabedit scratchpad<cr>
 nmap <C-W> :tabclose<cr>
 
 " Completion config
 set completeopt=menu,menuone,preview,noselect,noinsert
+
+" Alias
+fun! SetupCommandAlias(from, to)
+  exec 'cnoreabbrev <expr> '.a:from
+        \ .' ((getcmdtype() is# ":" && getcmdline() is# "'.a:from.'")'
+        \ .'? ("'.a:to.'") : ("'.a:from.'"))'
+endfun
+
+call SetupCommandAlias("scratchpad", "tabedit scratchpad")
+call SetupCommandAlias("type", "set syntax")
+
+" Tabs switcher
+function! UseTabs()
+  set tabstop=4     " Size of a hard tabstop (ts).
+  set shiftwidth=4  " Size of an indentation (sw).
+  set noexpandtab   " Always uses tabs instead of space characters (noet).
+  set autoindent    " Copy indent from current line when starting a new line (ai).
+endfunction
+nmap <leader>st :call UseTabs()<cr>
+
+function! UseSpaces()
+  set tabstop=2     " Size of a hard tabstop (ts).
+  set shiftwidth=2  " Size of an indentation (sw).
+  set expandtab     " Always uses spaces instead of tab characters (et).
+  set softtabstop=0 " Number of spaces a <Tab> counts for. When 0, featuer is off (sts).
+  set autoindent    " Copy indent from current line when starting a new line.
+  set smarttab      " Inserts blanks on a <Tab> key (as per sw, ts and sts).
+endfunction
+nmap <leader>ss :call UseSpaces()<cr>
+
+" function! SetType(type)
+"     set syntax=a:type
+"     set filetype=a:type
+" endfunction
+
+" command! -nargs=1 Type call SetType(<f-args>)
+
+nmap <leader>qq :qa<cr>
