@@ -79,17 +79,23 @@ set fillchars+=vert:.
 " Don't dispay mode in command line (lightline already shows it)
 set noshowmode
 
-nmap <C-W> :set wrap<CR>
-nmap <C-S-W> :set nowrap<CR>
+"" nmap <C-W> :set wrap<CR>
+"" nmap <C-S-W> :set nowrap<CR>
 
 " Go to tab by number
-noremap <leader>t1 1gt
-noremap <leader>t2 2gt
-noremap <leader>t3 3gt
-noremap <leader>t4 4gt
-noremap <leader>t5 5gt
-noremap <leader>t6 6gt
-noremap <leader>t7 7gt
-noremap <leader>t8 8gt
-noremap <leader>t9 9gt
-noremap <leader>t0 :tablast<cr>
+nmap <leader>t1 1gt
+nmap <leader>t2 2gt
+nmap <leader>t3 3gt
+nmap <leader>t4 4gt
+nmap <leader>t5 5gt
+nmap <leader>t6 6gt
+nmap <leader>t7 7gt
+nmap <leader>t8 8gt
+nmap <leader>t9 9gt
+nmap <leader>t0 :tablast<cr>
+
+nmap <C-T> :tabfind scratch<cr>
+nmap <C-W> :tabclose<cr>
+
+" Completion config
+set completeopt=menu,menuone,preview,noselect,noinsert
