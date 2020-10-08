@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/Users/johan/dotfiles/config/nvim'
+let g:netrw_dirhist_3='/Users/johan/Git'
+let g:netrw_dirhist_2='/Users/johan/Git/mycoaching-front'
+let g:netrw_dirhist_1='/Users/johan/Git/mycoaching-front/public'
+let g:netrw_dirhist_0='/Users/johan/Git/mycoaching-front'
+let g:netrw_dirhist_9='/Users/kuro/Git/weboasis-rs'
+let g:netrw_dirhist_8='/Users/kuro/Git/weboasis-rs/src'
+let g:netrw_dirhist_7='/Users/kuro/Git/weboasis-rs'
+let g:netrw_dirhist_6='/Users/kuro/Projet/rocket_lifap6'
+let g:netrw_dirhist_5='/Users/kuro/Git/shadow-private-api/examples'
