@@ -46,9 +46,6 @@ Plug 'airblade/vim-gitgutter'
 "" Plug 'LucHermitte/lh-vim-lib'
 "" Plug 'omrisarig13/vim-mr-interface'
 
-" Patch file creation
-Plug 'junkblocker/patchreview-vim'
-
 " === UI ===
 " Bottom bar theme
 Plug 'itchyny/lightline.vim'
