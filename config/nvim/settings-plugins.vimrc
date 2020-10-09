@@ -120,7 +120,7 @@ let g:ale_fix_on_save = 1
 " https://github.com/autozimu/LanguageClient-neovim "
 set hidden
 let g:LanguageClient_serverCommands = {
-\ 'rust': ['rust-analyzer'],
+\ 'rust': ['$HOME/.local/bin/rust-analyser'],
 \ }
 let g:LanguageClient_autoStart = 1
 
@@ -133,8 +133,8 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
 
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-" When the <Enter> key is pressed while the popup menu is visible, it only
-" hides the menu. Use this mapping to close the menu and also start a new
-" line.
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+" " When the <Enter> key is pressed while the popup menu is visible, it only
+" " hides the menu. Use this mapping to close the menu and also start a new
+" " line.
+" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 let g:float_preview#docked = 0
