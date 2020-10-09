@@ -4,3 +4,6 @@ source $HOME/.config/nvim/plugins.vimrc
 source $HOME/.config/nvim/global.vimrc
 " Settings for simple plugins
 source $HOME/.config/nvim/settings-plugins.vimrc
+
+" lua/init.lua
+lua require 'init'

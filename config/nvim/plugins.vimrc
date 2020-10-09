@@ -21,10 +21,22 @@ Plug 'lotabout/skim.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " --- Autocomplete ---
+" Analysis
 Plug 'dense-analysis/ale'
-
-" Print function signature in echo area
-Plug 'Shougo/echodoc.vim'
+" Completion
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2'
+" NOTE: you need to install completion sources to get completions. Check
+" our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim', { 'for' : 'vim' }
+Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
+Plug 'ncm2/float-preview.nvim'
 
 " Better comments
 Plug 'scrooloose/nerdcommenter'
@@ -66,6 +78,9 @@ Plug 'nathanaelkane/vim-indent-guides'
 
 " Local-wiki
 Plug 'vimwiki/vimwiki'
+
+" Color on colors
+Plug 'norcalli/nvim-colorizer.lua'
 
 " === Language plugin ===
 " --- Toml ---

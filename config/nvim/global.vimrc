@@ -115,23 +115,29 @@ call SetupCommandAlias("scratchpad", "tabedit scratchpad")
 call SetupCommandAlias("type", "set syntax")
 
 " Tabs switcher
-function! UseTabs()
-  set tabstop=4     " Size of a hard tabstop (ts).
-  set shiftwidth=4  " Size of an indentation (sw).
-  set noexpandtab   " Always uses tabs instead of space characters (noet).
-  set autoindent    " Copy indent from current line when starting a new line (ai).
-endfunction
-nmap <leader>st :call UseTabs()<cr>
+" function! UseTabs()
+"   set tabstop=4     " Size of a hard tabstop (ts).
+"   set shiftwidth=4  " Size of an indentation (sw).
+"   set noexpandtab   " Always uses tabs instead of space characters (noet).
+"   set autoindent    " Copy indent from current line when starting a new line (ai).
+" endfunction
+fun! Spaces4()
+    set ts=4 sw=4 noet
+endfun
+nmap <leader>st2 :call Spaces4()<cr>
 
-function! UseSpaces()
-  set tabstop=2     " Size of a hard tabstop (ts).
-  set shiftwidth=2  " Size of an indentation (sw).
-  set expandtab     " Always uses spaces instead of tab characters (et).
-  set softtabstop=0 " Number of spaces a <Tab> counts for. When 0, featuer is off (sts).
-  set autoindent    " Copy indent from current line when starting a new line.
-  set smarttab      " Inserts blanks on a <Tab> key (as per sw, ts and sts).
-endfunction
-nmap <leader>ss :call UseSpaces()<cr>
+" function! UseSpaces()
+"   set tabstop=2     " Size of a hard tabstop (ts).
+"   set shiftwidth=2  " Size of an indentation (sw).
+"   set expandtab     " Always uses spaces instead of tab characters (et).
+"   set softtabstop=0 " Number of spaces a <Tab> counts for. When 0, featuer is off (sts).
+"   set autoindent    " Copy indent from current line when starting a new line.
+"   set smarttab      " Inserts blanks on a <Tab> key (as per sw, ts and sts).
+" endfunction
+fun! Spaces2()
+    set ts=2 sw=2 et
+endfun
+nmap <leader>st2 :call Spaces2()<cr>
 
 " function! SetType(type)
 "     set syntax=a:type
@@ -141,3 +147,8 @@ nmap <leader>ss :call UseSpaces()<cr>
 " command! -nargs=1 Type call SetType(<f-args>)
 
 nmap <leader>qq :qa<cr>
+
+nmap <silent> <C-Left> :wincmd h<cr>
+nmap <silent> <C-Up> :wincmd j<cr>
+nmap <silent> <C-Down> :wincmd k<cr>
+nmap <silent> <C-Right> :wincmd l<cr>

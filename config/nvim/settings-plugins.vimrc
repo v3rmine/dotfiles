@@ -36,15 +36,6 @@ if exists('g:loaded_webdevicons')
   call webdevicons#refresh()
 endif
 
-" Justfile support
-if exists("did_load_filetypes")
-  finish
-endif
-
-augroup filetypedetect
-  au BufNewFile,BufRead justfile setf make
-augroup END
-
 " Gitlab review
 " https://github.com/omrisarig13/vim-mr-interface "
 "" call glaive#Install()
@@ -80,7 +71,7 @@ let g:lightline = {
       \ },
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead'
-      \ }
+      \ },
       \ 'component_expand': {
       \   'buffers': 'lightline#bufferline#buffers'
       \ },
@@ -91,26 +82,60 @@ let g:lightline = {
 
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
-" Echodoc
-" https://github.com/Shougo/echodoc.vim "
-g:echodoc#enable_at_startup = 1
-
 " CtrlP
 " https://github.com/ctrlpvim/ctrlp.vim "
 if executable('rg')
   let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
 endif
 
+" Easymotion
+" https://github.com/easymotion/vim-easymotion "
+
+" Gitgutter
+highlight clear SignColumn
+let g:gitgutter_preview_win_floating = 1
+
 " ALE
 " https://github.com/dense-analysis/ale "
 let g:ale_completion_enabled = 1
 let g:ale_linters = {
 \   'javascript': ['eslint'],
+\   'vue': ['eslint'],
+\   'scss': ['prettier'],
+\   'html': ['prettier'],
+\   'less': ['prettier'],
+\   'rust': ['cargo', 'analyzer', 'rustfmt'],
 \}
 let g:ale_linters_explicit = 1
 
-" Easymotion
-" https://github.com/easymotion/vim-easymotion "
+let g:ale_rust_cargo_use_clippy = 1
 
-" Gitgutter
-hi clear SignColumn
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+
+let g:ale_fix_on_save = 1
+
+" LanguageClient-neovim
+" https://github.com/autozimu/LanguageClient-neovim "
+set hidden
+let g:LanguageClient_serverCommands = {
+\ 'rust': ['rust-analyzer'],
+\ }
+let g:LanguageClient_autoStart = 1
+
+" ncm2
+" https://github.com/ncm2/ncm2 "
+" enable ncm2 for all buffers
+set shortmess+=c
+inoremap <c-c> <ESC>
+autocmd BufEnter * call ncm2#enable_for_buffer()
+au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
+
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+" When the <Enter> key is pressed while the popup menu is visible, it only
+" hides the menu. Use this mapping to close the menu and also start a new
+" line.
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+let g:float_preview#docked = 0
