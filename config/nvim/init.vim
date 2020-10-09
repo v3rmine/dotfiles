@@ -6,4 +6,4 @@ source $HOME/.config/nvim/global.vimrc
 source $HOME/.config/nvim/settings-plugins.vimrc
 
 " lua/init.lua
-" lua require 'init'
+lua require 'init'
