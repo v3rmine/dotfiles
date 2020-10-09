@@ -93,7 +93,6 @@ endif
 
 " Gitgutter
 highlight clear SignColumn
-let g:gitgutter_preview_win_floating = 1
 
 " ALE
 " https://github.com/dense-analysis/ale "

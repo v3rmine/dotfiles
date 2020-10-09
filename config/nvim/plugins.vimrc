@@ -80,7 +80,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vimwiki/vimwiki'
 
 " Color on colors
-Plug 'norcalli/nvim-colorizer.lua'
+" Plug 'norcalli/nvim-colorizer.lua'
 
 " === Language plugin ===
 " --- Toml ---
