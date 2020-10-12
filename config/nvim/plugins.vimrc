@@ -1,14 +1,11 @@
 call plug#begin()
 
 " === Editing ===
-" Trailing whitespace highlight & autofix
-Plug 'ntpeters/vim-better-whitespace'
-
 " auto-close plugin
 Plug 'jiangmiao/auto-pairs'
 
 " Surround brackets...
-Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-surround'
 
 " Jump in file
 Plug 'easymotion/vim-easymotion'
@@ -20,9 +17,12 @@ Plug 'lotabout/skim.vim'
 " Search filename
 Plug 'ctrlpvim/ctrlp.vim'
 
+" Polyglot language pack
+"" Plug 'sheerun/vim-polyglot'
+
 " --- Autocomplete ---
-" Analysis
-Plug 'dense-analysis/ale'
+" Syntax scan
+Plug 'w0rp/ale'
 " Completion
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
@@ -52,26 +52,14 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
-" Gitlab Review
-"" Plug 'google/vim-maktaba'
-"" Plug 'google/vim-glaive'
-"" Plug 'LucHermitte/lh-vim-lib'
-"" Plug 'omrisarig13/vim-mr-interface'
-
 " === UI ===
 " Bottom bar theme
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 
 " Editor Theme
-"Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'mhartington/oceanic-next'
-
-" Icons
-Plug 'ryanoasis/vim-devicons'
-
-" Sidebar undo history
-" Plug 'mbbill/undotree'
+Plug 'joshdick/onedark.vim'
+" Plug 'mhartington/oceanic-next'
 
 " Indentation help
 Plug 'nathanaelkane/vim-indent-guides'
@@ -81,6 +69,9 @@ Plug 'vimwiki/vimwiki'
 
 " Color on colors
 Plug 'norcalli/nvim-colorizer.lua'
+
+" Code context
+Plug 'wellle/context.vim'
 
 " === Language plugin ===
 " --- Toml ---
