@@ -1,0 +1,1 @@
+ssh -ND $1 -v kuro@serv2.planchon.xyz
