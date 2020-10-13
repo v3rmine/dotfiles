@@ -65,7 +65,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 
 " Local-wiki
-Plug 'vimwiki/vimwiki'
+"" Plug 'vimwiki/vimwiki'
 
 " Color on colors
 Plug 'norcalli/nvim-colorizer.lua'
@@ -73,8 +73,17 @@ Plug 'norcalli/nvim-colorizer.lua'
 " Code context
 Plug 'wellle/context.vim'
 
+" Distraction free markdown
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+
 " === Language plugin ===
 " --- Toml ---
 Plug 'cespare/vim-toml'
+
+" --- Markdown --- "
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 
 call plug#end()

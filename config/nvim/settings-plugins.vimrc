@@ -13,7 +13,7 @@ let g:formatters_rust = ['rustfmt']
 nmap <Leader>f :Autoformat<CR>
 
 " Local wiki
-let g:vimwiki_list = [{'path': '~/.config/nvim/vimwiki/'}]
+"" let g:vimwiki_list = [{'path': '~/.config/nvim/vimwiki/'}]
 
 " Indent guide
 let g:indent_guides_enable_on_vim_startup = 1
@@ -31,6 +31,20 @@ let g:context_enabled = 1
 " https://github.com/Konfekt/FastFold "
 let g:fastfold_savehook = 1
 let g:rust_fold = 1
+
+" Vim markdown
+" https://github.com/plasticboy/vim-markdown "
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_math = 0
+let g:vim_markdown_frontmatter = 0
+let g:vim_markdown_toml_frontmatter = 0
+let g:vim_markdown_json_frontmatter = 0
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_fenced_languages = ['rust=rs', 'c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini']
+augroup pandoc_syntax
+    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+augroup END
 
 " Lightline
 " https://github.com/itchyny/lightline.vim "
