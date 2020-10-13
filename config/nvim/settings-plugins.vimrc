@@ -27,6 +27,11 @@ command! -bang -nargs=* Rg call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_pr
 " https://github.com/wellle/context.vim "
 let g:context_enabled = 1
 
+" FastFold
+" https://github.com/Konfekt/FastFold "
+let g:fastfold_savehook = 1
+let g:rust_fold = 1
+
 " Lightline
 " https://github.com/itchyny/lightline.vim "
 " https://github.com/mengelbrecht/lightline-bufferline "
@@ -97,8 +102,13 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 let g:float_preview#docked = 0
 
 " ALE
-"  "
-let g:ale_fixers = {
-  \ 'javascript': ['eslint']
-\ }
+" https://github.com/dense-analysis/ale "
+let g:ale_linters_explicit = 1
 let g:ale_fix_on_save = 1
+
+let g:ale_linters = {
+  \ 'javascript': ['eslint'],
+\ }
+let g:ale_fixers = {
+  \ 'javascript': ['eslint'],
+\ }

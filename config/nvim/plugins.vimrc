@@ -46,7 +46,7 @@ Plug 'sbdchd/neoformat'
 Plug 'Chiel92/vim-autoformat'
 
 " Code Folding
-Plug 'tmhedberg/SimpylFold'
+Plug 'Konfekt/FastFold'
 
 " Git
 Plug 'tpope/vim-fugitive'
