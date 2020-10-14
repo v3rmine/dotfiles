@@ -117,3 +117,14 @@ nmap <silent> <C-Right> :wincmd l<cr>
 " Tabs
 nmap <silent> s2 :set ts=2 sw=2 et<cr>
 nmap <silent> s4 :set ts=4 sw=4 noet<cr>
+
+" Run
+augroup rust
+    fun! RustMappings()
+        nmap <M-r> :!cargo run<cr>
+        nmap <M-c> :!cargo clippy<cr>
+        nmap <M-b> :!cargo build<cr>
+        nmap <M-B> :!cargo build --release<cr>
+    endfun
+    au! BufNewFile,BufFilePre,BufRead *.rs call RustMappings()
+augroup END
