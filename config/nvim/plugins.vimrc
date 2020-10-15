@@ -79,6 +79,9 @@ Plug 'wellle/context.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
+" Interactive terminal
+Plug 'kassio/neoterm'
+
 " === Language plugin ===
 " --- Toml ---
 Plug 'cespare/vim-toml'
