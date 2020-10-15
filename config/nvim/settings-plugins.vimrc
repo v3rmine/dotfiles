@@ -1,11 +1,5 @@
 " ColorTheme
 let g:onedark_terminal_italics = 1
-augroup colorextend
-    au ColorScheme * call onedark#extend_highlight("Cursor", { "fg": { "gui": "Black" } })
-    au ColorScheme * call onedark#extend_highlight("Cursor", { "bg": { "gui": "Black" } })
-    au ColorScheme * call onedark#extend_highlight("CursorLine", { "fg": { "gui": "Black" } })
-    au ColorScheme * call onedark#extend_highlight("CursorLine", { "bg": { "gui": "#65adef" } })
-augroup END
 colorscheme onedark
 
 " Neoformat

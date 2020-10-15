@@ -59,7 +59,6 @@ set nowrap
 set noruler
 " Highlight current line
 set cursorline
-highlight CursorLine ctermbg=LightBlue
 
 " Command line
 set cmdheight=1
