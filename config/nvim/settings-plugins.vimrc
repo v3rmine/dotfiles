@@ -88,8 +88,10 @@ nmap <C-P> :CtrlPMixed<cr>
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<Nop>'], 
+    \ 'AcceptSelection("e")': ['<C-c>'], 
     \ 'AcceptSelection("t")': ['<cr>'],
+    \ 'AcceptSelection("h")': ['<C-h>'],
+    \ 'AcceptSelection("v")': ['<C-v>'],
     \ }
 
 " Easymotion
@@ -107,6 +109,7 @@ let g:LanguageClient_serverCommands = {
 \ }
 ""  \ 'vue': ['vls'],
 let g:LanguageClient_autoStart = 0
+let g:LanguageClient_hasSnippetSupport = 1
 
 " ncm2
 " https://github.com/ncm2/ncm2 "

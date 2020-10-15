@@ -112,9 +112,10 @@ nmap q <Nop>
 nmap <leader>qq :qa<cr>
 
 nmap <silent> <C-Left> :wincmd h<cr>
-nmap <silent> <C-Up> :wincmd j<cr>
-nmap <silent> <C-Down> :wincmd k<cr>
+nmap <silent> <C-Up> :wincmd k<cr>
+nmap <silent> <C-Down> :wincmd j<cr>
 nmap <silent> <C-Right> :wincmd l<cr>
+nmap <silent> <C-q> :quit<cr>
 
 " Tabs
 fun! Retab2()
@@ -154,5 +155,6 @@ augroup vue
         nmap <M-l> :!yarn lint<cr>
         :LanguageClientStart
     endfun
-    au! BufNewFile,BufFilePre,BufRead *.vue call VueConfig()
+    au! BufNewFile,BufRead *.vue set filetype=vue
+    au! filetype vue call VueConfig()
 augroup END
