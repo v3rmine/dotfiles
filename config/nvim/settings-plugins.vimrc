@@ -84,6 +84,13 @@ autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 if executable('rg')
   let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
 endif
+nmap <C-P> :CtrlPMixed<cr>
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<Nop>'], 
+    \ 'AcceptSelection("t")': ['<cr>'],
+    \ }
 
 " Easymotion
 " https://github.com/easymotion/vim-easymotion "
@@ -96,6 +103,7 @@ highlight clear SignColumn
 set hidden
 let g:LanguageClient_serverCommands = {
   \ 'rust': ['$HOME/.local/bin/rust-analyser'],
+  \ 'vue': ['vls'],
 \ }
 ""  \ 'vue': ['vls'],
 let g:LanguageClient_autoStart = 0

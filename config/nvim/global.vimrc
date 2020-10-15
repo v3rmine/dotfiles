@@ -76,19 +76,20 @@ set noshowmode
 "" nmap <C-S-W> :set nowrap<CR>
 
 " Go to tab by number
-nmap <leader>t1 1gt
-nmap <leader>t2 2gt
-nmap <leader>t3 3gt
-nmap <leader>t4 4gt
-nmap <leader>t5 5gt
-nmap <leader>t6 6gt
-nmap <leader>t7 7gt
-nmap <leader>t8 8gt
-nmap <leader>t9 9gt
-nmap <leader>t0 :tablast<cr>
+nmap <silent> <leader>t<Esc> :tabfirst<cr>
+nmap <silent> <leader>t1 1gt
+nmap <silent> <leader>t2 2gt
+nmap <silent> <leader>t3 3gt
+nmap <silent> <leader>t4 4gt
+nmap <silent> <leader>t5 5gt
+nmap <silent> <leader>t6 6gt
+nmap <silent> <leader>t7 7gt
+nmap <silent> <leader>t8 8gt
+nmap <silent> <leader>t9 9gt
+nmap <silent> <leader>t0 :tablast<cr>
 
-nmap <C-T> :tabedit scratchpad<cr>
-nmap <C-W> :tabclose<cr>
+nmap <silent> <C-T> :tabedit scratchpad<cr>
+nmap <silent> <C-W> :tabclose<cr>
 
 " Completion config
 set completeopt=menu,menuone,preview,noselect,noinsert
@@ -107,6 +108,7 @@ call SetupCommandAlias("type", "set syntax")
 " Allows you to save files you opened without write permissions via sudo
 cmap w!! w !sudo tee %
 
+nmap q <Nop>
 nmap <leader>qq :qa<cr>
 
 nmap <silent> <C-Left> :wincmd h<cr>
@@ -133,7 +135,7 @@ endfun
 nmap s2 :call Retab2()<cr>
 nmap s4 :call Retab4()<cr>
 
-" Run
+" Language
 augroup rust
     fun! RustConfig()
         set ts=2 sw=2 noet
@@ -144,4 +146,12 @@ augroup rust
         nmap <M-f> :%! rustfmt --config hard_tabs=true<cr>
     endfun
     au! BufNewFile,BufFilePre,BufRead *.rs call RustConfig()
+augroup END
+
+augroup vue
+    fun! VueConfig()
+        set ts=4 sw=4 et
+        :LanguageClientStart
+    endfun
+    au! BufNewFile,BufFilePre,BufRead *.vue call VueConfig()
 augroup END
