@@ -151,6 +151,7 @@ augroup END
 augroup vue
     fun! VueConfig()
         set ts=4 sw=4 et
+        nmap <M-l> :!yarn lint<cr>
         :LanguageClientStart
     endfun
     au! BufNewFile,BufFilePre,BufRead *.vue call VueConfig()
