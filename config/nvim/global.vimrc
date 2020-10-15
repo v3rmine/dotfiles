@@ -47,10 +47,10 @@ set smartcase
 set autoread
 
 " Tabs setup
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
+"" set tabstop=4
+"" set shiftwidth=4
+"" set softtabstop=4
+"" set noexpandtab
 set showmatch
 set smarttab
 
@@ -59,6 +59,7 @@ set nowrap
 set noruler
 " Highlight current line
 set cursorline
+highlight CursorLine ctermbg=LightBlue
 
 " Command line
 set cmdheight=1
@@ -115,16 +116,33 @@ nmap <silent> <C-Down> :wincmd k<cr>
 nmap <silent> <C-Right> :wincmd l<cr>
 
 " Tabs
-nmap <silent> s2 :set ts=2 sw=2 et<cr>
-nmap <silent> s4 :set ts=4 sw=4 noet<cr>
+fun! Retab2()
+    :IndentGuidesDisable
+    set ts=2 sw=2 et
+    :normal gg=G
+    :%retab!
+    :IndentGuidesEnable
+endfun
+fun! Retab4()
+    :IndentGuidesDisable
+    set ts=4 sw=4 noet
+    :normal gg=G
+    :%retab!
+    :IndentGuidesEnable
+endfun
+
+nmap s2 :call Retab2()<cr>
+nmap s4 :call Retab4()<cr>
 
 " Run
 augroup rust
-    fun! RustMappings()
+    fun! RustConfig()
+        set ts=2 sw=2 noet
         nmap <M-r> :!cargo run<cr>
         nmap <M-c> :!cargo clippy<cr>
         nmap <M-b> :!cargo build<cr>
         nmap <M-B> :!cargo build --release<cr>
+        nmap <M-f> :%! rustfmt --config hard_tabs=true<cr>
     endfun
-    au! BufNewFile,BufFilePre,BufRead *.rs call RustMappings()
+    au! BufNewFile,BufFilePre,BufRead *.rs call RustConfig()
 augroup END

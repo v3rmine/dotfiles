@@ -42,8 +42,8 @@ Plug 'ncm2/float-preview.nvim'
 Plug 'scrooloose/nerdcommenter'
 
 " Autoformat
-Plug 'sbdchd/neoformat'
-Plug 'Chiel92/vim-autoformat'
+"" Plug 'sbdchd/neoformat'
+"" Plug 'Chiel92/vim-autoformat'
 
 " Code Folding
 Plug 'Konfekt/FastFold'
@@ -63,6 +63,8 @@ Plug 'joshdick/onedark.vim'
 
 " Indentation help
 Plug 'nathanaelkane/vim-indent-guides'
+" Autodetect indent
+Plug 'tpope/vim-sleuth'
 
 " Local-wiki
 "" Plug 'vimwiki/vimwiki'

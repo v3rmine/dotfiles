@@ -3,14 +3,14 @@ colorscheme onedark
 let g:onedark_terminal_italics = 1
 
 " Neoformat
-let g:neoformat_basic_format_align = 1
-let g:neoformat_basic_format_retab = 1
-let g:neoformat_basic_format_trim = 1
+"" let g:neoformat_basic_format_align = 1
+"" let g:neoformat_basic_format_retab = 1
+"" let g:neoformat_basic_format_trim = 1
 
 " vim-autoformat
-let g:formatdef_rustfmt = '"rustfmt"'
-let g:formatters_rust = ['rustfmt']
-nmap <Leader>f :Autoformat<CR>
+"" let g:formatdef_rustfmt = '"rustfmt"'
+"" let g:formatters_rust = ['rustfmt']
+"" nmap <Leader>f :Autoformat<CR>
 
 " Local wiki
 "" let g:vimwiki_list = [{'path': '~/.config/nvim/vimwiki/'}]
