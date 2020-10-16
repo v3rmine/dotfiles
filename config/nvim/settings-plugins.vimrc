@@ -106,6 +106,7 @@ set hidden
 let g:LanguageClient_serverCommands = {
   \ 'rust': ['$HOME/.local/bin/rust-analyser'],
   \ 'vue': ['vls'],
+  \ 'javascript': ['$HOME/.asdf/shims/javascript-typescript-stdio'],
 \ }
 ""  \ 'vue': ['vls'],
 let g:LanguageClient_autoStart = 0
