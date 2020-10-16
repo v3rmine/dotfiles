@@ -91,4 +91,12 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 
+" --- Javascript ---
+" Syntax base
+Plug 'othree/yajs.vim'
+" Syntax ES6
+Plug 'othree/es.next.syntax.vim'
+" Auto-import
+Plug 'galooshi/vim-import-js'
+
 call plug#end()
