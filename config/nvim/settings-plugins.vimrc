@@ -121,13 +121,12 @@ inoremap <c-c> <ESC>
 set shortmess+=c
 "" autocmd User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
 autocmd BufEnter * call ncm2#enable_for_buffer()
-inoremap <expr> <Tab> (pumvisible() ? "\<C-n>" : "\<Tab>")
-
-inoremap <expr> <Plug>(cr_prev) execute('let g:_prev_line = getline(".")')
-inoremap <expr> <Plug>(cr_do) (g:_prev_line == getline('.') ? "\<cr>" : "")
-inoremap <expr> <Plug>(cr_post) execute('unlet g:_prev_line')
-
-imap <expr> <CR> (pumvisible() ? "\<Plug>(cr_prev)\<C-Y>\<Plug>(cr_do)\<Plug>(cr_post)" : "\<CR>")
+inoremap <expr> <C-y> (pumvisible() && !empty(v:completed_item) ? "\<cr>" : "\<C-y>"))
+" inoremap <expr> <Tab> (pumvisible() ? "\<C-n>" : "\<Tab>")
+" inoremap <expr> <Plug>(cr_prev) execute('let g:_prev_line = getline(".")')
+" inoremap <expr> <Plug>(cr_do) (g:_prev_line == getline('.') ? "\<cr>" : "")
+" inoremap <expr> <Plug>(cr_post) execute('unlet g:_prev_line')
+" imap <expr> <CR> (pumvisible() ? "\<Plug>(cr_prev)\<C-Y>\<Plug>(cr_do)\<Plug>(cr_post)" : "\<CR>")
 
 let g:float_preview#docked = 0
 " Press enter key to trigger snippet expansion
