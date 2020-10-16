@@ -32,6 +32,10 @@ let g:context_enabled = 1
 let g:fastfold_savehook = 1
 let g:rust_fold = 1
 
+" Vim-vue
+" https://github.com/posva/vim-vue "
+let g:vue_pre_processors = []
+
 " Vim markdown
 " https://github.com/plasticboy/vim-markdown "
 let g:vim_markdown_conceal = 0
@@ -62,19 +66,9 @@ let g:lightline = {
       \ [ 'fileformat', 'fileencoding', 'filetype' ] 
     \ ]
   \ },
-  \ 'tabline': {
-    \ 'left': [ ['buffers'] ],
-    \ 'right': [ ['close'] ]
-  \ },
   \ 'component_function': {
     \ 'gitbranch': 'FugitiveHead'
   \ },
-  \ 'component_expand': {
-    \ 'buffers': 'lightline#bufferline#buffers'
-  \ },
-  \ 'component_type': {
-    \ 'buffers': 'tabsel'
-  \ }
 \ }
 
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
@@ -93,20 +87,29 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("h")': ['<C-h>'],
     \ 'AcceptSelection("v")': ['<C-v>'],
     \ }
+let g:ctrlp_tabpage_position = 'l'
 
 " Easymotion
 " https://github.com/easymotion/vim-easymotion "
+
+" Utilisnips
+" https://github.com/SirVer/ultisnips "
+let g:UltiSnipsJumpForwardTrigger	= "<c-Left>"
+let g:UltiSnipsJumpBackwardTrigger	= "<c-Right>"
+let g:UltiSnipsRemoveSelectModeMappings = 0
+let g:UltiSnipsSnippetDirectories = ['UltiSnips']
 
 " Gitgutter
 highlight clear SignColumn
 
 " LanguageClient-neovim
 " https://github.com/autozimu/LanguageClient-neovim "
-set hidden
 let g:LanguageClient_serverCommands = {
   \ 'rust': ['$HOME/.local/bin/rust-analyser'],
   \ 'vue': ['vls'],
   \ 'javascript': ['$HOME/.asdf/shims/javascript-typescript-stdio'],
+  \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+  \ 'python': ['$HOME/.asdf/shims/pyls'],
 \ }
 ""  \ 'vue': ['vls'],
 let g:LanguageClient_autoStart = 0
@@ -114,18 +117,22 @@ let g:LanguageClient_hasSnippetSupport = 1
 
 " ncm2
 " https://github.com/ncm2/ncm2 "
-" enable ncm2 for all buffers
-set shortmess+=c
 inoremap <c-c> <ESC>
+set shortmess+=c
+"" autocmd User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
 autocmd BufEnter * call ncm2#enable_for_buffer()
-au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
+inoremap <expr> <Tab> (pumvisible() ? "\<C-n>" : "\<Tab>")
 
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-" " When the <Enter> key is pressed while the popup menu is visible, it only
-" " hides the menu. Use this mapping to close the menu and also start a new
-" " line.
-" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+inoremap <expr> <Plug>(cr_prev) execute('let g:_prev_line = getline(".")')
+inoremap <expr> <Plug>(cr_do) (g:_prev_line == getline('.') ? "\<cr>" : "")
+inoremap <expr> <Plug>(cr_post) execute('unlet g:_prev_line')
+
+imap <expr> <CR> (pumvisible() ? "\<Plug>(cr_prev)\<C-Y>\<Plug>(cr_do)\<Plug>(cr_post)" : "\<CR>")
+
 let g:float_preview#docked = 0
+" Press enter key to trigger snippet expansion
+" The parameters are the same as `:help feedkeys()`
+" inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
 
 " ALE
 " https://github.com/dense-analysis/ale "

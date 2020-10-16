@@ -37,6 +37,7 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim', { 'for' : 'vim' }
 Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
 Plug 'ncm2/float-preview.nvim'
+Plug 'ncm2/ncm2-ultisnips'
 
 " Better comments
 Plug 'scrooloose/nerdcommenter'
@@ -52,10 +53,12 @@ Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+" Snippets
+Plug 'SirVer/ultisnips'
+
 " === UI ===
 " Bottom bar theme
 Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
 
 " Editor Theme
 Plug 'joshdick/onedark.vim'
@@ -98,5 +101,8 @@ Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
 " Auto-import
 Plug 'galooshi/vim-import-js'
+
+" --- VueJS ---
+Plug 'posva/vim-vue'
 
 call plug#end()

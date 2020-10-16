@@ -26,7 +26,7 @@ let g:mapleader=','
 
 " Search down into subfolders
 " Provides tab-completion for all file-related tasks
-set path+=**
+"" set path+=**
 " Display all matching files when we tab complete, navigable with Tab and Shift+Tab
 set wildmenu
 
@@ -72,6 +72,9 @@ set fillchars+=vert:.
 " Don't dispay mode in command line (lightline already shows it)
 set noshowmode
 
+" Split right by default
+set splitright
+
 "" nmap <C-W> :set wrap<CR>
 "" nmap <C-S-W> :set nowrap<CR>
 
@@ -88,11 +91,12 @@ nmap <silent> <leader>t8 8gt
 nmap <silent> <leader>t9 9gt
 nmap <silent> <leader>t0 :tablast<cr>
 
-nmap <silent> <C-T> :tabedit scratchpad<cr>
+nmap <silent> <C-T> :$tabedit scratchpad<cr>
 nmap <silent> <C-W> :tabclose<cr>
 
 " Completion config
-set completeopt=menu,menuone,preview,noselect,noinsert
+" set completeopt=menu,menuone,preview,noselect,noinsert,longest
+set completeopt=noinsert,menuone,noselect,longest
 
 " Alias
 fun! SetupCommandAlias(from, to)
@@ -115,7 +119,16 @@ nmap <silent> <C-Left> :wincmd h<cr>
 nmap <silent> <C-Up> :wincmd k<cr>
 nmap <silent> <C-Down> :wincmd j<cr>
 nmap <silent> <C-Right> :wincmd l<cr>
+nmap <silent> <C-h> :split<cr>
+nmap <silent> <C-v> :vsplit<cr>
 nmap <silent> <C-q> :quit<cr>
+fun! OpenCurrBufferNewTab()
+    let l:bufnb = buffer_number()
+    quit
+    exec 'tab sb'.l:bufnb
+endfun
+nmap <silent> <C-c> :call OpenCurrBufferNewTab()<cr>
+nmap <silent> gf :vertical wincmd f<CR>
 
 " Tabs
 fun! Retab2()
@@ -135,26 +148,3 @@ endfun
 
 nmap s2 :call Retab2()<cr>
 nmap s4 :call Retab4()<cr>
-
-" Language
-augroup rust
-    fun! RustConfig()
-        set ts=2 sw=2 noet
-        nmap <M-r> :!cargo run<cr>
-        nmap <M-c> :!cargo clippy<cr>
-        nmap <M-b> :!cargo build<cr>
-        nmap <M-B> :!cargo build --release<cr>
-        nmap <M-f> :%! rustfmt --config hard_tabs=true<cr>
-    endfun
-    au! BufNewFile,BufFilePre,BufRead *.rs call RustConfig()
-augroup END
-
-augroup vue
-    fun! VueConfig()
-        set ts=4 sw=4 et
-        nmap <M-l> :!yarn lint<cr>
-        :LanguageClientStart
-    endfun
-    au! BufNewFile,BufRead *.vue set filetype=vue
-    au! filetype vue call VueConfig()
-augroup END
