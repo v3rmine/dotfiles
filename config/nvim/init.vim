@@ -1,10 +1,11 @@
+" Plugins list
 source $HOME/.config/nvim/plugins.vimrc
+" Settings neovim
 source $HOME/.config/nvim/global.vimrc
-source $HOME/.config/nvim/settings.vimrc
-source $HOME/.config/nvim/settings-denite.vimrc
-"source $HOME/.config/nvim/settings-coc.vimrc
-source $HOME/.config/nvim/settings-airline.vimrc
+" Settings for simple plugins
+source $HOME/.config/nvim/settings-plugins.vimrc
+" Config for each lang
+source $HOME/.config/nvim/languages.vimrc
 
-" Display line number
-set number
-set nu
+" lua/init.lua
+lua require 'init'

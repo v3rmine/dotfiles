@@ -1,117 +1,108 @@
 call plug#begin()
 
 " === Editing ===
-" Trailing whitespace highlight & autofix
-Plug 'ntpeters/vim-better-whitespace'
-
 " auto-close plugin
-"Plug 'rstacruz/vim-closer'
 Plug 'jiangmiao/auto-pairs'
 
 " Surround brackets...
-Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-surround'
 
-" Ctags / Gtags
-"Plug 'jsfaint/gen_tags.vim'
+" Jump in file
+Plug 'easymotion/vim-easymotion'
 
-" Autoformat
-Plug 'Chiel92/vim-autoformat'
-
-" fuzzy file searching
+" fuzzy searching
+Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
 Plug 'lotabout/skim.vim'
 
+" Search filename
+Plug 'ctrlpvim/ctrlp.vim'
+
+" Polyglot language pack
+"" Plug 'sheerun/vim-polyglot'
+
 " --- Autocomplete ---
+" Syntax scan
+Plug 'w0rp/ale'
+" Completion
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-"Plug 'junegunn/fzf'
-
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
-"Plug 'Shougo/neoinclude.vim'
-"Plug 'jsfaint/coc-neoinclude'
-"Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': '*', 'do': { -> coc#util#install()}}
-
-" autocomplete JSs imports
-Plug 'galooshi/vim-import-js', { 'do': 'npm install -g import-js' }
-
-" Shougo/denite.nvim
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-
-" Print function signature in echo area
-Plug 'Shougo/echodoc.vim'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2'
+" NOTE: you need to install completion sources to get completions. Check
+" our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-vim' | Plug 'Shougo/neco-vim', { 'for' : 'vim' }
+Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
+Plug 'ncm2/float-preview.nvim'
+Plug 'ncm2/ncm2-ultisnips'
 
 " Better comments
 Plug 'scrooloose/nerdcommenter'
 
 " Autoformat
-Plug 'sbdchd/neoformat'
+"" Plug 'sbdchd/neoformat'
+"" Plug 'Chiel92/vim-autoformat'
 
 " Code Folding
-Plug 'tmhedberg/SimpylFold'
+Plug 'Konfekt/FastFold'
+
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" Snippets
+Plug 'SirVer/ultisnips'
 
 " === UI ===
 " Bottom bar theme
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes', { 'do': 'cp $HOME/.config/nvim/space.vim $HOME/.config/nvim/plugged/vim-airline-themes/autoload/airline/themes/space.vim' }
+Plug 'itchyny/lightline.vim'
 
 " Editor Theme
-"Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'mhartington/oceanic-next'
-
-" Icons
-Plug 'ryanoasis/vim-devicons'
-
-" Sidebar undo history
-Plug 'mbbill/undotree'
+Plug 'joshdick/onedark.vim'
+" Plug 'mhartington/oceanic-next'
 
 " Indentation help
 Plug 'nathanaelkane/vim-indent-guides'
+" Autodetect indent
+Plug 'tpope/vim-sleuth'
 
 " Local-wiki
-Plug 'vimwiki/vimwiki'
+"" Plug 'vimwiki/vimwiki'
+
+" Color on colors
+Plug 'norcalli/nvim-colorizer.lua'
+
+" Code context
+Plug 'wellle/context.vim'
+
+" Distraction free markdown
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+
+" Interactive terminal
+Plug 'kassio/neoterm'
 
 " === Language plugin ===
-" --- Golang ---
-"Plug 'stamblerre/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/plugged/gocode/vim/symlink.sh' }
-"Plug 'fatih/vim-go' ", { 'do': ':GoUpdateBinaries' }
-
-" --- Markdown ---
-"Plug 'vim-pandoc/vim-pandoc'
-"Plug 'vim-pandoc/vim-pandoc-syntax'
-
-" --- Javascript / Typescript ---
-" Typescript syntax highlighting
-Plug 'HerringtonDarkholme/yats.vim'
-" React JSX syntax highlighting
-Plug 'mxw/vim-jsx'
-
-" Syntax highlighting for javascript libraries
-Plug 'othree/javascript-libraries-syntax.vim'
-" Improved syntax highlighting and indentation
-Plug 'othree/yajs.vim'
-
-" Generate JSDoc based on code
-Plug 'heavenshell/vim-jsdoc'
-
-" --- C/C++ ---
-" Debug / Breakpoints
-Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
-
-" --- Elixir ---
-"Plug 'elixir-lang/vim-elixir'
-"Plug 'thinca/vim-ref'
-"Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
-
 " --- Toml ---
 Plug 'cespare/vim-toml'
 
-" --- Fish ---
-Plug 'dag/vim-fish'
+" --- Markdown --- "
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 
-" Buffer management
-"Plug 'jeetsukumaran/vim-buffergator'
+" --- Javascript ---
+" Syntax base
+Plug 'othree/yajs.vim'
+" Syntax ES6
+Plug 'othree/es.next.syntax.vim'
+" Auto-import
+Plug 'galooshi/vim-import-js'
+
+" --- VueJS ---
+Plug 'posva/vim-vue'
 
 call plug#end()
