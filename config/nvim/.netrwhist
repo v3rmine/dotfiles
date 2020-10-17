@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =9
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/home/kuro/dotfiles/config/nvim'
 let g:netrw_dirhist_9='/Users/kuro/Git/weboasis-rs'
 let g:netrw_dirhist_8='/Users/kuro/Git/weboasis-rs/src'
 let g:netrw_dirhist_7='/Users/kuro/Git/weboasis-rs'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_4='/Users/kuro/Git/shadow-private-api/src/log'
 let g:netrw_dirhist_3='/Users/kuro/Git/shadow-private-api/src/status'
 let g:netrw_dirhist_2='/Users/kuro/Git/shadow-private-api/src/computer'
 let g:netrw_dirhist_1='/Users/kuro/Git/rust-project-template/tests'
-let g:netrw_dirhist_0='/Users/kuro/Projet/fb-commenter-rs/src'

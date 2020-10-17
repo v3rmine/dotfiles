@@ -8,11 +8,11 @@ Plug 'jiangmiao/auto-pairs'
 " Plug 'tpope/vim-surround'
 
 " Jump in file
-Plug 'easymotion/vim-easymotion'
+"Plug 'easymotion/vim-easymotion'
 
 " fuzzy searching
-Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
-Plug 'lotabout/skim.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " Search filename
 Plug 'ctrlpvim/ctrlp.vim'
@@ -73,7 +73,8 @@ Plug 'tpope/vim-sleuth'
 "" Plug 'vimwiki/vimwiki'
 
 " Color on colors
-Plug 'norcalli/nvim-colorizer.lua'
+" Plug 'norcalli/nvim-colorizer.lua'
+Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 " Code context
 Plug 'wellle/context.vim'
@@ -84,6 +85,16 @@ Plug 'junegunn/limelight.vim'
 
 " Interactive terminal
 Plug 'kassio/neoterm'
+
+" NEOVIM ROAD TO LUA
+" Syntax
+"" Plug 'tjdevries/nlua.nvim'
+" Scratchpad
+Plug 'rafcamlet/nvim-luapad'
+" Lua functions
+Plug 'nvim-lua/plenary.nvim'
+" Alpha popup API
+Plug 'nvim-lua/popup.nvim'
 
 " === Language plugin ===
 " --- Toml ---
@@ -104,5 +115,8 @@ Plug 'galooshi/vim-import-js'
 
 " --- VueJS ---
 Plug 'posva/vim-vue'
+
+" --- Nim ---
+Plug 'zah/nim.vim'
 
 call plug#end()

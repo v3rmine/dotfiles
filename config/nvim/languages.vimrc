@@ -34,3 +34,11 @@ augroup markdown
     " https://github.com/junegunn/goyo.vim/issues/207 "
     au! WinEnter,BufEnter *.md call MardownConfig()
 augroup END
+
+augroup vimrc
+    fun! VimrcConfig()
+        set ts=2 sw=2 noet
+        nmap <C-r> :source $MYVIMRC<cr>
+    endfun
+    au! WinEnter,BufEnter *.vimrc call VimrcConfig()
+augroup END
