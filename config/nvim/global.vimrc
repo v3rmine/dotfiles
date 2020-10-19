@@ -6,6 +6,11 @@ set encoding=UTF-8
 set backspace=indent,eol,start
 set ruler
 set number
+set relativenumber
+
+au! InsertEnter * set norelativenumber
+au! InsertLeave * set relativenumber
+
 set noshowcmd
 set incsearch
 set hlsearch
@@ -26,15 +31,15 @@ let g:mapleader=','
 
 " Search down into subfolders
 " Provides tab-completion for all file-related tasks
-"" set path+=**
+set path+=**
 " Display all matching files when we tab complete, navigable with Tab and Shift+Tab
 set wildmenu
 
 " File browser
-let g:netrw_banner=0            " disable annoying banner
-let g:netrw_browse_split=3      " open in prior window
-"" let g:netrw_altv=1              " open splits to the right
-let g:netrw_liststyle=3         " tree view
+let g:netrw_banner=0			" disable annoying banner
+let g:netrw_browse_split=3		" open in prior window
+"" let g:netrw_altv=1			   " open splits to the right
+let g:netrw_liststyle=3			" tree view
 let g:netrw_list_hide='.*\.swp$' " hide vim swap files
 "" let g:netrw_list_hide=netrw_gitignore#Hide()
 "" let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
@@ -47,10 +52,6 @@ set smartcase
 set autoread
 
 " Tabs setup
-"" set tabstop=4
-"" set shiftwidth=4
-"" set softtabstop=4
-"" set noexpandtab
 set showmatch
 set smarttab
 
@@ -100,9 +101,9 @@ set completeopt=noinsert,menuone,noselect,longest
 
 " Alias
 fun! SetupCommandAlias(from, to)
-  exec 'cnoreabbrev <expr> '.a:from
-        \ .' ((getcmdtype() is# ":" && getcmdline() is# "'.a:from.'")'
-        \ .'? ("'.a:to.'") : ("'.a:from.'"))'
+	exec 'cnoreabbrev <expr> '.a:from
+		\ .' ((getcmdtype() is# ":" && getcmdline() is# "'.a:from.'")'
+		\ .'? ("'.a:to.'") : ("'.a:from.'"))'
 endfun
 
 
@@ -119,32 +120,36 @@ nmap <silent> <C-Left> :wincmd h<cr>
 nmap <silent> <C-Up> :wincmd k<cr>
 nmap <silent> <C-Down> :wincmd j<cr>
 nmap <silent> <C-Right> :wincmd l<cr>
-nmap <silent> <C-h> :split<cr>
-nmap <silent> <C-v> :vsplit<cr>
-nmap <silent> <C-q> :quit<cr>
+nmap <silent> <C-H> :split<cr>
+nmap <silent> <C-V> :vsplit<cr>
+nmap <silent> <C-Q> :quit<cr>
 fun! OpenCurrBufferNewTab()
-    let l:bufnb = buffer_number()
-    quit
-    exec 'tab sb'.l:bufnb
+	let l:bufnb = buffer_number()
+	quit
+	exec 'tab sb'.l:bufnb
 endfun
 nmap <silent> <C-c> :call OpenCurrBufferNewTab()<cr>
 nmap <silent> gf :vertical wincmd f<CR>
 
 " Tabs
 fun! Retab2()
-    :IndentGuidesDisable
-    set ts=2 sw=2 et
-    :normal gg=G
-    :%retab!
-    :IndentGuidesEnable
+	:IndentGuidesDisable
+	set ts=2 sw=2 et
+	:normal gg=G
+	:%retab!
+	:IndentGuidesEnable
 endfun
 fun! Retab4()
-    :IndentGuidesDisable
-    set ts=4 sw=4 noet
-    :normal gg=G
-    :%retab!
-    :IndentGuidesEnable
+	:IndentGuidesDisable
+	set ts=4 sw=4 noet
+	:normal gg=G
+	:%retab!
+	:IndentGuidesEnable
 endfun
 
 nmap s2 :call Retab2()<cr>
 nmap s4 :call Retab4()<cr>
+
+" Good undo / redo
+nmap <silent> <u> :undo<cr>
+nmap <silent> <S-U> :redo<cr>

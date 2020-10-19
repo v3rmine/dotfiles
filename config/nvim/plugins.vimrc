@@ -8,7 +8,7 @@ Plug 'jiangmiao/auto-pairs'
 " Plug 'tpope/vim-surround'
 
 " Jump in file
-"Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 
 " fuzzy searching
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -25,9 +25,9 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'w0rp/ale'
 " Completion
 Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+	\ 'branch': 'next',
+	\ 'do': 'bash install.sh',
+	\ }
 Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2'
 " NOTE: you need to install completion sources to get completions. Check
@@ -117,6 +117,6 @@ Plug 'galooshi/vim-import-js'
 Plug 'posva/vim-vue'
 
 " --- Nim ---
-Plug 'zah/nim.vim'
+Plug 'alaviss/nim.nvim'
 
 call plug#end()

@@ -2,16 +2,6 @@
 let g:onedark_terminal_italics = 1
 colorscheme onedark
 
-" Neoformat
-"" let g:neoformat_basic_format_align = 1
-"" let g:neoformat_basic_format_retab = 1
-"" let g:neoformat_basic_format_trim = 1
-
-" vim-autoformat
-"" let g:formatdef_rustfmt = '"rustfmt"'
-"" let g:formatters_rust = ['rustfmt']
-"" nmap <Leader>f :Autoformat<CR>
-
 " Local wiki
 "" let g:vimwiki_list = [{'path': '~/.config/nvim/vimwiki/'}]
 
@@ -22,11 +12,11 @@ let g:indent_guides_enable_on_vim_startup = 1
 " https://github.com/lotabout/skim.vim "
 " https://github.com/junegunn/fzf.vim "
 fun! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+	let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+	let initial_command = printf(command_fmt, shellescape(a:query))
+	let reload_command = printf(command_fmt, '{q}')
+	let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+	call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfun
 command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
 
@@ -61,50 +51,54 @@ let g:vim_markdown_json_frontmatter = 0
 let g:vim_markdown_strikethrough = 1
 let g:vim_markdown_fenced_languages = ['rust=rs', 'c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini']
 augroup pandoc_syntax
-    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+	au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
 augroup END
 
 " Lightline
 " https://github.com/itchyny/lightline.vim "
 " https://github.com/mengelbrecht/lightline-bufferline "
 let g:lightline = {
-  \ 'colorscheme': 'one',
-  \ 'active': {
-    \ 'left': [
-      \ [ 'mode', 'paste' ], 
-      \ [ 'gitbranch', 'readonly', 'filename', 'modified' ] 
-    \ ],
-    \ 'right': [ 
-      \ [ 'lineinfo' ],
-      \ [ 'percent' ],
-      \ [ 'fileformat', 'fileencoding', 'filetype' ] 
-    \ ]
-  \ },
-  \ 'component_function': {
-    \ 'gitbranch': 'FugitiveHead'
-  \ },
-\ }
+	\ 'colorscheme': 'one',
+	\ 'active': {
+	\ 'left': [
+	\ [ 'mode', 'paste' ],
+	\ [ 'gitbranch', 'readonly', 'filename', 'modified' ]
+	\ ],
+	\ 'right': [
+	\ [ 'lineinfo' ],
+	\ [ 'percent' ],
+	\ [ 'fileformat', 'fileencoding', 'filetype' ]
+	\ ]
+	\ },
+	\ 'component_function': {
+	\ 'gitbranch': 'FugitiveHead'
+	\ },
+	\ }
 
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
 " CtrlP
 " https://github.com/ctrlpvim/ctrlp.vim "
 if executable('rg')
-  let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
+	let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
 endif
 nmap <C-P> :CtrlPMixed<cr>
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<C-c>'], 
-    \ 'AcceptSelection("t")': ['<cr>'],
-    \ 'AcceptSelection("h")': ['<C-h>'],
-    \ 'AcceptSelection("v")': ['<C-v>'],
-    \ }
+	\ 'AcceptSelection("e")': ['<C-c>'],
+	\ 'AcceptSelection("t")': ['<cr>'],
+	\ 'AcceptSelection("h")': ['<C-h>'],
+	\ 'AcceptSelection("v")': ['<C-v>'],
+	\ }
 let g:ctrlp_tabpage_position = 'l'
 
 " Easymotion
 " https://github.com/easymotion/vim-easymotion "
+nmap s <Plug>(easymotion-s2)
+nmap / <Plug>(easymotion-sn)
+nmap <N> <Plug>(easymotion-next)
+nmap <S-N> <Plug>(easymotion-prev)
 
 " Utilisnips
 " https://github.com/SirVer/ultisnips "
@@ -121,16 +115,16 @@ highlight clear SignColumn
 " LanguageClient-neovim
 " https://github.com/autozimu/LanguageClient-neovim "
 let g:LanguageClient_serverCommands = {
-  \ 'rust': ['$HOME/.local/bin/rust-analyser'],
-  \ 'vue': ['vls'],
-  \ 'javascript': ['$HOME/.asdf/shims/javascript-typescript-stdio'],
-  \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-  \ 'python': ['$HOME/.asdf/shims/pyls'],
+	\ 'rust': ['$HOME/.local/bin/rust-analyser'],
+	\ 'vue': ['vls'],
+	\ 'javascript': ['$HOME/.asdf/shims/javascript-typescript-stdio'],
+	\ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+	\ 'python': ['$HOME/.asdf/shims/pyls'],
 	\ 'lua.luapad': ['$HOME/.luarocks/bin/lua-lsp'],
 	\ 'lua': ['$HOME/.luarocks/bin/lua-lsp'],
 	\ 'nim': ['$HOME/.nimble/bin/nimlsp'],
-\ }
-""  \ 'vue': ['vls'],
+	\ }
+""	\ 'vue': ['vls'],
 let g:LanguageClient_autoStart = 0
 let g:LanguageClient_hasSnippetSupport = 1
 
@@ -149,11 +143,21 @@ let g:float_preview#docked = 0
 " ALE
 " https://github.com/dense-analysis/ale "
 let g:ale_linters_explicit = 1
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
 let g:ale_fix_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
 
 let g:ale_linters = {
-  \ 'javascript': ['eslint'],
-\ }
+	\ 'javascript': ['eslint'],
+	\ 'nim': ['nimlsp', 'nimcheck'],
+	\ }
 let g:ale_fixers = {
-  \ 'javascript': ['eslint'],
-\ }
+	\ '*': ['remove_trailing_lines', 'trim_whitespace'],
+	\ 'javascript': ['eslint'],
+	\ 'nim': ['nimpretty']
+	\ }
+
+highlight ALEErrorSign guifg=Red
+highlight ALEWarningSign guifg=Yellow
