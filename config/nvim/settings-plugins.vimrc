@@ -18,10 +18,24 @@ colorscheme onedark
 " Indent guide
 let g:indent_guides_enable_on_vim_startup = 1
 
-" Skim
+" Skim / FzF
 " https://github.com/lotabout/skim.vim "
-command! -bang -nargs=* Ag call fzf#vim#ag_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
-command! -bang -nargs=* Rg call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
+" https://github.com/junegunn/fzf.vim "
+fun! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfun
+command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
+
+let g:fzf_preview_window = 'right:50%'
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+
+nmap <leader>l :Lines<cr>
+nmap <leader>f :Files<cr>
+nmap <leader>r :Rg<cr>
 
 " Context.vim
 " https://github.com/wellle/context.vim "
@@ -96,8 +110,10 @@ let g:ctrlp_tabpage_position = 'l'
 " https://github.com/SirVer/ultisnips "
 let g:UltiSnipsJumpForwardTrigger	= "<c-Left>"
 let g:UltiSnipsJumpBackwardTrigger	= "<c-Right>"
+let g:UltiSnipsExpandTrigger = "<Nop>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsSnippetDirectories = ['UltiSnips']
+inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
 
 " Gitgutter
 highlight clear SignColumn
@@ -110,6 +126,9 @@ let g:LanguageClient_serverCommands = {
   \ 'javascript': ['$HOME/.asdf/shims/javascript-typescript-stdio'],
   \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
   \ 'python': ['$HOME/.asdf/shims/pyls'],
+	\ 'lua.luapad': ['$HOME/.luarocks/bin/lua-lsp'],
+	\ 'lua': ['$HOME/.luarocks/bin/lua-lsp'],
+	\ 'nim': ['$HOME/.nimble/bin/nimlsp'],
 \ }
 ""  \ 'vue': ['vls'],
 let g:LanguageClient_autoStart = 0
@@ -121,17 +140,11 @@ inoremap <c-c> <ESC>
 set shortmess+=c
 "" autocmd User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
 autocmd BufEnter * call ncm2#enable_for_buffer()
-inoremap <expr> <C-y> (pumvisible() && !empty(v:completed_item) ? "\<cr>" : "\<C-y>"))
-" inoremap <expr> <Tab> (pumvisible() ? "\<C-n>" : "\<Tab>")
-" inoremap <expr> <Plug>(cr_prev) execute('let g:_prev_line = getline(".")')
-" inoremap <expr> <Plug>(cr_do) (g:_prev_line == getline('.') ? "\<cr>" : "")
-" inoremap <expr> <Plug>(cr_post) execute('unlet g:_prev_line')
-" imap <expr> <CR> (pumvisible() ? "\<Plug>(cr_prev)\<C-Y>\<Plug>(cr_do)\<Plug>(cr_post)" : "\<CR>")
+inoremap <expr><CR> pumvisible() ? (complete_info().selected == -1 ? "\<C-y>\<CR>" : "\<C-y>") : "\<CR>"
+inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 let g:float_preview#docked = 0
-" Press enter key to trigger snippet expansion
-" The parameters are the same as `:help feedkeys()`
-" inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
 
 " ALE
 " https://github.com/dense-analysis/ale "
