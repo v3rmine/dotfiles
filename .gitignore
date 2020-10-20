@@ -1,3 +1,3 @@
 *.lock
 **/tags
-config/nvim/plugged
+config/nvim/
