@@ -17,6 +17,7 @@
     ~/.xbindkeysrc: xbindkeysrc
     ~/.tool-versions: tool-versions
     ~/.fishrc: config/fish/config.fish
+    ~/.gitconfig: gitconfig
 
 #- shell:
   #- [git submodule update --init --recursive, Installing submodules]
