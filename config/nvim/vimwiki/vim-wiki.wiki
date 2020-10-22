@@ -1,5 +1,0 @@
-= vim-wiki =
-== Commands ==
-  * `<Leader>ww`: to open wiki
-  * <Enter>: to follow a link
-  * <Backspace>: to go back to index
