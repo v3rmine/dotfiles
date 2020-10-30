@@ -1,0 +1,32 @@
+{
+  "work": [
+    {
+      "end": "2020-10-29T11:15:00.000001Z",
+      "name": "mycoaching",
+      "notes": [
+        "normalisation table encaissement / facturation"
+      ],
+      "start": "2020-10-29T08:30:00.000001Z",
+      "tags": [
+        "simplx"
+      ]
+    },
+    {
+      "end": "2020-10-29T17:00:00.000001Z",
+      "name": "koura",
+      "notes": [
+        "binding des donnees utilisateur",
+        "unites sur les axes graphiques"
+      ],
+      "start": "2020-10-29T12:45:00.000001Z"
+    },
+    {
+      "name": "koura",
+      "notes": [
+        "filtre par periode",
+        "filtrage factures"
+      ],
+      "start": "2020-10-30T09:30:00.000001Z"
+    }
+  ]
+}

@@ -17,6 +17,7 @@
         path: bin/*
     ~/.tool-versions: asdf-versions
     ~/.gitconfig: gitconfig
+    ~/.tt-sheet.json: tt-sheet.json
 
 #- shell:
   #- [git submodule update --init --recursive, Installing submodules]
