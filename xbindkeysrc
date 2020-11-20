@@ -42,8 +42,8 @@
 #"xbindkeys_show"
   #Mod1+r
 
-"kitty"
-  Mod4+Super_L+Return
+#"kitty"
+  #Mod4+Super_L+Return
 
 # set directly keycode (here control + f with my keyboard)
 #"xterm"
