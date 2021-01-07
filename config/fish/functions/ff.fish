@@ -1,3 +1,3 @@
 function ff --description "Find file"
-  vim (fd | sk -q "$argv[1]")
+  vim (fd | sk -q "$argv")
 end
