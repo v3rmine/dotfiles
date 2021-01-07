@@ -1,5 +1,5 @@
 function kp --description "Kill processes"
-  set -l __kp__pid (ps -ef | sed 1d | eval "fzf $FZF_DEFAULT_OPTS -m --header='[kill:process]'" | awk '{print $2}')
+  set -l __kp__pid (ps -ef | sed 1d | eval "sk $FZF_DEFAULT_OPTS -m --header='[kill:process]'" | awk '{print $2}')
   set -l __kp__kc $argv[1]
 
   if test "x$__kp__pid" != "x"
