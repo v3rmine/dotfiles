@@ -12,7 +12,7 @@ export TERM="xterm-256color"
 
 # PATH
 export PATH="$HOME/.local/bin:$PATH"
-#export PATH="$HOME/.nimble/bin:$PATH"
+export PATH="$HOME/.emacs.d/bin:$PATH"
 
 # Shortcuts
 alias x="exit"
@@ -22,12 +22,8 @@ alias sz="omf reload"
 alias mirrors_update="sudo pacman-mirrors --fasttrack"
 
 # rebind classics
-#alias cat="bat"
-#alias ls="lsd"
 alias vim="nvim"
 alias findfile="$HOME/.cargo/bin/fd"
-#alias rm="rip"
-#alias time="hyperfine"
 
 # tools
 alias trust-ssh="ssh -o UserKnownHostsFile=/dev/null -T $1 /bin/bash -i"
