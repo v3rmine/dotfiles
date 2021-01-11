@@ -12,6 +12,8 @@ export REVIEW_BASE="dev"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH="/usr/local/share/android-sdk/build-tools/29.0.3:$PATH"
+export PATH="$HOME/.emacs.d/bin:$PATH"
+export PATH="$HOME/.nimble/bin:$PATH"
 
 # Shortcuts
 alias x="exit"
