@@ -14,6 +14,11 @@ export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH="/usr/local/share/android-sdk/build-tools/29.0.3:$PATH"
 export PATH="$HOME/.emacs.d/bin:$PATH"
 export PATH="$HOME/.nimble/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# PATH PERSO
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="$HOME/Applications/Nim/bin:$PATH"
 
 # Shortcuts
 alias x="exit"
@@ -24,7 +29,7 @@ alias sz="omf reload"
 # rebind classics
 alias cat="bat"
 #alias ls="lsd"
-alias vim="nvim"
+#alias vim="nvim"
 #alias rm="rip"
 #alias time="hyperfine"
 
@@ -48,6 +53,6 @@ alias gsh="git show"
 set -g fish_user_paths "/usr/local/opt/texinfo/bin" $fish_user_paths
 set -g fish_user_paths "/usr/local/opt/ruby/bin" $fish_user_paths
 
-source (brew --prefix asdf)/asdf.fish
+source ~/.asdf/asdf.fish
 
 starship init fish | source

@@ -8,7 +8,7 @@ package neovim
 package nvm
 package pisces
 package rustup
-package thefuck
+package spark
 package vish
 package wd
 package weather
