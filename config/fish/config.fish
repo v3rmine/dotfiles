@@ -2,7 +2,7 @@ set -g pure_symbol_prompt "\$"
 
 # EXPORTS
 export ENHANCD_FILTER=fzf
-export VISUAL=emacs
+export VISUAL="emacs -nw"
 export EDITOR="$VISUAL"
 export TERM="xterm-256color"
 export GPG_TTY=(tty)
