@@ -2,6 +2,9 @@
 name = joxcat
 email = blackksoulls@gmail.com
 
+[core]
+  pager = delta
+
 [pull]
 	ff = only
 
@@ -10,5 +13,19 @@ email = blackksoulls@gmail.com
   stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
   review = !nvim -p $(git files) +\"tabdo Gvdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
   reviewone = !nvim -p +\"tabdo Gvdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
+
+[diff]
+  colorMoved = default
+
 [http]
 	postBuffer = 524288000
+
+[delta]
+  line-numbers = true
+  side-by-side = true
+  plus-color = "#012800"
+  minus-color = "#340001"
+  syntax-theme = Monokai Extended
+
+[interactive]
+  diffFilter = delta --color-only

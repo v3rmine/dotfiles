@@ -13,6 +13,7 @@ export TERM="xterm-256color"
 # PATH
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.emacs.d/bin:$PATH"
+export PATH="$HOME/.nimble/bin:$PATH"
 
 # Shortcuts
 alias x="exit"
@@ -20,6 +21,7 @@ alias hc="history -c"
 alias j="just"
 alias sz="omf reload"
 alias mirrors_update="sudo pacman-mirrors --fasttrack"
+alias emacs="emacs -nw"
 
 # rebind classics
 alias vim="nvim"
