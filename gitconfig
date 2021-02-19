@@ -15,12 +15,13 @@ email = blackksoulls@gmail.com
   reviewone = !nvim -p +\"tabdo Gvdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
 
 [diff]
-  colorMoved = default
+  colorMoved = zebra
 
 [http]
 	postBuffer = 524288000
 
 [delta]
+  paging = always
   line-numbers = true
   side-by-side = true
   plus-color = "#012800"

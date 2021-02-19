@@ -7,6 +7,7 @@ export EDITOR="$VISUAL"
 export TERM="xterm-256color"
 export GPG_TTY=(tty)
 export REVIEW_BASE="dev"
+export PAGER="less"
 
 # PATH
 export PATH="$HOME/.local/bin:$PATH"
@@ -37,10 +38,13 @@ alias gc="git commit"
 alias gcm="gc -m"
 alias gk="git checkout"
 alias gm="git merge"
-alias gf=fetch
-alias gp=pull
+alias gb="git branch"
+alias gf="git fetch"
+alias gp="git pull"
 alias gst="git status"
 alias gsh="git show"
+alias gl="git log"
+alias gd="git diff --minimal -B -M -C --color-moved=zebra" 
 
 set -g fish_user_paths "/usr/local/opt/texinfo/bin" $fish_user_paths
 set -g fish_user_paths "/usr/local/opt/ruby/bin" $fish_user_paths
