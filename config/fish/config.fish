@@ -45,6 +45,9 @@ alias gst="git status"
 alias gsh="git show"
 alias gl="git log"
 alias gd="git diff --minimal -B -M -C --color-moved=zebra" 
+alias gsl="git stash list"
+alias gsa="git-stash-apply"
+alias gs="git stash"
 
 set -g fish_user_paths "/usr/local/opt/texinfo/bin" $fish_user_paths
 set -g fish_user_paths "/usr/local/opt/ruby/bin" $fish_user_paths
