@@ -18,6 +18,6 @@
     ~/.tool-versions: asdf-versions
     ~/.gitconfig: gitconfig
     ~/.tt-sheet.json: tt-sheet.json
-
+    ~/Library/Preferences/espanso: espanso
 #- shell:
   #- [git submodule update --init --recursive, Installing submodules]
