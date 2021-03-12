@@ -8,3 +8,6 @@
 [submodule "config/doom"]
 	path = config/doom
 	url = https://github.com/joxcat/doom
+[submodule "navi"]
+	path = navi
+	url = https://github.com/joxcat/navi
