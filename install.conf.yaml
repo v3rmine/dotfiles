@@ -17,9 +17,7 @@
         path: bin/*
     ~/.tool-versions: asdf-versions
     ~/.gitconfig: gitconfig
-    ~/.tt-sheet.json: tt-sheet.json
-    ~/Library/Preferences/espanso: espanso
     ~/Library/Application Support/navi: navi
 
-#- shell:
-  #- [git submodule update --init --recursive, Installing submodules]
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
