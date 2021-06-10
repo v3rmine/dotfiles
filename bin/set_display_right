@@ -1,0 +1,2 @@
+#!/bin/bash
+xrandr --output eDP-1-1 --auto --pos 0x0 --output HDMI-0 --auto --pos 1920x-1080

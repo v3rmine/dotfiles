@@ -18,6 +18,7 @@
     ~/.tool-versions: tool-versions
     ~/.fishrc: config/fish/config.fish
     ~/.gitconfig: gitconfig
+    ~/.local/share/navi: navi
 
 #- shell:
   #- [git submodule update --init --recursive, Installing submodules]

@@ -1,15 +1,12 @@
-package apt
 package argu
+package autojump
 package config
 package dpaste
 package foreign-env
 package fzf
 package fzf-autojump
-package neovim
 package pisces
 package rustup
-package spark
-package vish
 package wd
 package z
 theme default

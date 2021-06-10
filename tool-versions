@@ -1,4 +1,6 @@
 python 3.8.3
-nodejs 12.18.0
+nodejs 13.14.0
 nim 1.4.2
 golang 1.14.4
+lein 2.9.6
+clojure 1.10.3.822
