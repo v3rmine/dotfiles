@@ -17,6 +17,7 @@
         path: bin/*
     ~/.tool-versions: asdf-versions
     ~/.gitconfig: gitconfig
+    ~/.gitignore: gitignore
     ~/Library/Application Support/navi: navi
 
 - shell:
