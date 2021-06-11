@@ -1,3 +1,8 @@
 #!/bin/bash
-#ss -lntup
-lsof -i -P -n | grep LISTEN
+if command ss >/dev/null 2>&1; then
+    ss -lntup
+elif command lsof >/dev/null 2>&1; then
+    lsof -i -P -n | grep LISTEN
+else
+    echo "No port command found please add it to me!"
+fi

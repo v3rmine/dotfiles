@@ -9,6 +9,9 @@ export GPG_TTY=(tty)
 export REVIEW_BASE="dev"
 export PAGER="less"
 
+## NAVI
+export NAVI_FZF_OVERRIDES='--height 10'
+
 # PATH
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.emacs.d/bin:$PATH"
@@ -55,6 +58,7 @@ set -g fish_user_paths "/usr/local/opt/ruby/bin" $fish_user_paths
 source ~/.asdf/asdf.fish
 
 starship init fish | source
+navi widget fish | source
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/johan/Apps/google-cloud-sdk/path.fish.inc' ]; . '/Users/johan/Apps/google-cloud-sdk/path.fish.inc'; end
