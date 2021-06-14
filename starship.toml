@@ -1,0 +1,12 @@
+add_newline = true
+
+[character]
+symbol = "kuro ➜" # "🐈"
+use_symbol_for_status = true
+
+[hostname]
+disabled = true
+
+[username]
+show_always = false
+disabled = false

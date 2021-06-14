@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Add local executables
+export PATH="$HOME/.local/bin:$PATH"
+
+# Add emacs
+export PATH="$HOME/.emacs.d/bin:$PATH"
+
+# Add Rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# Add texinfo to the path
+export PATH="$PATH:/usr/local/opt/texinfo/bin"
+
+# Add ruby to the path
+export PATH="$PATH:/usr/local/opt/ruby/bin"
+
+# Add android-sdk to the path
+export PATH="$PATH:/usr/local/share/android-sdk/build-tools/30.0.3/"
+
+# GNU coreutils
+export PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
+
+# Import google SDK
+if [ -f '/Users/johan/Apps/google-cloud-sdk/path.bash.inc' ]; then
+    source '/Users/johan/Apps/google-cloud-sdk/path.bash.inc'
+fi

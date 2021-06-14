@@ -1,0 +1,6 @@
+#!/bin/bash
+# Get UUID of item
+uuid=$(op list documents | jq -r '(.[] | [.uuid, .overview.title]) | @tsv' | sk | grep -Eo '^[a-z0-9]+')
+## echo UUID: $uuid
+# Get password
+item=$(op get document $uuid >> $1)

@@ -1,6 +1,8 @@
+nodejs 13.14.0
 nodejs 12.8.1
 nodejs 10.17.0
-python 3.7.9
+python 3.8.3
 ruby 3.0.0
 golang 1.15.7
-nim 1.4.2
+lein 2.9.6
+clojure 1.10.3.822

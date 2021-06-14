@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Local executables
+export PATH="$HOME/.local/bin:$PATH"
+
+# Emacs
+export PATH="$HOME/.emacs.d/bin:$PATH"
+
+# Rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# --- alias for linux ---
+alias mirrors_update="sudo pacman-mirrors --fasttrack"

@@ -9,16 +9,24 @@
         force: true
 - link:
     ~/.fishrc: config/fish/config.fish
+    ~/.zshrc: zshrc
     ~/.config/:
         glob: true
         path: config/*
     ~/.local/bin/:
         glob: true
-        path: bin/*
+        path: bin/**
     ~/.tool-versions: asdf-versions
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
-    ~/Library/Application Support/navi: navi
+    ~/.xbindkeyrc: xbindkeyrc
+    ~/.profile:
+      if: '[ `uname` = Darwin ]'
+      path: profile.osx
+    ~/.profile:
+      if: '[ `uname` = Linux ]'
+      path: profile.lux
+    "${NAVI_PATH}": navi
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
