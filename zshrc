@@ -1,5 +1,9 @@
 #!/bin/bash
 
+source "$HOME/.profile"
+
+if [ ! -d "$HOME/.local" ]; then mkdir "$HOME/.local"; fi
+
 export TERM="xterm-256color"
 
 # --- ZSH ---
@@ -18,16 +22,6 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR="emacs -nw"
   export VISUAL="$EDITOR"
-fi
-
-# Import env
-platform=$(uname)
-if [[ $platform = 'Darwin' ]]; then
-  # Apple
-  echo 1
-else
-  # Default
-  echo 2
 fi
 
 # Imports bash utils
@@ -56,7 +50,21 @@ alias gsl="git stash list"
 alias gsa="git-stash-apply"
 alias gs="git stash"
 
-# --- Sources ---
+# --- Antigen ---
+if test_command antigen; then
+  curl -L git.io/antigen > "$HOME/.local/antigen.zsh"
+fi
+source "$HOME/.local/antigen.zsh"
 
-starship init bash | source
-navi widget bash | source
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+# Last one !important
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# --- Sources ---
+if test_command starship; then
+  starship init bash | source
+fi
+if test_command navi; then
+  navi widget bash | source
+fi
