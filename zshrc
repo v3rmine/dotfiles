@@ -5,6 +5,7 @@ source "$HOME/.profile"
 if [ ! -d "$HOME/.local" ]; then mkdir "$HOME/.local"; fi
 
 export TERM="xterm-256color"
+export SHELL="zsh"
 
 # --- ZSH ---
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor root line)
@@ -51,20 +52,26 @@ alias gsa="git-stash-apply"
 alias gs="git stash"
 
 # --- Antigen ---
-if test_command antigen; then
-  curl -L git.io/antigen > "$HOME/.local/antigen.zsh"
+ANTIGEN_PATH="$HOME/.local/antigen.zsh"
+if [ ! -f "$ANTIGEN_PATH" ]; then
+  curl -L git.io/antigen > "$ANTIGEN_PATH"
 fi
-source "$HOME/.local/antigen.zsh"
+source "$ANTIGEN_PATH"
 
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 # Last one !important
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen apply
 
 # --- Sources ---
 if test_command starship; then
-  starship init bash | source
+  eval "$(starship init zsh)"
 fi
-if test_command navi; then
-  navi widget bash | source
+if test_command "navi -h"; then
+  navi widget zsh | source
+fi
+ASDF_PATH="$HOME/.asdf/asdf.sh"
+if [ -f "$ASDF_PATH" ]; then
+  source "$ASDF_PATH"
 fi

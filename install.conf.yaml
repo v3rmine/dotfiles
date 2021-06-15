@@ -7,6 +7,9 @@
 - clean:
     ~/.local/bin:
         force: true
+    ~/.profile:
+        force: true
+
 - link:
     ~/.fishrc: config/fish/config.fish
     ~/.zshrc: zshrc
@@ -23,10 +26,12 @@
     ~/.profile:
       if: '[ `uname` = Darwin ]'
       path: profile.osx
-    ~/.profile:
-      if: '[ `uname` = Linux ]'
-      path: profile.lux
-    "${NAVI_PATH}": navi
+      
+    # ~/.profile:
+    #   if: 'test $(uname) = Linux'
+    #   path: profile.lux
+    # "${NAVI_PATH}": navi
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
+  - [install-scripts/os-prepare.bash, Preparing the os specifics]

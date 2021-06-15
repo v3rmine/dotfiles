@@ -5,6 +5,8 @@
 [submodule "config/doom"]
 	path = config/doom
 	url = https://github.com/joxcat/doom
+    branch = master
 [submodule "navi"]
 	path = navi
 	url = https://github.com/joxcat/navi
+    branch = master
