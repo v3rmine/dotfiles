@@ -31,7 +31,7 @@ source "$DOTFILES_PATH/install-scripts/functions-utils.bash"
 # --- Rebinds ---
 # shortcuts
 alias findfile="$HOME/.cargo/bin/fd"
-alias sz="source ~/.zshrc"
+alias sz="source $HOME/.zshrc"
 function trust-ssh() { ssh -o UserKnownHostsFile=/dev/null -T "$1" /bin/bash -i }
 
 # git
@@ -65,10 +65,10 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen apply
 
 # --- Sources ---
-if test_command starship; then
+if test_command starship -h; then
   eval "$(starship init zsh)"
 fi
-if test_command "navi -h"; then
+if test_command navi -h; then
   navi widget zsh | source
 fi
 ASDF_PATH="$HOME/.asdf/asdf.sh"
