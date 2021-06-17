@@ -7,8 +7,6 @@
 - clean:
     ~/.local/bin:
         force: true
-    ~/.profile:
-        force: true
 
 - link:
     ~/.fishrc: config/fish/config.fish
@@ -23,14 +21,6 @@
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
     ~/.xbindkeyrc: xbindkeyrc
-    ~/.profile:
-      if: '[ `uname` = Darwin ]'
-      path: profile.osx
-      
-    # ~/.profile:
-    #   if: 'test $(uname) = Linux'
-    #   path: profile.lux
-    # "${NAVI_PATH}": navi
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

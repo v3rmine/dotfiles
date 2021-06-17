@@ -58,6 +58,10 @@ if [ ! -f "$ANTIGEN_PATH" ]; then
 fi
 source "$ANTIGEN_PATH"
 
+# plugins
+antigen bundle mfaerevaag/wd
+
+# zsh-users
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 # Last one !important
@@ -69,7 +73,8 @@ if test_command starship -h; then
   eval "$(starship init zsh)"
 fi
 if test_command navi -h; then
-  navi widget zsh | source
+  export NAVI_FZF_OVERRIDES='--height 3'
+  eval "$(navi widget zsh)"
 fi
 ASDF_PATH="$HOME/.asdf/asdf.sh"
 if [ -f "$ASDF_PATH" ]; then
