@@ -34,6 +34,12 @@ alias findfile="$HOME/.cargo/bin/fd"
 alias sz="source $HOME/.zshrc"
 function trust-ssh() { ssh -o UserKnownHostsFile=/dev/null -T "$1" /bin/bash -i }
 
+# Emacs
+alias ec="emacsclient -n"
+alias ecw="emacsclient -nw"
+alias ecc="emacsclient -cn"
+alias eccw="emacsclient -cnw"
+
 # git
 alias ga="git add"
 alias gc="git commit"
@@ -50,6 +56,12 @@ alias gd="git diff --minimal -B -M -C --color-moved=zebra"
 alias gsl="git stash list"
 alias gsa="git-stash-apply"
 alias gs="git stash"
+
+# --- ASDF ---
+ASDF_PATH="$HOME/.asdf/asdf.sh"
+if [ -f "$ASDF_PATH" ]; then
+  source "$ASDF_PATH"
+fi
 
 # --- Antigen ---
 ANTIGEN_PATH="$HOME/.local/antigen.zsh"
@@ -76,10 +88,6 @@ fi
 if test_command navi -h; then
   export NAVI_FZF_OVERRIDES='--height 3'
   eval "$(navi widget zsh)"
-fi
-ASDF_PATH="$HOME/.asdf/asdf.sh"
-if [ -f "$ASDF_PATH" ]; then
-  source "$ASDF_PATH"
 fi
 
 # --- Key rebind ---
