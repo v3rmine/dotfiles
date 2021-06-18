@@ -60,6 +60,7 @@ source "$ANTIGEN_PATH"
 
 # plugins
 antigen bundle mfaerevaag/wd
+antigen bundle MichaelAquilina/zsh-you-should-use
 
 # zsh-users
 antigen bundle zsh-users/zsh-autosuggestions
@@ -80,3 +81,6 @@ ASDF_PATH="$HOME/.asdf/asdf.sh"
 if [ -f "$ASDF_PATH" ]; then
   source "$ASDF_PATH"
 fi
+
+# --- Key rebind ---
+bindkey "^[[3~" delete-char
