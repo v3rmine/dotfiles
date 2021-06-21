@@ -92,3 +92,4 @@ fi
 
 # --- Key rebind ---
 bindkey "^[[3~" delete-char
+if [ -e /Users/johan/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/johan/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
