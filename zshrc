@@ -21,7 +21,8 @@ export DISABLE_UNTRACKED_FILES_DIRTY="true"
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR="vim"
 else
-  export EDITOR="emacs -nw"
+  export ALTERNATE_EDITOR=''
+  export EDITOR="emacsclient -t"
   export VISUAL="$EDITOR"
 fi
 
@@ -35,10 +36,10 @@ alias sz="source $HOME/.zshrc"
 function trust-ssh() { ssh -o UserKnownHostsFile=/dev/null -T "$1" /bin/bash -i }
 
 # Emacs
-alias ec="emacsclient -n"
-alias ecw="emacsclient -nw"
-alias ecc="emacsclient -cn"
-alias eccw="emacsclient -cnw"
+alias ec="emacsclient"
+alias ecw="emacsclient -t"
+alias ecc="emacsclient -c"
+alias eccw="emacsclient -c -t"
 
 # git
 alias ga="git add"
