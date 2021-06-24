@@ -74,6 +74,7 @@ source "$ANTIGEN_PATH"
 # plugins
 antigen bundle mfaerevaag/wd
 antigen bundle MichaelAquilina/zsh-you-should-use
+antigen bundle hlissner/zsh-autopair
 
 # zsh-users
 antigen bundle zsh-users/zsh-autosuggestions
@@ -92,5 +93,31 @@ if test_command navi -h; then
 fi
 
 # --- Key rebind ---
+# del
 bindkey "^[[3~" delete-char
-if [ -e /Users/johan/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/johan/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+# os-left
+bindkey "^[[1;9D" beginning-of-line
+# os-right
+bindkey "^[[1;9C" end-of-line
+# ctrl-left
+bindkey "^[[1;5D" emacs-backward-word
+# ctrl-right
+bindkey "^[[1;5C" emacs-forward-word
+# ctrl-c
+bindkey "^C" kill-whole-line
+# ctrl-backspace
+bindkey "^H" backward-delete-word
+
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+# case insensitive path-completion 
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
+# partial completion suggestions
+zstyle ':completion:*' list-suffixes
+zstyle ':completion:*' expand prefix suffix
+zstyle :compinstall filename '/Users/johan/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
