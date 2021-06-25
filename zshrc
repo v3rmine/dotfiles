@@ -35,6 +35,13 @@ alias findfile="$HOME/.cargo/bin/fd"
 alias sz="source $HOME/.zshrc"
 function trust-ssh() { ssh -o UserKnownHostsFile=/dev/null -T "$1" /bin/bash -i }
 
+# ls
+alias ls="lsd"
+alias ll="ls -l"
+alias la="ls -al"
+alias lh="ls -alh"
+alias l="ls"
+
 # Emacs
 alias ec="emacsclient"
 alias ecw="emacsclient -t"
@@ -57,6 +64,28 @@ alias gd="git diff --minimal -B -M -C --color-moved=zebra"
 alias gsl="git stash list"
 alias gsa="git-stash-apply"
 alias gs="git stash"
+
+# --- Colored LESS E.G for man ---
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
+
+# --- Kitty (https://github.com/kovidgoyal/kitty/issues/610) ---
+function set-title-precmd() {
+  printf "\e]2;%s\a" "${PWD/#$HOME/~}"
+}
+
+function set-title-preexec() {
+  printf "\e]2;%s\a" "$1"
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd set-title-precmd
+add-zsh-hook preexec set-title-preexec
 
 # --- ASDF ---
 ASDF_PATH="$HOME/.asdf/asdf.sh"
@@ -110,13 +139,12 @@ bindkey "^H" backward-delete-word
 
 # The following lines were added by compinstall
 
-zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
-# case insensitive path-completion 
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
-# partial completion suggestions
-zstyle ':completion:*' list-suffixes
-zstyle ':completion:*' expand prefix suffix
-zstyle :compinstall filename '/Users/johan/.zshrc'
+# zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+# # case insensitive path-completion 
+# zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
+# # partial completion suggestions
+# zstyle ':completion:*' list-suffixes
+# zstyle ':completion:*' expand prefix suffix
 
 autoload -Uz compinit
 compinit
