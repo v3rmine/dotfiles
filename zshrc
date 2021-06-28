@@ -9,7 +9,7 @@ export SHELL="zsh"
 
 # --- ZSH ---
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor root line)
-export ZSH_HIGHLIGHT_PATTERNS=('rm *' 'fg=white,bold,bg=red')
+export ZSH_HIGHLIGHT_PATTERNS=('rm *\*' 'fg=white,bold,bg=red')
 
 # DISABLE_AUTO_UPDATE="true"
 export DISABLE_UPDATE_PROMPT="true"
