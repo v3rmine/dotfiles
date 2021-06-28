@@ -7,15 +7,6 @@ if [ ! -d "$HOME/.local" ]; then mkdir "$HOME/.local"; fi
 export TERM="xterm-256color"
 export SHELL="zsh"
 
-# --- ZSH ---
-export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor root line)
-export ZSH_HIGHLIGHT_PATTERNS=('rm *\*' 'fg=white,bold,bg=red')
-
-# DISABLE_AUTO_UPDATE="true"
-export DISABLE_UPDATE_PROMPT="true"
-export ENABLE_CORRECTION="true"
-export DISABLE_UNTRACKED_FILES_DIRTY="true"
-
 # --- Cross platform management ---
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -137,15 +128,14 @@ bindkey "^C" kill-whole-line
 # ctrl-backspace
 bindkey "^H" backward-delete-word
 
-# The following lines were added by compinstall
+# --- ZSH ---
+export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor root line)
+export ZSH_HIGHLIGHT_PATTERNS=('rm *\*' 'fg=white,bold,bg=red')
 
-# zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
-# # case insensitive path-completion 
-# zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
-# # partial completion suggestions
-# zstyle ':completion:*' list-suffixes
-# zstyle ':completion:*' expand prefix suffix
+# DISABLE_AUTO_UPDATE="true"
+export DISABLE_UPDATE_PROMPT="true"
+export ENABLE_CORRECTION="true"
+export DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
