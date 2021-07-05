@@ -129,6 +129,12 @@ bindkey "^C" kill-whole-line
 bindkey "^H" backward-delete-word
 
 # --- ZSH ---
+# History
+export HISTFILE="~/.zsh_history"
+export HISTSIZE=1000
+export SAVEHIST=1000
+setopt appendhistory
+# Highlights
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor root line)
 export ZSH_HIGHLIGHT_PATTERNS=('rm *\*' 'fg=white,bold,bg=red')
 
