@@ -48,6 +48,7 @@ alias gm="git merge"
 alias gb="git branch"
 alias gf="git fetch"
 alias gp="git pull"
+function gPu () { git push -u origin $(git branch | grep '^\*' | sed -E 's/( |\*)//g') }
 alias gst="git status"
 alias gsh="git show"
 alias gl="git log"
@@ -130,10 +131,10 @@ bindkey "^H" backward-delete-word
 
 # --- ZSH ---
 # History
-export HISTFILE="~/.zsh_history"
+export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=1000
 export SAVEHIST=1000
-setopt appendhistory
+setopt inc_append_history
 # Highlights
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor root line)
 export ZSH_HIGHLIGHT_PATTERNS=('rm *\*' 'fg=white,bold,bg=red')
