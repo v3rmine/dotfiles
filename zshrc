@@ -83,6 +83,7 @@ add-zsh-hook preexec set-title-preexec
 ASDF_PATH="$HOME/.asdf/asdf.sh"
 if [ -f "$ASDF_PATH" ]; then
   source "$ASDF_PATH"
+  fpath=(${ASDF_DIR}/completions $fpath)
 fi
 
 # --- Antigen ---
