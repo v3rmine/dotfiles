@@ -7,3 +7,4 @@ ruby 3.0.0
 golang 1.15.7
 lein 2.9.6
 clojure 1.10.3.822
+zig master
