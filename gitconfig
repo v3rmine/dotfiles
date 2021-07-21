@@ -4,28 +4,28 @@
 
 [core]
   excludesfile = $HOME/.gitignore
-  pager = delta
+# pager = delta
 
 [pull]
   rebase = false
 
-[alias]
-  files = !git diff --name-only $(git merge-base HEAD \"$REVIEW_BASE\")
-  stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
+# [alias]
+#   files = !git diff --name-only $(git merge-base HEAD \"$REVIEW_BASE\")
+#   stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
 
-[diff]
-  colorMoved = zebra
+# [diff]
+#   colorMoved = zebra
 
 [http]
 	postBuffer = 524288000
 
-[delta]
-  paging = always
-  line-numbers = true
-  side-by-side = true
-  plus-color = "#012800"
-  minus-color = "#340001"
-  syntax-theme = Monokai Extended
+# [delta]
+#   paging = always
+#   line-numbers = true
+#   side-by-side = true
+#   plus-color = "#012800"
+#   minus-color = "#340001"
+#   syntax-theme = Monokai Extended
 
-[interactive]
-  diffFilter = delta --color-only
+# [interactive]
+#   diffFilter = delta --color-only
