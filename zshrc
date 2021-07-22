@@ -103,6 +103,7 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 # Last one !important
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-history-substring-search
 antigen apply
 
 # --- Sources ---
@@ -129,8 +130,15 @@ bindkey "^[[1;5C" emacs-forward-word
 bindkey "^C" kill-whole-line
 # ctrl-backspace
 bindkey "^H" backward-delete-word
+# fish search up
+bindkey "^[[A" history-substring-search-up
+# fish search down
+bindkey "^[[B" history-substring-search-down
 
 # --- ZSH ---
+# Default: *?_-.[]~=/&;!#$%^(){}<>
+export WORDCHARS="*?_.~&;!#$%^"
+
 # History
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=1000
