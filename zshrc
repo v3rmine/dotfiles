@@ -84,6 +84,7 @@ ASDF_PATH="$HOME/.asdf/asdf.sh"
 if [ -f "$ASDF_PATH" ]; then
   source "$ASDF_PATH"
   fpath=(${ASDF_DIR}/completions $fpath)
+  export PATH="$PATH:$ASDF_USER_SHIMS"
 fi
 
 # --- Antigen ---
