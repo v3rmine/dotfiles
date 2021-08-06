@@ -113,7 +113,6 @@ if test_command starship -h; then
 fi
 if test_command navi -h; then
   export NAVI_FZF_OVERRIDES='--height 3'
-
   navi_call() {
     local result="$(navi "$@" </dev/tty)"
     if [ -z "${result}" ]; then
@@ -128,8 +127,8 @@ if test_command navi -h; then
     local find="$last_command"
     local replacement="$last_command"
 
-    if [ -z "${last_command}" ]; then
-      replacement="$(_navi_call --print --fzf-overrides '--no-select-1 --height 3')"
+    if [ -z "${last_command}" ]; then 
+      replacement="$(FZF_OVERRIDES="${FZF_OVERRIDES:-} --no-select-1" _navi_call --print)"
     elif [ "${LASTWIDGET}" = "_navi_widget" ] && [ "$input" = "$previous_output" ]; then
       find="$input"
       replacement="$(_navi_call --print --query "${previous_last_command:-$last_command}")"
