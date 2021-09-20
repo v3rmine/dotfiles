@@ -113,40 +113,7 @@ if test_command starship -h; then
 fi
 if test_command navi -h; then
   export NAVI_FZF_OVERRIDES='--height 3'
-  navi_call() {
-    local result="$(navi "$@" </dev/tty)"
-    if [ -z "${result}" ]; then
-      result="$(navi --print </dev/tty)"
-    fi
-    printf "%s" "$result"
-  }
-
-  _navi_widget() {
-    local -r input="${LBUFFER}"
-    local -r last_command="$(echo "${input}" | navi fn widget::last_command)"
-    local find="$last_command"
-    local replacement="$last_command"
-
-    if [ -z "${last_command}" ]; then 
-      replacement="$(FZF_OVERRIDES="${FZF_OVERRIDES:-} --no-select-1" _navi_call --print)"
-    elif [ "${LASTWIDGET}" = "_navi_widget" ] && [ "$input" = "$previous_output" ]; then
-      find="$input"
-      replacement="$(_navi_call --print --query "${previous_last_command:-$last_command}")"
-    else
-      replacement="$(_navi_call --print --best-match --query "${last_command}")"
-    fi
-
-    previous_last_command="$last_command"
-    previous_output="${input//$find/$replacement}"
-
-    zle kill-whole-line
-    LBUFFER="${previous_output}"
-    region_highlight=("P0 100 bold")
-    zle redisplay
-  }
-
-  zle -N _navi_widget
-  bindkey '^g' _navi_widget
+  eval "$(navi widget zsh)"
 fi
 
 # --- Key rebind ---
@@ -187,5 +154,10 @@ export DISABLE_UPDATE_PROMPT="true"
 export ENABLE_CORRECTION="true"
 export DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+# Support bash completions
+autoload bashcompinit
+bashcompinit
+
+# ZSH Completions
 autoload -Uz compinit
 compinit
