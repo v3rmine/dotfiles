@@ -13,4 +13,4 @@ export DOTFILES_PATH="$HOME/dotfiles"
 
 export NOPERM_SYSTEM=1
 # --- overrides ---
-export CUSTOM_LS="ls"
+export CUSTOM_LS="ls --color"
