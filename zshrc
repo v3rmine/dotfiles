@@ -27,7 +27,7 @@ alias sz="source $HOME/.zshrc"
 function trust-ssh() { ssh -o UserKnownHostsFile=/dev/null -T "$1" /bin/bash -i }
 
 # ls
-alias ls="lsd"
+alias ls="${CUSTOM_LS:-lsd}"
 alias ll="ls -l"
 alias la="ls -al"
 alias lh="ls -alh"

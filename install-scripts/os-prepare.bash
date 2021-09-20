@@ -14,7 +14,13 @@ if [ "$os" = Darwin ]; then
 
 elif [ "$os" = Linux ]; then
     echo Linking os profile file
-    ln -s "$PWD/profile.lux" "$HOME/.profile"
+    
+    user=$(whoami)
+    if [ "$user" = johan.planchon ]; then
+	ln -s "$PWD/no-perms.lux" "$HOME/.profile"
+    else
+    	ln -s "$PWD/profile.lux" "$HOME/.profile"
+    fi
 
     echo Linking navi
     rm "$HOME/.local/share/navi" || true

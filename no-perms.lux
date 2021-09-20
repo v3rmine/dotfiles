@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Local executables
+export PATH="$HOME/.local/bin:$PATH"
+
+# Emacs
+export PATH="$HOME/.emacs.d/bin:$PATH"
+
+# --- alias for linux ---
+
+# --- common ---
+export DOTFILES_PATH="$HOME/dotfiles"
+
+export NOPERM_SYSTEM=1
+# --- overrides ---
+export CUSTOM_LS="ls"
