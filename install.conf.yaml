@@ -9,7 +9,6 @@
         force: true
 
 - link:
-    ~/.fishrc: config/fish/config.fish
     ~/.zshrc: zshrc
     ~/.config/:
         glob: true
