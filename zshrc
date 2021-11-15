@@ -26,6 +26,9 @@ alias findfile="$HOME/.cargo/bin/fd"
 alias sz="source $HOME/.zshrc"
 function trust-ssh() { ssh -o UserKnownHostsFile=/dev/null -T "$1" /bin/bash -i }
 
+# CPE
+function gccpe() { gcc "$1" -o "$2" -Wall -Wextra -g } 
+
 # ls
 alias ls="${CUSTOM_LS:-lsd}"
 alias ll="ls -l"

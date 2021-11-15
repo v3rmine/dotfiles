@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Local executables
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/.local/bin"
 
 # Emacs
-export PATH="$HOME/.emacs.d/bin:$PATH"
+export PATH="$PATH:$HOME/.emacs.d/bin"
 
 # --- alias for linux ---
 

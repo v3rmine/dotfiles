@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Add local executables
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/.local/bin"
 
 # Add emacs
-export PATH="$HOME/.emacs.d/bin:$PATH"
+export PATH="$PATH:$HOME/.emacs.d/bin"
 
 # Add Rust
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 # Add texinfo to the path
 export PATH="$PATH:/usr/local/opt/texinfo/bin"

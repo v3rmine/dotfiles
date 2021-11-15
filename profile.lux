@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Local executables
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/.local/bin"
 
 # Emacs
-export PATH="$HOME/.emacs.d/bin:$PATH"
+export PATH="$PATH:$HOME/.emacs.d/bin"
 
 # Rust
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 # --- alias for linux ---
 alias mirrors_update="sudo pacman-mirrors --fasttrack"
