@@ -124,8 +124,10 @@ fi
 bindkey "^[[3~" delete-char
 # os-left
 bindkey "^[[1;9D" beginning-of-line
+bindkey "^[[H" beginning-of-line
 # os-right
 bindkey "^[[1;9C" end-of-line
+bindkey "^[[F" end-of-line
 # ctrl-left
 bindkey "^[[1;5D" emacs-backward-word
 # ctrl-right
