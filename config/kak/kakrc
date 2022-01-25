@@ -11,8 +11,22 @@ plug "andreyorst/plug.kak" noload
 # Plugins management
 plug "kak-lsp/kak-lsp" do %{
     cargo install --locked --force --path .
+} config %{
+    hook global WinSetOption filetype=rust %{
+        lsp-enable-window
+        lsp-inlay-diagnostics-enable buffer
+        hook window BufWritePre .* lsp-formatting-sync
+        hook window -group rust-inlay-hints BufReload .* rust-analyzer-inlay-hints
+        hook window -group rust-inlay-hints NormalIdle .* rust-analyzer-inlay-hints
+        hook window -group rust-inlay-hints InsertIdle .* rust-analyzer-inlay-hints
+        hook -once -always window WinSetOption filetype=.* %{
+            remove-hooks window rust-inlay-hints
+        }
+    }
 }
-plug "alexherbo2/auto-pairs.kak"
+plug "alexherbo2/auto-pairs.kak" config %{
+    enable-auto-pairs
+}
 plug "andreyorst/smarttab.kak" defer smarttab %{
     # when `backspace' is pressed, 4 spaces are deleted at once
     set-option global softtabstop 4
@@ -24,8 +38,29 @@ plug "andreyorst/smarttab.kak" defer smarttab %{
     # these languages will use `smarttab' behavior
     hook global WinSetOption filetype=(c|cpp) smarttab
 }
+plug "andreyorst/powerline.kak" defer powerline_palenight %{
+    powerline-format global 'git bufname filetype mode_info line_column position'
+    powerline-theme palenight
+} config %{
+    powerline-start
+}
+plug "andreyorst/fzf.kak"
+plug "danr/kakoune-easymotion"
+plug "lePerdu/kakboard" %{
+    hook global WinCreate .* %{ kakboard-enable }
+}
+plug "andreyorst/kaktree" config %{
+    hook global WinSetOption filetype=kaktree %{
+        remove-highlighter buffer/numbers
+        remove-highlighter buffer/matching
+        remove-highlighter buffer/wrap
+        remove-highlighter buffer/show-whitespaces
+    }
+    kaktree-enable
+}
 
 colorscheme palenight
+add-highlighter global/ number-lines
 
 # Move prev word with ctrl+<-
 map global normal <c-left> 'b;'

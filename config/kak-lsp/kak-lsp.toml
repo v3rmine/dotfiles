@@ -1,0 +1,4 @@
+[language.rust]
+filetypes = ["rust"]
+roots = [".git", "Cargo.toml"]
+command = "rust-analyzer"
