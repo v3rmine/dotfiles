@@ -25,6 +25,23 @@ source "$DOTFILES_PATH/install-scripts/functions-utils.bash"
 alias findfile="$HOME/.cargo/bin/fd"
 alias sz="source $HOME/.zshrc"
 function trust-ssh() { ssh -o UserKnownHostsFile=/dev/null -T "$1" /bin/bash -i }
+function just-me() {
+  resp=$(
+    curl -sL --fail \
+      "https://api-prod.downfor.cloud/httpcheck/$1" \
+      --user-agent 'Mozilla/5.0'
+  )
+  if [ "$?" -ne 0 ]; then
+    echo "Meeeh your shitty internet seems down (curl failed)"
+    return 1
+  fi
+
+  if echo "$resp" | grep '"isDown":true' > /dev/null; then
+    echo "It's not just you $1 is dead for everyone!"
+  else
+    echo "It's just you and your shitty computer $1 is up"
+  fi
+}
 
 # CPE
 function gccpe() { gcc "$1" -o "$2" -Wall -Wextra -g }
@@ -90,6 +107,14 @@ if [ -f "$ASDF_PATH" ]; then
   export PATH="$PATH:$ASDF_USER_SHIMS"
 fi
 
+# Support bash completions
+autoload bashcompinit
+bashcompinit
+
+# ZSH Completions
+autoload -Uz compinit
+compinit
+
 # --- Antigen ---
 ANTIGEN_PATH="$HOME/.local/antigen.zsh"
 if [ ! -f "$ANTIGEN_PATH" ]; then
@@ -101,6 +126,7 @@ source "$ANTIGEN_PATH"
 antigen bundle mfaerevaag/wd
 antigen bundle MichaelAquilina/zsh-you-should-use
 antigen bundle hlissner/zsh-autopair
+antigen bundle Aloxaf/fzf-tab
 
 # zsh-users
 antigen bundle zsh-users/zsh-autosuggestions
@@ -159,10 +185,5 @@ export DISABLE_UPDATE_PROMPT="true"
 export ENABLE_CORRECTION="true"
 export DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Support bash completions
-autoload bashcompinit
 bashcompinit
-
-# ZSH Completions
-autoload -Uz compinit
 compinit
