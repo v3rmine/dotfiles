@@ -4,7 +4,7 @@ source "$HOME/.profile"
 
 if [ ! -d "$HOME/.local" ]; then mkdir "$HOME/.local"; fi
 
-export TERM="xterm-256color"
+export TERM="xterm-kitty"
 export SHELL="zsh"
 
 # --- Cross platform management ---
@@ -129,11 +129,11 @@ antigen bundle hlissner/zsh-autopair
 antigen bundle Aloxaf/fzf-tab
 
 # zsh-users
-antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 # Last one !important
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle zsh-users/zsh-autosuggestions
 antigen apply
 
 # --- Sources ---
