@@ -13,7 +13,9 @@ if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR="vim"
 else
   export ALTERNATE_EDITOR=''
-  export EDITOR="emacsclient -t"
+  # @TODO: Need to fix first file loading using emacsclient E.G git commit
+  # export EDITOR="emacsclient -t"
+  export EDITOR="emacs -nw"
   export VISUAL="$EDITOR"
 fi
 
