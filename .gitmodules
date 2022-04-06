@@ -10,3 +10,6 @@
 	path = navi
 	url = https://github.com/joxcat/navi
     branch = master
+[submodule "config/leftwm/themes/catppuccin"]
+	path = config/leftwm/themes/catppuccin
+	url = https://github.com/di-effe/catppuccin.git

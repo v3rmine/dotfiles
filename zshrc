@@ -1,5 +1,10 @@
 #!/bin/bash
+# colors
+bold="\033[1m"
+red="\033[31m"
+reset="\033[0m"
 
+# imports
 source "$HOME/.profile"
 
 if [ ! -d "$HOME/.local" ]; then mkdir "$HOME/.local"; fi
@@ -23,6 +28,20 @@ fi
 source "$DOTFILES_PATH/install-scripts/functions-utils.bash"
 
 # --- Rebinds ---
+# upgrade
+function sudo() {
+    printf "${bold}sudo${reset} ${red}%s${reset}\n" "$*";
+    if [[ "$1" == "rm" ]]; then
+        REPLY=$(bash -c 'read -p "Are you sure? [y/n] " -n 1 -r; echo $REPLY')
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]
+        then
+            return 1
+        fi
+    fi
+    /bin/sudo $@;
+}
+
 # shortcuts
 alias findfile="$HOME/.cargo/bin/fd"
 alias sz="source $HOME/.zshrc"
