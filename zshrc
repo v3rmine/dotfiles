@@ -71,6 +71,7 @@ alias gb="git branch"
 alias gf="git fetch"
 alias gp="git pull"
 function gPu () { git push -u origin $(git branch | grep '^\*' | sed -E 's/( |\*)//g') }
+function gBu () { git branch --set-upstream-to="origin/$(git branch | grep '^\*' | sed -E 's/( |\*)//g')" $(git branch | grep '^\*' | sed -E 's/( |\*)//g') }
 alias gst="git status"
 alias gsh="git show"
 alias gl="git log"

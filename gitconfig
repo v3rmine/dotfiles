@@ -9,15 +9,15 @@
 [pull]
   rebase = false
 
-# [alias]
-#   files = !git diff --name-only $(git merge-base HEAD \"$REVIEW_BASE\")
-#   stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
+[alias]
+  files = !git diff --name-only $(git merge-base HEAD \"${REVIEW_BASE:-development}\")
+  stat = !git diff --stat $(git merge-base HEAD \"${REVIEW_BASE:-development}\")
 
-# [diff]
-#   colorMoved = zebra
+[diff]
+  colorMoved = zebra
 
 [http]
-	postBuffer = 524288000
+  postBuffer = 524288000
 
 # [delta]
 #   paging = always
