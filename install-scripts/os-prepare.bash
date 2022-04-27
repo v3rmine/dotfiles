@@ -12,6 +12,9 @@ if [ "$os" = Darwin ]; then
     rm "$HOME/Library/Application Support/navi" || true
     ln -s "$PWD/navi" "$HOME/Library/Application Support/navi"
 
+    echo Linking nushell
+    ln -s "$PWD/os-config/nushell" "$HOME/Library/Application Support/nushell"
+
 elif [ "$os" = Linux ]; then
     echo Linking os profile file
     
@@ -25,4 +28,7 @@ elif [ "$os" = Linux ]; then
     echo Linking navi
     rm "$HOME/.local/share/navi" || true
     ln -s "$PWD/navi" "$HOME/.local/share/navi"
+
+    echo Linking nushell
+    ln -s "$PWD/os-config/nushell" "$HOME/.config/nushell"
 fi

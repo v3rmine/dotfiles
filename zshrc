@@ -39,7 +39,7 @@ function sudo() {
             return 1
         fi
     fi
-    /bin/sudo $@;
+    /usr/bin/sudo $@;
 }
 
 # shortcuts
