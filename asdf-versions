@@ -2,3 +2,4 @@ nodejs 16.9.1
 python 3.8.3
 ruby 3.0.0
 java adoptopenjdk-jre-12.0.2+10.1
+janet 1.21.2
