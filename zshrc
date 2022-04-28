@@ -46,6 +46,7 @@ function sudo() {
 alias findfile="$HOME/.cargo/bin/fd"
 alias sz="source $HOME/.zshrc"
 function trust-ssh() { ssh -o UserKnownHostsFile=/dev/null -T "$1" /bin/bash -i }
+
 function just-me() {
   resp=$(
     curl -sL --fail \
@@ -61,6 +62,32 @@ function just-me() {
     echo "It's not just you $1 is dead for everyone!"
   else
     echo "It's just you and your shitty computer $1 is up"
+  fi
+}
+
+function fdp() {
+  fd --color 'always' | sk --ansi --header='[find:print]' --preview 'bat --color "always" {}'
+}
+
+function rdp() {
+  sk --ansi --header='[ripfind:print]' --cmd 'rg --column --line-number --no-heading --color=always .' --delimiter ':' --nth '4..' --preview 'bat -f -H $(echo {} | cut -d: -f2) $(echo {} | cut -d: -f1)' | cut -d: -f1-3
+}
+
+function fp() {
+  local loc=$(echo $PATH | sed -e $'s/:/\\\n/g' | eval "sk ${FZF_DEFAULT_OPTS} --header='[find:path]'")
+
+  if [[ -d $loc ]]; then
+    echo "$(rg --files $loc | rev | cut -d"/" -f1 | rev)" | eval "sk ${FZF_DEFAULT_OPTS} --header='[find:exe] => ${loc}' >/dev/null"
+    fp
+  fi
+}
+
+function kp() {
+  local pid=$(ps -ef | sed 1d | eval "sk ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
+
+  if [ "x$pid" != "x" ]; then
+    echo $pid | xargs kill -${1:-9}
+    kp
   fi
 }
 
@@ -85,6 +112,7 @@ alias ga="git add"
 alias gc="git commit"
 alias gcm="gc -m"
 alias gk="git checkout"
+alias gkk="git branch | sk | xargs git checkout"
 alias gm="git merge"
 alias gb="git branch"
 alias gf="git fetch"
