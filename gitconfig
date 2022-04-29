@@ -1,6 +1,6 @@
 [user]
 	name = Johan Planchon
-	email = dev@planchon.xyz
+	email = dev@planchon.dev
 
 [core]
   excludesfile = $HOME/.gitignore
