@@ -70,7 +70,10 @@ function fdp() {
 }
 
 function rdp() {
-  sk --ansi --header='[ripfind:print]' --cmd 'rg --column --line-number --no-heading --color=always .' --delimiter ':' --nth '4..' --preview 'bat -f -H $(echo {} | cut -d: -f2) $(echo {} | cut -d: -f1)' | cut -d: -f1-3
+  sk --ansi --header='[ripfind:print]' \
+    --cmd 'rg --column --line-number --no-heading --color=always .' \
+    --delimiter ':' --nth '4..' \
+    --preview "$(printf \"bat -f -H {2} --pager='less +%s -RF'\" {1})" | cut -d: -f1-3
 }
 
 function fp() {
@@ -89,6 +92,15 @@ function kp() {
     echo $pid | xargs kill -${1:-9}
     kp
   fi
+}
+
+function fgl() {
+  local sed_regex="s/^[ *|]* [a-z0-9]{7} (.*)/\1/g"
+
+  sk --ansi --header='[find:git-commit]' \
+    --cmd 'git log --oneline --graph --color' \
+    --preview "printf 'git show --stat %s' \"$(echo {} | sed -E ${sed_regex})\""
+    # --preview "$(printf \"echo git show --stat %s; echo git diff ^\" \"$(echo '{}' | sed -E 's/^[ *|]* ([a-z0-9]*) (.*)/\2/g')\")"
 }
 
 # CPE
