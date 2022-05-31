@@ -94,13 +94,30 @@ function kp() {
   fi
 }
 
+# TODO: do not work
 function fgl() {
-  local sed_regex="s/^[ *|]* [a-z0-9]{7} (.*)/\1/g"
-
   sk --ansi --header='[find:git-commit]' \
     --cmd 'git log --oneline --graph --color' \
-    --preview "printf 'git show --stat %s' \"$(echo {} | sed -E ${sed_regex})\""
-    # --preview "$(printf \"echo git show --stat %s; echo git diff ^\" \"$(echo '{}' | sed -E 's/^[ *|]* ([a-z0-9]*) (.*)/\2/g')\")"
+    --preview "echo git show --stat $(echo '{}' sed -E \"s/^[ *|]* [a-z0-9]{7} (.*)/\1/g\")"
+}
+
+function start-patch-number() {
+  local patch_folder=$(if [ "$#" -eq 1 ]; then echo "$1"; else echo "patches"; fi)
+  local patch_number=0001
+
+  if [ -d "$patch_folder" ]; then 
+    patch_number=$(echo "1 + $(ls "$patch_folder" | sed -E 's/([0-9]*)-.*/\1/' | sort --numeric-sort --reverse | head -n1)" | bc | xargs printf "%04d")
+  fi
+
+  echo "$patch_number"
+}
+
+function new-patch() {
+  local patch_folder=$(if [ "$#" -eq 2 ]; then echo "$1"; else echo "patches"; fi)
+  local patch_name=$(if [ "$#" -eq 2 ]; then echo "$2"; else echo "$1"; fi)
+  local patch_number=$(start-patch-number "$patch_folder")
+
+  echo "$patch_folder/$patch_number-$(echo $patch_name | sed 's/ /-/g').patch"
 }
 
 # CPE

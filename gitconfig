@@ -19,6 +19,11 @@
 [http]
   postBuffer = 524288000
 
+[merge]
+  tool = vscode
+[mergetool "vscode"]
+  cmd = code --wait --reuse-window $MERGED
+
 # [delta]
 #   paging = always
 #   line-numbers = true

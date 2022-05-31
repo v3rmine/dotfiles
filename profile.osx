@@ -26,6 +26,10 @@ if [ -f '/Users/johan/Apps/google-cloud-sdk/path.zsh.inc' ]; then
     source '/Users/johan/Apps/google-cloud-sdk/path.zsh.inc'
 fi
 
+# Add code binary to the PATH
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="$PATH:/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin"
+
 # --- common ---
 export DOTFILES_PATH="$HOME/dotfiles"
 
