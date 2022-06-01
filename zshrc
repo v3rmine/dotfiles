@@ -9,7 +9,7 @@ source "$HOME/.profile"
 
 if [ ! -d "$HOME/.local" ]; then mkdir "$HOME/.local"; fi
 
-export TERM="xterm-kitty"
+export TERM="xterm-256color"
 export SHELL="zsh"
 
 # --- Cross platform management ---
@@ -118,6 +118,13 @@ function new-patch() {
   local patch_number=$(start-patch-number "$patch_folder")
 
   echo "$patch_folder/$patch_number-$(echo $patch_name | sed 's/ /-/g').patch"
+}
+
+function sha256sum-dir() {
+  find "$1" -type f -print0 \
+    | sort -z \
+    | xargs -0 sha256sum \
+    | sha256sum
 }
 
 # CPE
