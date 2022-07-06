@@ -193,7 +193,10 @@ if [ -f "$ASDF_PATH" ]; then
   export PATH="$PATH:$ASDF_USER_SHIMS"
 fi
 ## Load JAVA_HOME
-. ~/.asdf/plugins/java/set-java-home.zsh
+set_java_home_file=~/.asdf/plugins/java/set-java-home.zsh
+if [ -f $set_java_home_file ]; then
+  . $set_java_home_file
+fi
 
 # Support bash completions
 autoload bashcompinit
