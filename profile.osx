@@ -38,3 +38,4 @@ export DOTFILES_PATH="$HOME/dotfiles"
 
 if [ -e /Users/johan/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/johan/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
+alias grep="ggrep"
