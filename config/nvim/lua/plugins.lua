@@ -8,6 +8,19 @@ end
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
 
+  use 'folke/tokyonight.nvim'
+  use({
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    config = function()
+      require('lualine').setup({
+        options = {
+          theme = 'tokyonight'
+        }
+      })
+    end,
+  })
+
   use({
     "windwp/nvim-autopairs",
     config = function()
@@ -28,6 +41,24 @@ return require('packer').startup(function(use)
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     config = function()
       require('lsp_lines').setup()
+    end,
+  })
+
+  use({
+    "ms-jpq/coq_nvim",
+    branch = "coq",
+    config = function()
+      vim.g.coq_settings = { auto_start = true }
+      require('coq')
+    end,
+  })
+  use({
+    "ms-jpq/coq.thirdparty",
+    branch = "3p",
+    config = function()
+      require('coq_3p'){
+        { src = "nvimlua", short_name = "nLUA" },
+      }
     end,
   })
 

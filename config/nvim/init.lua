@@ -2,6 +2,8 @@ require('plugins')
 
 local lspconfig = require('lspconfig')
 
+vim.cmd [[colorscheme tokyonight]]
+
 -- Disable virtual_text since it's redundant due to lsp_lines.
 vim.diagnostic.config({
   virtual_text = false,
