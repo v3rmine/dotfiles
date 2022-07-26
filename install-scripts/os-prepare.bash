@@ -8,9 +8,6 @@ if [ "$os" = Darwin ]; then
     echo Linking os profile file
     ln -s "$PWD/profile.osx" "$HOME/.profile"
 
-    echo Linking nushell
-    ln -s "$PWD/os-config/nushell" "$HOME/Library/Application Support/nushell"
-
 elif [ "$os" = Linux ]; then
     echo Linking os profile file
     
@@ -20,7 +17,4 @@ elif [ "$os" = Linux ]; then
     else
     	ln -s "$PWD/profile.lux" "$HOME/.profile"
     fi
-
-    echo Linking nushell
-    ln -s "$PWD/os-config/nushell" "$HOME/.config"
 fi
