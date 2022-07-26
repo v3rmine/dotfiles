@@ -5,6 +5,8 @@
 - clean: ["~"]
 
 - clean:
+    ~/.tool-versions:
+        force: true
     ~/.local/bin:
         force: true
 

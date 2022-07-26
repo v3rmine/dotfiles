@@ -20,7 +20,7 @@ else
   export ALTERNATE_EDITOR=''
   # @TODO: Need to fix first file loading using emacsclient E.G git commit
   # export EDITOR="emacsclient -t"
-  export EDITOR="emacs -nw"
+  export EDITOR="nvim"
   export VISUAL="$EDITOR"
 fi
 
@@ -28,6 +28,13 @@ fi
 source "$DOTFILES_PATH/install-scripts/functions-utils.bash"
 
 # --- Rebinds ---
+function vim() {
+    if command -v nvim >/dev/null; then 
+	nvim $@ 
+    else 
+	vim $@
+    fi
+}
 # upgrade
 function sudo() {
     printf "${bold}sudo${reset} ${red}%s${reset}\n" "$*";
@@ -230,10 +237,6 @@ antigen apply
 # --- Sources ---
 if test_command starship -h; then
   eval "$(starship init zsh)"
-fi
-if test_command navi -h; then
-  export NAVI_FZF_OVERRIDES='--height 3'
-  eval "$(navi widget zsh)"
 fi
 
 # --- Key rebind ---
