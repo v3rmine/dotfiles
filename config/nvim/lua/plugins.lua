@@ -5,6 +5,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
+-- https://github.com/jubnzv/virtual-types.nvim
+-- https://github.com/TimUntersberger/neogit
+-- https://github.com/github/copilot.vim
+-- https://github.com/folke/todo-comments.nvim
+-- https://github.com/williamboman/mason.nvim
+
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
 
