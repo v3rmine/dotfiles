@@ -22,9 +22,28 @@ return require('packer').startup(function(use)
   })
 
   use({
+    "folke/which-key.nvim",
+    config = function()
+      require('which-key').setup()
+    end,
+  })
+
+  use({
+    "nvim-telescope/telescope.nvim",
+    branch = '0.1.x',
+    requires = "nvim-lua/plenary.nvim"
+  })
+
+  use({
     "windwp/nvim-autopairs",
     config = function()
       require('nvim-autopairs').setup()
+    end,
+  })
+  use({
+    "kylechui/nvim-surround",
+    config = function()
+      require('nvim-surround').setup()
     end,
   })
   use({
@@ -35,12 +54,26 @@ return require('packer').startup(function(use)
       })
     end,
   })
+  use({
+    "phaazon/hop.nvim",
+    branch = 'v2',
+    config = function ()
+      require('hop').setup()
+    end,
+  })
 
   use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
   use({
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     config = function()
       require('lsp_lines').setup()
+    end,
+  })
+  use({
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require('trouble').setup()
     end,
   })
 
