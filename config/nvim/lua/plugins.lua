@@ -17,6 +17,8 @@ end
 -- https://github.com/ms-jpq/chadtree
 -- https://github.com/rktjmp/lush.nvim
 
+-- TODO: Replace nvim-cmp with ms-jpq/coq_nvim
+
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
 
@@ -74,34 +76,7 @@ return require('packer').startup(function(use)
     end,
   })
 
-  use({
-    "ms-jpq/coq_nvim",
-    branch = "coq",
-    requires = 'ms-jpq/coq.thirdparty',
-    setup = function()
-      vim.g.coq_settings = {
-        auto_start = true,
-        clients = {
-          paths = { enabled = true, resolution = { 'file' } },
-          snippets = { enabled = false, warn = {} },
-        },
-      }
-    end,
-    config = function()
-      require('coq')
-    end,
-  })
-  use({
-    "ms-jpq/coq.thirdparty",
-    branch = "3p",
-    config = function()
-      require('coq_3p'){
-        { src = "nvimlua", short_name = "nLUA" },
-      }
-    end,
-  })
-
-  use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
+  use('neovim/nvim-lspconfig') -- Configurations for Nvim LSP
   use({
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     config = function()
@@ -113,6 +88,33 @@ return require('packer').startup(function(use)
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
       require('trouble').setup()
+    end,
+  })
+
+  use("hrsh7th/cmp-nvim-lsp")
+  use("hrsh7th/cmp-buffer")
+  use("hrsh7th/cmp-path")
+  use("hrsh7th/cmp-cmdline")
+  use({
+    "hrsh7th/nvim-cmp",
+    config = function()
+      local cmp = require('cmp')
+
+      cmp.setup({
+        mapping = cmp.mapping.preset.insert({
+          ['<Tab>'] = cmp.mapping.select_next_item(),
+          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        }),
+        sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
+          { name = 'path' },
+          { name = 'nvim_lua' },
+        }, {
+          { name = 'buffer' }
+        })
+      })
     end,
   })
 
