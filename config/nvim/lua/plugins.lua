@@ -10,6 +10,12 @@ end
 -- https://github.com/github/copilot.vim
 -- https://github.com/folke/todo-comments.nvim
 -- https://github.com/williamboman/mason.nvim
+-- https://github.com/goolord/alpha-nvim
+-- https://github.com/lewis6991/gitsigns.nvim
+-- https://github.com/kyazdani42/nvim-web-devicons
+-- https://github.com/akinsho/bufferline.nvim
+-- https://github.com/ms-jpq/chadtree
+-- https://github.com/rktjmp/lush.nvim
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
@@ -68,6 +74,33 @@ return require('packer').startup(function(use)
     end,
   })
 
+  use({
+    "ms-jpq/coq_nvim",
+    branch = "coq",
+    requires = 'ms-jpq/coq.thirdparty',
+    setup = function()
+      vim.g.coq_settings = {
+        auto_start = true,
+        clients = {
+          paths = { enabled = true, resolution = { 'file' } },
+          snippets = { enabled = false, warn = {} },
+        },
+      }
+    end,
+    config = function()
+      require('coq')
+    end,
+  })
+  use({
+    "ms-jpq/coq.thirdparty",
+    branch = "3p",
+    config = function()
+      require('coq_3p'){
+        { src = "nvimlua", short_name = "nLUA" },
+      }
+    end,
+  })
+
   use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
   use({
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
@@ -80,24 +113,6 @@ return require('packer').startup(function(use)
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
       require('trouble').setup()
-    end,
-  })
-
-  use({
-    "ms-jpq/coq_nvim",
-    branch = "coq",
-    config = function()
-      vim.g.coq_settings = { auto_start = true }
-      require('coq')
-    end,
-  })
-  use({
-    "ms-jpq/coq.thirdparty",
-    branch = "3p",
-    config = function()
-      require('coq_3p'){
-        { src = "nvimlua", short_name = "nLUA" },
-      }
     end,
   })
 
