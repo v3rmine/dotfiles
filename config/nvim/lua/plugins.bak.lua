@@ -22,7 +22,12 @@ end
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
 
-  use 'folke/tokyonight.nvim'
+  use({
+    'folke/tokyonight.nvim',
+    config = function()
+      vim.cmd [[colorscheme tokyonight]]
+    end,
+  })
   use({
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
