@@ -18,9 +18,20 @@ M.general = {
     ["<C-l>"] = { "<Right>", " move right" },
     ["<C-j>"] = { "<Down>", " move down" },
     ["<C-k>"] = { "<Up>", " move up" },
+
+    -- Move
+    ["<C-Left>"] = { "<Esc>lbi", " beginning of the word" },
+    ["<C-Right>"] = { "<Esc>ea", " end of the word" },
+
+    -- Delete
+    ["<C-Backspace>"] = { "<Esc>vbda", " delete previous word" },
+    ["<C-Del>"] = { "<Esc>veda", " delete next word" }
   },
 
   n = {
+    -- Move
+    ["<C-Left>"] = { "lb<Esc>", " beginning of the word" },
+    ["<C-Right>"] = { "e<Esc>", " end of the word" },
 
     ["<ESC>"] = { "<cmd> noh <CR>", "  no highlight" },
 
@@ -39,17 +50,6 @@ M.general = {
     -- line numbers
     ["<leader>n"] = { "<cmd> set nu! <CR>", "   toggle line number" },
     ["<leader>rn"] = { "<cmd> set rnu! <CR>", "   toggle relative number" },
-
-    -- update nvchad
-    ["<leader>uu"] = { "<cmd> :NvChadUpdate <CR>", "  update nvchad" },
-
-    ["<leader>tt"] = {
-      function()
-        require("base46").toggle_theme()
-      end,
-
-      "   toggle theme",
-    },
 
     -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
     -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/

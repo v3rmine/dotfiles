@@ -30,6 +30,17 @@ M.on_attach = function(client, bufnr)
   utils.load_mappings({ lsp_mappings }, { buffer = bufnr })
 end
 
+M.on_attach_virtual_types = function(client, bufnr)
+  local present, virtualtypes = pcall(require, "virtualtypes")
+
+  if not present then
+    return
+  end
+
+  virtualtypes.on_attach(client, bufnr)
+  M.on_attach(client, bufnr)
+end
+
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
 M.capabilities.textDocument.completion.completionItem = {
@@ -50,7 +61,7 @@ M.capabilities.textDocument.completion.completionItem = {
   },
 }
 
-lspconfig.sumneko_lua.setup {
+lspconfig.sumneko_lua.setup({
   on_attach = M.on_attach,
   capabilities = M.capabilities,
 
@@ -59,21 +70,41 @@ lspconfig.sumneko_lua.setup {
       diagnostics = {
         globals = { "vim" },
       },
-      -- workspace = {
-      --   library = {
-      --     [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-      --     [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-      --   },
-      --   maxPreload = 100000,
-      --   preloadFileSize = 10000,
-      -- },
+      workspace = {
+        library = {
+          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+          [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+        },
+        maxPreload = 100000,
+        preloadFileSize = 10000,
+      },
     },
   },
-}
+})
 
 lspconfig.bashls.setup({
-  on_attach = lsp_config.on_attach,
-  capabilities = lsp_config.capabilities,
+  on_attach = M.on_attach,
+  capabilities = M.capabilities,
+})
+
+lspconfig.rust_analyzer.setup({
+  on_attach = M.on_attach_virtual_types,
+  capabilities = M.capabilities,
+})
+
+lspconfig.nimls.setup({
+  on_attach = M.on_attach_virtual_types,
+  capabilities = M.capabilities,
+})
+
+-- lspconfig.eslint.setup({
+--   on_attach = M.on_attach,
+--   capabilities = M.capabilities,
+-- })
+
+lspconfig.tsserver.setup({
+  on_attach = M.on_attach_virtual_types,
+  capabilities = M.capabilities,
 })
 
 return M

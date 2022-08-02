@@ -1,8 +1,11 @@
 local plugins = {
+  -- Libs
   ["nvim-lua/plenary.nvim"] = { module = "plenary" },
   ["wbthomason/packer.nvim"] = {},
-  -- ["NvChad/extensions"] = { module = { "telescope", "nvchad" } },
+  -- ["NvChad/extensions"] = { module = { "telescope" } },
+  ["rktjmp/lush.nvim"] = {},
 
+  -- Ui
   ["kyazdani42/nvim-web-devicons"] = {
     module = "nvim-web-devicons",
     config = function()
@@ -25,6 +28,22 @@ local plugins = {
     end,
   },
 
+  ["akinsho/bufferline.nvim"] = {
+    wants = "kyazdani42/nvim-web-devicons",
+    tag = "v2.*",
+    config = function()
+      require("bufferline").setup()
+    end,
+  },
+
+  ["goolord/alpha-nvim"] = {
+    wants = "kyazdani42/nvim-web-devicons",
+    config = function ()
+      require("alpha").setup(require("alpha.themes.dashboard").config)
+    end,
+  },
+
+  -- Syntax
   ["nvim-treesitter/nvim-treesitter"] = {
     module = "nvim-treesitter",
     run = ":TSUpdate",
@@ -33,7 +52,20 @@ local plugins = {
     end,
   },
 
-  -- git stuff
+  ["norcalli/nvim-colorizer.lua"] = {
+    config = function()
+      require("colorizer").setup()
+    end,
+  },
+
+  ["folke/todo-comments.nvim"] = {
+    wants = "nvim-lua/plenary.nvim",
+    config = function()
+      require("plugins.configs.todo").setup()
+    end,
+  },
+
+  -- Git
   ["lewis6991/gitsigns.nvim"] = {
     ft = "gitcommit",
     config = function()
@@ -41,30 +73,57 @@ local plugins = {
     end,
   },
 
-  -- lsp stuff
+  ["TimUntersberger/neogit"] = {
+    config = function()
+      require("neogit").setup()
+    end,
+  },
+
+  -- Lsp
   ["williamboman/mason.nvim"] = {
     config = function()
       require("plugins.configs.mason")
     end,
   },
 
+  ["jubnzv/virtual-types.nvim"] = {},
+
   ["neovim/nvim-lspconfig"] = {
+    wants = "jubnzv/virtual-types.nvim",
     config = function()
       require("plugins.configs.lspconfig")
     end,
   },
+
+  ["jose-elias-alvarez/null-ls.nvim"] = {
+    wants = "neovim/nvim-lspconfig",
+    config = function()
+      local null_ls = require("null-ls")
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.diagnostics.eslint_d,
+          null_ls.builtins.code_actions.eslint_d,
+          null_ls.builtins.diagnostics.shellcheck,
+          null_ls.builtins.code_actions.shellcheck,
+        }
+      })
+    end
+  },
+
   ["folke/trouble.nvim"] = {
     wants = "neovim/nvim-lspconfig",
     config = function()
       require('trouble').setup()
     end,
   },
+
   ["https://git.sr.ht/~whynothugo/lsp_lines.nvim"] = {
     config = function()
       require('lsp_lines').setup()
     end,
   },
 
+  -- Completion
   ["hrsh7th/nvim-cmp"] = {
     event = "InsertEnter",
     config = function()
@@ -99,7 +158,7 @@ local plugins = {
     after = "cmp-buffer",
   },
 
-  -- misc plugins
+  -- Misc
   ["nmac427/guess-indent.nvim"] = {
     config = function()
       require('guess-indent').setup({
@@ -130,6 +189,8 @@ local plugins = {
     end,
   },
 
+  ["github/copilot.vim"] = {},
+
   -- file managing , picker etc
   ["kyazdani42/nvim-tree.lua"] = {
     ft = "alpha",
@@ -146,7 +207,7 @@ local plugins = {
     end,
   },
 
-  -- Only load whichkey after all the gui
+  -- Only load whichkey after all
   ["folke/which-key.nvim"] = {
     module = "which-key",
     config = function()
