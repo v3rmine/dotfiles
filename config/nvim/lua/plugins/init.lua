@@ -29,7 +29,7 @@ local plugins = {
   },
 
   ["akinsho/bufferline.nvim"] = {
-    wants = "kyazdani42/nvim-web-devicons",
+    wants = "nvim-web-devicons",
     tag = "v2.*",
     event = "InsertEnter",
     config = function()
@@ -38,7 +38,7 @@ local plugins = {
   },
 
   ["goolord/alpha-nvim"] = {
-    wants = "kyazdani42/nvim-web-devicons",
+    wants = "nvim-web-devicons",
     config = function ()
       require("alpha").setup(require("alpha.themes.dashboard").config)
     end,

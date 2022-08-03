@@ -6,7 +6,7 @@ vim.diagnostic.config({
 
 local M = {}
 
-M.supported_filetypes = { "sh", "zsh", "bash", "lua", "rust", "nim" }
+M.supported_filetypes = { "sh", "lua", "rust", "nim" }
 
 local present, lspconfig = pcall(require, "lspconfig")
 
@@ -74,12 +74,12 @@ lspconfig.sumneko_lua.setup({
         globals = { "vim" },
       },
       workspace = {
-        library = {
-          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-          [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-        },
+        library = vim.api.nvim_get_runtime_file("", true),
         maxPreload = 100000,
         preloadFileSize = 10000,
+      },
+      telemetry = {
+        enable = false,
       },
     },
   },
