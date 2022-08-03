@@ -31,6 +31,7 @@ local plugins = {
   ["akinsho/bufferline.nvim"] = {
     wants = "kyazdani42/nvim-web-devicons",
     tag = "v2.*",
+    event = "InsertEnter",
     config = function()
       require("bufferline").setup()
     end,
@@ -45,7 +46,7 @@ local plugins = {
 
   -- Syntax
   ["nvim-treesitter/nvim-treesitter"] = {
-    module = "nvim-treesitter",
+    event = "InsertEnter",
     run = ":TSUpdate",
     config = function()
       require "plugins.configs.treesitter"
@@ -74,52 +75,58 @@ local plugins = {
   },
 
   ["TimUntersberger/neogit"] = {
+    cmd = "Neogit",
     config = function()
-      require("neogit").setup()
+      require("plugins.configs.others").neogit()
     end,
   },
 
   -- Lsp
   ["williamboman/mason.nvim"] = {
+    cmd = "Mason",
     config = function()
       require("plugins.configs.mason")
     end,
   },
 
-  ["jubnzv/virtual-types.nvim"] = {},
 
   ["neovim/nvim-lspconfig"] = {
-    wants = "jubnzv/virtual-types.nvim",
+    ft = require("plugins.configs.lspconfig").supported_filetypes,
     config = function()
       require("plugins.configs.lspconfig")
     end,
   },
 
+  ["jubnzv/virtual-types.nvim"] = {
+    after = "nvim-lspconfig",
+  },
+
   ["jose-elias-alvarez/null-ls.nvim"] = {
-    wants = "neovim/nvim-lspconfig",
+    after = "nvim-lspconfig",
     config = function()
-      local null_ls = require("null-ls")
-      null_ls.setup({
-        sources = {
-          null_ls.builtins.diagnostics.eslint_d,
-          null_ls.builtins.code_actions.eslint_d,
-          null_ls.builtins.diagnostics.shellcheck,
-          null_ls.builtins.code_actions.shellcheck,
-        }
-      })
+      require("plugins.configs.others").null_ls()
     end
   },
 
   ["folke/trouble.nvim"] = {
-    wants = "neovim/nvim-lspconfig",
+    after = "nvim-lspconfig",
     config = function()
-      require('trouble').setup()
+      require("plugins.configs.lspothers").trouble()
     end,
   },
 
   ["https://git.sr.ht/~whynothugo/lsp_lines.nvim"] = {
+    after = "nvim-lspconfig",
     config = function()
-      require('lsp_lines').setup()
+      require("plugins.configs.lspothers").lsp_lines()
+    end,
+  },
+
+  ["simrat39/rust-tools.nvim"] = {
+    after = "nvim-lspconfig",
+    ft = { "rust" },
+    config = function()
+      require("plugins.configs.lspothers").rust_tools()
     end,
   },
 
@@ -127,7 +134,7 @@ local plugins = {
   ["hrsh7th/nvim-cmp"] = {
     event = "InsertEnter",
     config = function()
-      require "plugins.configs.cmp"
+      require("plugins.configs.cmp")
     end,
   },
 
@@ -160,10 +167,9 @@ local plugins = {
 
   -- Misc
   ["nmac427/guess-indent.nvim"] = {
+    event = "InsertEnter",
     config = function()
-      require('guess-indent').setup({
-        auto_cmd = true,
-      })
+      require("plugins.configs.others").guess_indent()
     end,
   },
 
@@ -189,29 +195,30 @@ local plugins = {
     end,
   },
 
-  ["github/copilot.vim"] = {},
+  ["github/copilot.vim"] = {
+    after = "nvim-cmp",
+  },
 
   -- file managing , picker etc
   ["kyazdani42/nvim-tree.lua"] = {
     ft = "alpha",
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     config = function()
-      require "plugins.configs.nvimtree"
+      require("plugins.configs.nvimtree")
     end,
   },
 
   ["nvim-telescope/telescope.nvim"] = {
     cmd = "Telescope",
     config = function()
-      require "plugins.configs.telescope"
+      require("plugins.configs.telescope")
     end,
   },
 
   -- Only load whichkey after all
   ["folke/which-key.nvim"] = {
-    module = "which-key",
     config = function()
-      require "plugins.configs.whichkey"
+      require("plugins.configs.whichkey")
     end,
   },
 }

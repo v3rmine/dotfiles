@@ -24,14 +24,14 @@ M.general = {
     ["<C-Right>"] = { "<Esc>ea", " end of the word" },
 
     -- Delete
-    ["<C-Backspace>"] = { "<Esc>vbda", " delete previous word" },
-    ["<C-Del>"] = { "<Esc>veda", " delete next word" }
+    ["<C-Backspace>"] = { "<Esc>vbdi", " delete previous word" },
+    ["<C-Del>"] = { "<Esc>vedi", " delete next word" }
   },
 
   n = {
     -- Move
-    ["<C-Left>"] = { "lb<Esc>", " beginning of the word" },
-    ["<C-Right>"] = { "e<Esc>", " end of the word" },
+    ["<C-Left>"] = { "b", " beginning of the word" },
+    ["<C-Right>"] = { "e", " end of the word" },
 
     ["<ESC>"] = { "<cmd> noh <CR>", "  no highlight" },
 

@@ -4,13 +4,16 @@ vim.diagnostic.config({
   virtual_lines = true,
 })
 
+local M = {}
+
+M.supported_filetypes = { "sh", "zsh", "bash", "lua", "rust", "nim" }
+
 local present, lspconfig = pcall(require, "lspconfig")
 
 if not present then
-  return
+  return M
 end
 
-local M = {}
 local utils = require "core.utils"
 
 -- export on_attach & capabilities for custom lspconfigs
@@ -31,9 +34,9 @@ M.on_attach = function(client, bufnr)
 end
 
 M.on_attach_virtual_types = function(client, bufnr)
-  local present, virtualtypes = pcall(require, "virtualtypes")
+  local vtype_present, virtualtypes = pcall(require, "virtualtypes")
 
-  if not present then
+  if not vtype_present then
     return
   end
 
@@ -90,6 +93,18 @@ lspconfig.bashls.setup({
 lspconfig.rust_analyzer.setup({
   on_attach = M.on_attach_virtual_types,
   capabilities = M.capabilities,
+  settings = {
+    ["rust-analyzer"] = {
+      checkOnSave = {
+        command = "clippy"
+      },
+      diagnostics = {
+        experimental = {
+          enable = true,
+        },
+      },
+    },
+  },
 })
 
 lspconfig.nimls.setup({

@@ -84,6 +84,14 @@ M.gitsigns = function()
   gitsigns.setup(options)
 end
 
+M.neogit = function()
+  local present, neogit = pcall(require, "neogit")
+
+  if present then
+    neogit.setup()
+  end
+end
+
 M.devicons = function()
   local present, devicons = pcall(require, "nvim-web-devicons")
 
@@ -92,6 +100,31 @@ M.devicons = function()
     options = require("core.utils").load_override(options, "kyazdani42/nvim-web-devicons")
 
     devicons.setup(options)
+  end
+end
+
+M.null_ls = function()
+  local present, null_ls = pcall(require, "null-ls")
+
+  if present then
+    null_ls.setup({
+      sources = {
+        null_ls.builtins.diagnostics.eslint_d,
+        null_ls.builtins.code_actions.eslint_d,
+        null_ls.builtins.diagnostics.shellcheck,
+        null_ls.builtins.code_actions.shellcheck,
+      }
+    })
+  end
+end
+
+M.guess_indent = function()
+  local present, guess_indent = pcall(require, "guess-indent")
+
+  if present then
+    guess_indent.setup({
+      auto_cmd = true,
+    })
   end
 end
 
