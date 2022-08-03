@@ -6,7 +6,10 @@ vim.diagnostic.config({
 
 local M = {}
 
-M.supported_filetypes = { "sh", "lua", "rust", "nim" }
+M.supported_filetypes = { 
+  "sh", "lua", "rust", "nim",
+  "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx",
+}
 
 local present, lspconfig = pcall(require, "lspconfig")
 

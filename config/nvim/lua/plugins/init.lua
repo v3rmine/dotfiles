@@ -82,20 +82,25 @@ local plugins = {
   },
 
   -- Lsp
-  ["williamboman/mason.nvim"] = {
-    cmd = "Mason",
-    config = function()
-      require("plugins.configs.mason")
-    end,
-  },
-
-
   ["neovim/nvim-lspconfig"] = {
     ft = require("plugins.configs.lspconfig").supported_filetypes,
     config = function()
       require("plugins.configs.lspconfig")
     end,
   },
+  ["williamboman/mason.nvim"] = {
+    cmd = "Mason",
+    config = function()
+      require("plugins.configs.mason")
+    end,
+  },
+  ["williamboman/mason-lspconfig.nvim"] = {
+    after = { "mason.nvim", "nvim-lspconfig" },
+    config = function()
+      require("plugins.configs.lspothers").mason_lspconfig()
+    end,
+  },
+
 
   ["jubnzv/virtual-types.nvim"] = {
     after = "nvim-lspconfig",
@@ -123,7 +128,7 @@ local plugins = {
   },
 
   ["simrat39/rust-tools.nvim"] = {
-    after = "nvim-lspconfig",
+    wants = "nvim-lspconfig",
     ft = { "rust" },
     config = function()
       require("plugins.configs.lspothers").rust_tools()
