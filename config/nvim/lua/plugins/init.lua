@@ -83,24 +83,27 @@ local plugins = {
 
   -- Lsp
   ["neovim/nvim-lspconfig"] = {
-    ft = require("plugins.configs.lspconfig").supported_filetypes,
+    ft = { 
+      "sh", "lua", "rust", "nim",
+      "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx",
+    },
     config = function()
       require("plugins.configs.lspconfig")
     end,
   },
   ["williamboman/mason.nvim"] = {
+    after = "nvim-lspconfig",
     cmd = "Mason",
     config = function()
       require("plugins.configs.mason")
     end,
   },
-  ["williamboman/mason-lspconfig.nvim"] = {
-    after = { "mason.nvim", "nvim-lspconfig" },
-    config = function()
-      require("plugins.configs.lspothers").mason_lspconfig()
-    end,
-  },
-
+  -- ["williamboman/mason-lspconfig.nvim"] = {
+  --   after = { "mason.nvim", "nvim-lspconfig" },
+  --   config = function()
+  --     require("plugins.configs.lspothers").mason_lspconfig()
+  --   end,
+  -- },
 
   ["jubnzv/virtual-types.nvim"] = {
     after = "nvim-lspconfig",
@@ -200,9 +203,9 @@ local plugins = {
     end,
   },
 
-  ["github/copilot.vim"] = {
-    after = "nvim-cmp",
-  },
+  -- ["github/copilot.vim"] = {
+  --   after = "nvim-cmp",
+  -- },
 
   -- file managing , picker etc
   ["kyazdani42/nvim-tree.lua"] = {

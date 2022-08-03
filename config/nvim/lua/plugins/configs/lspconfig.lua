@@ -4,13 +4,6 @@ vim.diagnostic.config({
   virtual_lines = true,
 })
 
-local M = {}
-
-M.supported_filetypes = { 
-  "sh", "lua", "rust", "nim",
-  "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx",
-}
-
 local present, lspconfig = pcall(require, "lspconfig")
 
 if not present then
@@ -18,6 +11,8 @@ if not present then
 end
 
 local utils = require "core.utils"
+
+local M = {}
 
 -- export on_attach & capabilities for custom lspconfigs
 
