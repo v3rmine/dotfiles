@@ -10,69 +10,69 @@ M.general = {
   i = {
 
     -- go to  beginning and end
-    ["<C-b>"] = { "<ESC>^i", "論 beginning of line" },
-    ["<C-e>"] = { "<End>", "壟 end of line" },
+    ['<C-b>'] = { '<ESC>^i', '論 beginning of line' },
+    ['<C-e>'] = { '<End>', '壟 end of line' },
 
     -- navigate within insert mode
-    ["<C-h>"] = { "<Left>", "  move left" },
-    ["<C-l>"] = { "<Right>", " move right" },
-    ["<C-j>"] = { "<Down>", " move down" },
-    ["<C-k>"] = { "<Up>", " move up" },
+    ['<C-h>'] = { '<Left>', '  move left' },
+    ['<C-l>'] = { '<Right>', ' move right' },
+    ['<C-j>'] = { '<Down>', ' move down' },
+    ['<C-k>'] = { '<Up>', ' move up' },
 
     -- Move
-    ["<C-Left>"] = { "<Esc>lbi", " beginning of the word" },
-    ["<C-Right>"] = { "<Esc>ea", " end of the word" },
+    ['<C-Left>'] = { '<Esc>lbi', ' beginning of the word' },
+    ['<C-Right>'] = { '<Esc>ea', ' end of the word' },
 
     -- Delete
-    ["<C-Backspace>"] = { "<Esc>vbdi", " delete previous word" },
-    ["<C-Del>"] = { "<Esc>vedi", " delete next word" }
+    ['<C-Backspace>'] = { '<Esc>vbdi', ' delete previous word' },
+    ['<C-Del>'] = { '<Esc>vedi', ' delete next word' },
   },
 
   n = {
     -- Move
-    ["<C-Left>"] = { "b", " beginning of the word" },
-    ["<C-Right>"] = { "e", " end of the word" },
+    ['<C-Left>'] = { 'b', ' beginning of the word' },
+    ['<C-Right>'] = { 'e', ' end of the word' },
 
-    ["<ESC>"] = { "<cmd> noh <CR>", "  no highlight" },
+    ['<ESC>'] = { '<cmd> noh <CR>', '  no highlight' },
 
     -- switch between windows
-    ["<C-h>"] = { "<C-w>h", " window left" },
-    ["<C-l>"] = { "<C-w>l", " window right" },
-    ["<C-j>"] = { "<C-w>j", " window down" },
-    ["<C-k>"] = { "<C-w>k", " window up" },
+    ['<C-h>'] = { '<C-w>h', ' window left' },
+    ['<C-l>'] = { '<C-w>l', ' window right' },
+    ['<C-j>'] = { '<C-w>j', ' window down' },
+    ['<C-k>'] = { '<C-w>k', ' window up' },
 
     -- save
-    ["<C-s>"] = { "<cmd> w <CR>", "﬚  save file" },
+    ['<C-s>'] = { '<cmd> w <CR>', '﬚  save file' },
 
     -- Copy all
-    ["<C-c>"] = { "<cmd> %y+ <CR>", "  copy whole file" },
+    ['<C-c>'] = { '<cmd> %y+ <CR>', '  copy whole file' },
 
     -- line numbers
-    ["<leader>n"] = { "<cmd> set nu! <CR>", "   toggle line number" },
-    ["<leader>rn"] = { "<cmd> set rnu! <CR>", "   toggle relative number" },
+    ['<leader>n'] = { '<cmd> set nu! <CR>', '   toggle line number' },
+    ['<leader>rn'] = { '<cmd> set rnu! <CR>', '   toggle relative number' },
 
     -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
     -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
     -- empty mode is same as using <cmd> :map
     -- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
-    ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
-    ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
-    ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
-    ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+    ['j'] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+    ['k'] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+    ['<Up>'] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+    ['<Down>'] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
   },
 
   t = {
-    ["<C-x>"] = { termcodes "<C-\\><C-N>", "   escape terminal mode" },
+    ['<C-x>'] = { termcodes '<C-\\><C-N>', '   escape terminal mode' },
   },
 
   v = {
-    ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
-    ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
-    ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
-    ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+    ['j'] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+    ['k'] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+    ['<Up>'] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+    ['<Down>'] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
     -- Don't copy the replaced text after pasting in visual mode
     -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
-    ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', opts = { silent = true } },
+    ['p'] = { 'p:let @+=@0<CR>:let @"=@0<CR>', opts = { silent = true } },
   },
 }
 
@@ -80,22 +80,22 @@ M.tabufline = {
 
   n = {
     -- new buffer
-    ["<S-b>"] = { "<cmd> enew <CR>", "烙 new buffer" },
+    ['<S-b>'] = { '<cmd> enew <CR>', '烙 new buffer' },
 
     -- cycle through buffers
     -- ["<TAB>"] = { "<cmd> Tbufnext <CR>", "  goto next buffer" },
     -- ["<S-Tab>"] = { "<cmd> Tbufprev <CR> ", "  goto prev buffer" },
 
     -- cycle through tabs
-    ["<leader>tp"] = { "<cmd> tabprevious <CR>", "  goto next tab" },
-    ["<leader>tn"] = { "<cmd> tabnext <CR> ", "  goto prev tab" },
+    ['<leader>tp'] = { '<cmd> tabprevious <CR>', '  goto next tab' },
+    ['<leader>tn'] = { '<cmd> tabnext <CR> ', '  goto prev tab' },
 
     -- close buffer + hide terminal buffer
-    ["<leader>x"] = {
+    ['<leader>x'] = {
       function()
-        require("core.utils").close_buffer()
+        require('core.utils').close_buffer()
       end,
-      "   close buffer",
+      '   close buffer',
     },
   },
 }
@@ -104,19 +104,19 @@ M.comment = {
 
   -- toggle comment in both modes
   n = {
-    ["<leader>/"] = {
+    ['<leader>/'] = {
       function()
-        require("Comment.api").toggle_current_linewise()
+        require('Comment.api').toggle_current_linewise()
       end,
 
-      "蘒  toggle comment",
+      '蘒  toggle comment',
     },
   },
 
   v = {
-    ["<leader>/"] = {
+    ['<leader>/'] = {
       "<ESC><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>",
-      "蘒  toggle comment",
+      '蘒  toggle comment',
     },
   },
 }
@@ -125,123 +125,123 @@ M.lspconfig = {
   -- See `<cmd> :help vim.lsp.*` for documentation on any of the below functions
 
   n = {
-    ["gD"] = {
+    ['gD'] = {
       function()
         vim.lsp.buf.declaration()
       end,
-      "   lsp declaration",
+      '   lsp declaration',
     },
 
-    ["gd"] = {
+    ['gd'] = {
       function()
         vim.lsp.buf.definition()
       end,
-      "   lsp definition",
+      '   lsp definition',
     },
 
-    ["K"] = {
+    ['K'] = {
       function()
         vim.lsp.buf.hover()
       end,
-      "   lsp hover",
+      '   lsp hover',
     },
 
-    ["gi"] = {
+    ['gi'] = {
       function()
         vim.lsp.buf.implementation()
       end,
-      "   lsp implementation",
+      '   lsp implementation',
     },
 
-    ["<leader>ls"] = {
+    ['<leader>ls'] = {
       function()
         vim.lsp.buf.signature_help()
       end,
-      "   lsp signature_help",
+      '   lsp signature_help',
     },
 
-    ["<leader>D"] = {
+    ['<leader>D'] = {
       function()
         vim.lsp.buf.type_definition()
       end,
-      "   lsp definition type",
+      '   lsp definition type',
     },
 
-    ["<leader>ra"] = {
+    ['<leader>ra'] = {
       function()
-        require("nvchad_ui.renamer").open()
+        require('nvchad_ui.renamer').open()
       end,
-      "   lsp rename",
+      '   lsp rename',
     },
 
-    ["<leader>ca"] = {
+    ['<leader>ca'] = {
       function()
         vim.lsp.buf.code_action()
       end,
-      "   lsp code_action",
+      '   lsp code_action',
     },
 
-    ["gr"] = {
+    ['gr'] = {
       function()
         vim.lsp.buf.references()
       end,
-      "   lsp references",
+      '   lsp references',
     },
 
-    ["<leader>f"] = {
+    ['<leader>f'] = {
       function()
         vim.diagnostic.open_float()
       end,
-      "   floating diagnostic",
+      '   floating diagnostic',
     },
 
-    ["[d"] = {
+    ['[d'] = {
       function()
         vim.diagnostic.goto_prev()
       end,
-      "   goto prev",
+      '   goto prev',
     },
 
-    ["d]"] = {
+    ['d]'] = {
       function()
         vim.diagnostic.goto_next()
       end,
-      "   goto_next",
+      '   goto_next',
     },
 
-    ["<leader>q"] = {
+    ['<leader>q'] = {
       function()
         vim.diagnostic.setloclist()
       end,
-      "   diagnostic setloclist",
+      '   diagnostic setloclist',
     },
 
-    ["<leader>fm"] = {
+    ['<leader>fm'] = {
       function()
         vim.lsp.buf.formatting()
       end,
-      "   lsp formatting",
+      '   lsp formatting',
     },
 
-    ["<leader>wa"] = {
+    ['<leader>wa'] = {
       function()
         vim.lsp.buf.add_workspace_folder()
       end,
-      "   add workspace folder",
+      '   add workspace folder',
     },
 
-    ["<leader>wr"] = {
+    ['<leader>wr'] = {
       function()
         vim.lsp.buf.remove_workspace_folder()
       end,
-      "   remove workspace folder",
+      '   remove workspace folder',
     },
 
-    ["<leader>wl"] = {
+    ['<leader>wl'] = {
       function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
       end,
-      "   list workspace folders",
+      '   list workspace folders',
     },
   },
 }
@@ -250,50 +250,50 @@ M.nvimtree = {
 
   n = {
     -- toggle
-    ["<C-n>"] = { "<cmd> NvimTreeToggle <CR>", "   toggle nvimtree" },
+    ['<C-n>'] = { '<cmd> NvimTreeToggle <CR>', '   toggle nvimtree' },
 
     -- focus
-    ["<leader>e"] = { "<cmd> NvimTreeFocus <CR>", "   focus nvimtree" },
+    ['<leader>e'] = { '<cmd> NvimTreeFocus <CR>', '   focus nvimtree' },
   },
 }
 
 M.telescope = {
   n = {
     -- find
-    ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "  find files" },
-    ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "  find all" },
-    ["<leader>fw"] = { "<cmd> Telescope live_grep <CR>", "   live grep" },
-    ["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "  find buffers" },
-    ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "  help page" },
-    ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "   find oldfiles" },
-    ["<leader>tk"] = { "<cmd> Telescope keymaps <CR>", "   show keys" },
+    ['<leader>ff'] = { '<cmd> Telescope find_files <CR>', '  find files' },
+    ['<leader>fa'] = { '<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>', '  find all' },
+    ['<leader>fw'] = { '<cmd> Telescope live_grep <CR>', '   live grep' },
+    ['<leader>fb'] = { '<cmd> Telescope buffers <CR>', '  find buffers' },
+    ['<leader>fh'] = { '<cmd> Telescope help_tags <CR>', '  help page' },
+    ['<leader>fo'] = { '<cmd> Telescope oldfiles <CR>', '   find oldfiles' },
+    ['<leader>tk'] = { '<cmd> Telescope keymaps <CR>', '   show keys' },
 
     -- git
-    ["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "   git commits" },
-    ["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "  git status" },
+    ['<leader>cm'] = { '<cmd> Telescope git_commits <CR>', '   git commits' },
+    ['<leader>gt'] = { '<cmd> Telescope git_status <CR>', '  git status' },
 
     -- pick a hidden term
-    ["<leader>pt"] = { "<cmd> Telescope terms <CR>", "   pick hidden term" },
+    ['<leader>pt'] = { '<cmd> Telescope terms <CR>', '   pick hidden term' },
 
     -- theme switcher
-    ["<leader>th"] = { "<cmd> Telescope themes <CR>", "   nvchad themes" },
+    ['<leader>th'] = { '<cmd> Telescope themes <CR>', '   nvchad themes' },
   },
 }
 
 M.whichkey = {
   n = {
-    ["<leader>wK"] = {
+    ['<leader>wK'] = {
       function()
-        vim.cmd "WhichKey"
+        vim.cmd 'WhichKey'
       end,
-      "   which-key all keymaps",
+      '   which-key all keymaps',
     },
-    ["<leader>wk"] = {
+    ['<leader>wk'] = {
       function()
-        local input = vim.fn.input "WhichKey: "
-        vim.cmd("WhichKey " .. input)
+        local input = vim.fn.input 'WhichKey: '
+        vim.cmd('WhichKey ' .. input)
       end,
-      "   which-key query lookup",
+      '   which-key query lookup',
     },
   },
 }

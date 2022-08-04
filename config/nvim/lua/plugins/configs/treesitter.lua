@@ -1,4 +1,4 @@
-local present, treesitter = pcall(require, "nvim-treesitter.configs")
+local present, treesitter = pcall(require, 'nvim-treesitter.configs')
 
 if not present then
   return
@@ -6,7 +6,7 @@ end
 
 local options = {
   ensure_installed = {
-    "lua",
+    'lua',
   },
   highlight = {
     enable = true,
@@ -15,6 +15,6 @@ local options = {
 }
 
 -- check for any override
-options = require("core.utils").load_override(options, "nvim-treesitter/nvim-treesitter")
+options = require('core.utils').load_override(options, 'nvim-treesitter/nvim-treesitter')
 
 treesitter.setup(options)

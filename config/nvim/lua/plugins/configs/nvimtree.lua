@@ -1,4 +1,4 @@
-local present, nvimtree = pcall(require, "nvim-tree")
+local present, nvimtree = pcall(require, 'nvim-tree')
 
 if not present then
   return
@@ -7,12 +7,12 @@ end
 local options = {
   filters = {
     dotfiles = false,
-    exclude = { vim.fn.stdpath "config" .. "/lua/custom" },
+    exclude = { vim.fn.stdpath 'config' .. '/lua/custom' },
   },
   disable_netrw = true,
   hijack_netrw = true,
   open_on_setup = false,
-  ignore_ft_on_setup = { "alpha" },
+  ignore_ft_on_setup = { 'alpha' },
   hijack_cursor = true,
   hijack_unnamed_buffer_when_opening = false,
   update_cwd = true,
@@ -22,7 +22,7 @@ local options = {
   },
   view = {
     adaptive_size = true,
-    side = "right",
+    side = 'right',
     width = 20,
     hide_root_folder = true,
   },
@@ -40,7 +40,7 @@ local options = {
   },
   renderer = {
     highlight_git = false,
-    highlight_opened_files = "none",
+    highlight_opened_files = 'none',
 
     indent_markers = {
       enable = false,
@@ -55,26 +55,26 @@ local options = {
       },
 
       glyphs = {
-        default = "",
-        symlink = "",
+        default = '',
+        symlink = '',
         folder = {
-          default = "",
-          empty = "",
-          empty_open = "",
-          open = "",
-          symlink = "",
-          symlink_open = "",
-          arrow_open = "",
-          arrow_closed = "",
+          default = '',
+          empty = '',
+          empty_open = '',
+          open = '',
+          symlink = '',
+          symlink_open = '',
+          arrow_open = '',
+          arrow_closed = '',
         },
         git = {
-          unstaged = "✗",
-          staged = "✓",
-          unmerged = "",
-          renamed = "➜",
-          untracked = "★",
-          deleted = "",
-          ignored = "◌",
+          unstaged = '✗',
+          staged = '✓',
+          unmerged = '',
+          renamed = '➜',
+          untracked = '★',
+          deleted = '',
+          ignored = '◌',
         },
       },
     },
@@ -82,7 +82,7 @@ local options = {
 }
 
 -- check for any override
-options = require("core.utils").load_override(options, "kyazdani42/nvim-tree.lua")
+options = require('core.utils').load_override(options, 'kyazdani42/nvim-tree.lua')
 vim.g.nvimtree_side = options.view.side
 
 nvimtree.setup(options)

@@ -1,9 +1,9 @@
 local opt = vim.opt
 local g = vim.g
-local config = require("core.utils").load_config()
+local config = require('core.utils').load_config()
 
 g.vim_version = vim.version().minor
-g.toggle_theme_icon = "   "
+g.toggle_theme_icon = '   '
 g.transparency = config.ui.transparency
 g.theme_switcher_loaded = false
 
@@ -17,7 +17,7 @@ opt.laststatus = 3 -- global statusline
 opt.showmode = false
 
 opt.title = true
-opt.clipboard = "unnamedplus"
+opt.clipboard = 'unnamedplus'
 opt.cul = true -- cursor line
 
 -- Indenting
@@ -27,10 +27,10 @@ opt.smartindent = true
 opt.tabstop = 2
 opt.softtabstop = 2
 
-opt.fillchars = { eob = " " }
+opt.fillchars = { eob = ' ' }
 opt.ignorecase = true
 opt.smartcase = true
-opt.mouse = "a"
+opt.mouse = 'a'
 
 -- Numbers
 opt.number = true
@@ -38,9 +38,9 @@ opt.numberwidth = 2
 opt.ruler = false
 
 -- disable nvim intro
-opt.shortmess:append "sI"
+opt.shortmess:append 'sI'
 
-opt.signcolumn = "yes"
+opt.signcolumn = 'yes'
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
@@ -52,51 +52,51 @@ opt.updatetime = 250
 
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
-opt.whichwrap:append("<>[]hl")
+opt.whichwrap:append '<>[]hl'
 
-g.mapleader = " "
+g.mapleader = ' '
 
 -- disable some builtin vim plugins
 local default_plugins = {
-  "2html_plugin",
-  "getscript",
-  "getscriptPlugin",
-  "gzip",
-  "logipat",
-  "netrw",
-  "netrwPlugin",
-  "netrwSettings",
-  "netrwFileHandlers",
-  "matchit",
-  "tar",
-  "tarPlugin",
-  "rrhelper",
-  "spellfile_plugin",
-  "vimball",
-  "vimballPlugin",
-  "zip",
-  "zipPlugin",
-  "tutor",
-  "rplugin",
-  "syntax",
-  "synmenu",
-  "optwin",
-  "compiler",
-  "bugreport",
-  "ftplugin",
+  '2html_plugin',
+  'getscript',
+  'getscriptPlugin',
+  'gzip',
+  'logipat',
+  'netrw',
+  'netrwPlugin',
+  'netrwSettings',
+  'netrwFileHandlers',
+  'matchit',
+  'tar',
+  'tarPlugin',
+  'rrhelper',
+  'spellfile_plugin',
+  'vimball',
+  'vimballPlugin',
+  'zip',
+  'zipPlugin',
+  'tutor',
+  'rplugin',
+  'syntax',
+  'synmenu',
+  'optwin',
+  'compiler',
+  'bugreport',
+  'ftplugin',
 }
 
 for _, plugin in pairs(default_plugins) do
-  g["loaded_" .. plugin] = 1
+  g['loaded_' .. plugin] = 1
 end
 
 local default_providers = {
-  "node",
-  "perl",
-  "python3",
-  "ruby",
+  'node',
+  'perl',
+  'python3',
+  'ruby',
 }
 
 for _, provider in ipairs(default_providers) do
-  vim.g["loaded_" .. provider .. "_provider"] = 0
+  vim.g['loaded_' .. provider .. '_provider'] = 0
 end

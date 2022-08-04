@@ -4,19 +4,19 @@ local api = vim.api
 local merge_tb = vim.tbl_deep_extend
 
 M.close_buffer = function(bufnr)
-  if vim.bo.buftype == "terminal" then
-    vim.cmd(vim.bo.buflisted and "set nobl | enew" or "hide")
+  if vim.bo.buftype == 'terminal' then
+    vim.cmd(vim.bo.buflisted and 'set nobl | enew' or 'hide')
   elseif vim.bo.modified then
-    print "save the file bruh"
+    print 'save the file bruh'
   else
     bufnr = bufnr or api.nvim_get_current_buf()
-    require("core.utils").tabuflinePrev()
-    vim.cmd("bd" .. bufnr)
+    require('core.utils').tabuflinePrev()
+    vim.cmd('bd' .. bufnr)
   end
 end
 
 M.load_config = function()
-  local config = require "core.default_config"
+  local config = require 'core.default_config'
 
   -- if chadrc_exists then
   --   -- merge user config if it exists and is a table; otherwise display an error
@@ -33,14 +33,14 @@ M.load_config = function()
 end
 
 M.remove_default_keys = function()
-  local chadrc = require "custom.chadrc"
+  local chadrc = require 'custom.chadrc'
   local user_mappings = chadrc.mappings or {}
   local user_keys = {}
   local user_sections = vim.tbl_keys(user_mappings)
 
   -- push user_map keys in user_keys table
   for _, section in ipairs(user_sections) do
-    user_keys = vim.tbl_deep_extend("force", user_keys, user_mappings[section])
+    user_keys = vim.tbl_deep_extend('force', user_keys, user_mappings[section])
   end
 
   local function disable_key(mode, keybind, mode_mapping)
@@ -51,7 +51,7 @@ M.remove_default_keys = function()
     end
   end
 
-  local default_mappings = require("core.default_config").mappings
+  local default_mappings = require('core.default_config').mappings
 
   -- remove user_maps from default mapping table
   for _, section_mappings in pairs(default_mappings) do
@@ -66,7 +66,7 @@ end
 M.load_mappings = function(mappings, mapping_opt)
   -- set mapping function with/without whichkey
   local set_maps
-  local whichkey_exists, wk = pcall(require, "which-key")
+  local whichkey_exists, wk = pcall(require, 'which-key')
 
   if whichkey_exists then
     set_maps = function(keybind, mapping_info, opts)
@@ -87,8 +87,8 @@ M.load_mappings = function(mappings, mapping_opt)
     for mode, mode_values in pairs(section) do
       for keybind, mapping_info in pairs(mode_values) do
         -- merge default + user opts
-        local default_opts = merge_tb("force", { mode = mode }, mapping_opt or {})
-        local opts = merge_tb("force", default_opts, mapping_info.opts or {})
+        local default_opts = merge_tb('force', { mode = mode }, mapping_opt or {})
+        local opts = merge_tb('force', default_opts, mapping_info.opts or {})
 
         if mapping_info.opts then
           mapping_info.opts = nil
@@ -118,7 +118,7 @@ M.merge_plugins = function(default_plugins)
   local user_plugins = M.load_config().plugins.user
 
   -- merge default + user plugin table
-  default_plugins = merge_tb("force", default_plugins, user_plugins)
+  default_plugins = merge_tb('force', default_plugins, user_plugins)
 
   local final_table = {}
 
@@ -132,8 +132,8 @@ end
 
 M.load_override = function(default_table, plugin_name)
   local user_table = M.load_config().plugins.override[plugin_name] or {}
-  user_table = type(user_table) == "table" and user_table or user_table()
-  return merge_tb("force", default_table, user_table)
+  user_table = type(user_table) == 'table' and user_table or user_table()
+  return merge_tb('force', default_table, user_table)
 end
 
 M.bufilter = function()
@@ -153,7 +153,7 @@ M.tabuflineNext = function()
 
   for i, v in ipairs(bufs) do
     if api.nvim_get_current_buf() == v then
-      vim.cmd(i == #bufs and "b" .. bufs[1] or "b" .. bufs[i + 1])
+      vim.cmd(i == #bufs and 'b' .. bufs[1] or 'b' .. bufs[i + 1])
       break
     end
   end
@@ -164,7 +164,7 @@ M.tabuflinePrev = function()
 
   for i, v in ipairs(bufs) do
     if api.nvim_get_current_buf() == v then
-      vim.cmd(i == 1 and "b" .. bufs[#bufs] or "b" .. bufs[i - 1])
+      vim.cmd(i == 1 and 'b' .. bufs[#bufs] or 'b' .. bufs[i - 1])
       break
     end
   end
@@ -174,16 +174,16 @@ end
 M.closeAllBufs = function(action)
   local bufs = vim.t.bufs
 
-  if action == "closeTab" then
-    vim.cmd "tabclose"
+  if action == 'closeTab' then
+    vim.cmd 'tabclose'
   end
 
   for _, buf in ipairs(bufs) do
     M.close_buffer(buf)
   end
 
-  if action ~= "closeTab" then
-    vim.cmd "enew"
+  if action ~= 'closeTab' then
+    vim.cmd 'enew'
   end
 end
 

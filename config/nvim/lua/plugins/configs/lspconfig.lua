@@ -1,16 +1,16 @@
 -- Disable virtual_text since it's redundant due to lsp_lines.
-vim.diagnostic.config({
+vim.diagnostic.config {
   virtual_text = false,
   virtual_lines = true,
-})
+}
 
-local present, lspconfig = pcall(require, "lspconfig")
+local present, lspconfig = pcall(require, 'lspconfig')
 
 if not present then
   return M
 end
 
-local utils = require "core.utils"
+local utils = require 'core.utils'
 
 local M = {}
 
@@ -32,7 +32,7 @@ M.on_attach = function(client, bufnr)
 end
 
 M.on_attach_virtual_types = function(client, bufnr)
-  local vtype_present, virtualtypes = pcall(require, "virtualtypes")
+  local vtype_present, virtualtypes = pcall(require, 'virtualtypes')
 
   if not vtype_present then
     return
@@ -45,7 +45,7 @@ end
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
 M.capabilities.textDocument.completion.completionItem = {
-  documentationFormat = { "markdown", "plaintext" },
+  documentationFormat = { 'markdown', 'plaintext' },
   snippetSupport = true,
   preselectSupport = true,
   insertReplaceSupport = true,
@@ -55,24 +55,24 @@ M.capabilities.textDocument.completion.completionItem = {
   tagSupport = { valueSet = { 1 } },
   resolveSupport = {
     properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
+      'documentation',
+      'detail',
+      'additionalTextEdits',
     },
   },
 }
 
-lspconfig.sumneko_lua.setup({
+lspconfig.sumneko_lua.setup {
   on_attach = M.on_attach,
   capabilities = M.capabilities,
 
   settings = {
     Lua = {
       diagnostics = {
-        globals = { "vim" },
+        globals = { 'vim' },
       },
       workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
+        library = vim.api.nvim_get_runtime_file('', true),
         maxPreload = 100000,
         preloadFileSize = 10000,
       },
@@ -81,20 +81,20 @@ lspconfig.sumneko_lua.setup({
       },
     },
   },
-})
+}
 
-lspconfig.bashls.setup({
+lspconfig.bashls.setup {
   on_attach = M.on_attach,
   capabilities = M.capabilities,
-})
+}
 
-lspconfig.rust_analyzer.setup({
+lspconfig.rust_analyzer.setup {
   on_attach = M.on_attach_virtual_types,
   capabilities = M.capabilities,
   settings = {
-    ["rust-analyzer"] = {
+    ['rust-analyzer'] = {
       checkOnSave = {
-        command = "clippy"
+        command = 'clippy',
       },
       diagnostics = {
         experimental = {
@@ -103,21 +103,21 @@ lspconfig.rust_analyzer.setup({
       },
     },
   },
-})
+}
 
-lspconfig.nimls.setup({
+lspconfig.nimls.setup {
   on_attach = M.on_attach_virtual_types,
   capabilities = M.capabilities,
-})
+}
 
 -- lspconfig.eslint.setup({
 --   on_attach = M.on_attach,
 --   capabilities = M.capabilities,
 -- })
 
-lspconfig.tsserver.setup({
+lspconfig.tsserver.setup {
   on_attach = M.on_attach_virtual_types,
   capabilities = M.capabilities,
-})
+}
 
 return M
