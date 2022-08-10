@@ -6,7 +6,7 @@
   excludesfile = $HOME/.gitignore
 
 [pull]
-  rebase = false
+  rebase = true
 
 [alias]
   files = !git diff --name-only $(git merge-base HEAD \"${REVIEW_BASE:-development}\")

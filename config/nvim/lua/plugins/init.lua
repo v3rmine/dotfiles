@@ -252,6 +252,11 @@ local plugins = {
     end,
   },
 
+  -- Prog languages
+  ['alaviss/nim.nvim'] = {
+    ft = { 'nim' },
+  },
+
   -- Only load whichkey after all
   ['folke/which-key.nvim'] = {
     config = function()

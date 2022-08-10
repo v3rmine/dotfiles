@@ -7,7 +7,7 @@ vim.diagnostic.config {
 local present, lspconfig = pcall(require, 'lspconfig')
 
 if not present then
-  return M
+  return
 end
 
 local utils = require 'core.utils'
@@ -106,7 +106,7 @@ lspconfig.rust_analyzer.setup {
 }
 
 lspconfig.nimls.setup {
-  on_attach = M.on_attach_virtual_types,
+  on_attach = M.on_attach,
   capabilities = M.capabilities,
 }
 
