@@ -256,6 +256,9 @@ local plugins = {
   ['alaviss/nim.nvim'] = {
     ft = { 'nim' },
   },
+  ['LnL7/vim-nix'] = {
+    ft = { 'nix' }
+  },
 
   -- Only load whichkey after all
   ['folke/which-key.nvim'] = {
