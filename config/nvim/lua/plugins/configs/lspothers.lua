@@ -70,7 +70,7 @@ M.typescript_tools = function()
     return
   end
 
-  typescript.setup()
+  -- typescript.setup()
 end
 
 return M

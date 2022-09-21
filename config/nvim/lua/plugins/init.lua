@@ -46,8 +46,17 @@ local plugins = {
     event = 'InsertEnter',
     run = ':TSUpdate',
     config = function()
-      require 'plugins.configs.treesitter'
+      require('plugins.configs.treesitter').setup_treesitter()
     end,
+  },
+  ['nvim-treesitter/nvim-treesitter-context'] = {
+    after = 'nvim-treesitter',
+    config = function()
+      require('plugins.configs.treesitter').setup_treesitter_context()
+    end,
+  },
+  ['nvim-treesitter/nvim-treesitter-textobjects'] = {
+    after = 'nvim-treesitter',
   },
 
   ['norcalli/nvim-colorizer.lua'] = {
@@ -91,6 +100,9 @@ local plugins = {
       'typescript',
       'typescriptreact',
       'typescript.tsx',
+      'php',
+      'c',
+      'cpp',
     },
     config = function()
       require 'plugins.configs.lspconfig'

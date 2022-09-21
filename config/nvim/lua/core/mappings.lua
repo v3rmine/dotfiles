@@ -169,7 +169,7 @@ M.lspconfig = {
 
     ['<leader>ra'] = {
       function()
-        require('nvchad_ui.renamer').open()
+        vim.lsp.buf.rename()
       end,
       '   lsp rename',
     },

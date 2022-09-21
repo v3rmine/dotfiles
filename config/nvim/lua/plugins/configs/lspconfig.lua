@@ -116,7 +116,17 @@ lspconfig.nimls.setup {
 -- })
 
 lspconfig.tsserver.setup {
-  on_attach = M.on_attach_virtual_types,
+  on_attach = M.on_attach,
+  capabilities = M.capabilities,
+}
+
+lspconfig.phpactor.setup {
+ on_attach = M.on_attach,
+ capabilities = M.capabilities,
+}
+
+lspconfig.clangd.setup {
+  on_attach = M.on_attach,
   capabilities = M.capabilities,
 }
 
