@@ -1,4 +1,7 @@
 #!/bin/bash
+# shellcheck disable=SC1090,SC1091
+# NOTE: SC1090, SC1091 because we dont need to check linked shellscripts
+
 # colors
 bold="\033[1m"
 red="\033[31m"
@@ -29,30 +32,47 @@ source "$DOTFILES_PATH/install-scripts/functions-utils.bash"
 
 # --- Rebinds ---
 function vim() {
-    if command -v nvim >/dev/null; then 
-	nvim $@ 
-    else 
-	vim $@
-    fi
+  if command -v nvim >/dev/null; then 
+    nvim "$@" 
+  else 
+    vim "$@"
+  fi
 }
 # upgrade
 function sudo() {
-    printf "${bold}sudo${reset} ${red}%s${reset}\n" "$*";
-    if [[ "$1" == "rm" ]]; then
-        REPLY=$(bash -c 'read -p "Are you sure? [y/n] " -n 1 -r; echo $REPLY')
-        echo
-        if [[ ! $REPLY =~ ^[Yy]$ ]]
-        then
-            return 1
-        fi
+  # NOTE: Use full path to support user utils
+  local cmd
+  cmd="$(which "$1")"
+  fullcmd="/usr/bin/sudo $cmd ${*[*]:2}"
+
+  if echo "$cmd" | grep -q "not found"; then
+    >&2 echo "Error command $1 not found"
+    return 1
+  fi
+
+  if echo "$cmd" | grep -Pq ".*?\s?\(\)\s?\{"; then
+    fullcmd="/usr/bin/sudo bash -c '$cmd; $1 ${*[*]:2}'"
+  fi
+
+  printf "${bold}sudo${reset} ${red}%s %s${reset}\n" "$fullcmd" 
+  if [[ "$cmd" == "rm" ]]; then
+    REPLY=$(bash -c 'read -p "Are you sure? [y/n] " -n 1 -r; echo $REPLY')
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]
+    then
+      return 1
     fi
-    /usr/bin/sudo $@;
+  fi
+
+  eval "$fullcmd"
 }
 
 # shortcuts
+# shellcheck disable=SC2139 
 alias findfile="$HOME/.cargo/bin/fd"
+# shellcheck disable=SC2139 
 alias sz="source $HOME/.zshrc"
-function trust-ssh() { ssh -o UserKnownHostsFile=/dev/null -T "$1" /bin/bash -i }
+function trust-ssh() { ssh -o UserKnownHostsFile=/dev/null -T "$1" /bin/bash -i; }
 
 function just-me() {
   resp=$(
@@ -60,6 +80,7 @@ function just-me() {
       "https://api-prod.downfor.cloud/httpcheck/$1" \
       --user-agent 'Mozilla/5.0'
   )
+  # shellcheck disable=SC2181
   if [ "$?" -ne 0 ]; then
     echo "Meeeh your shitty internet seems down (curl failed)"
     return 1
@@ -77,6 +98,7 @@ function fdp() {
 }
 
 function rdp() {
+  # shellcheck disable=SC1083,SC2182
   sk --ansi --header='[ripfind:print]' \
     --cmd 'rg --column --line-number --no-heading --color=always .' \
     --delimiter ':' --nth '4..' \
@@ -84,35 +106,43 @@ function rdp() {
 }
 
 function fp() {
-  local loc=$(echo $PATH | sed -e $'s/:/\\\n/g' | eval "sk ${FZF_DEFAULT_OPTS} --header='[find:path]'")
+  local loc
+  loc=$(echo "$PATH" | sed -e $'s/:/\\\n/g' | eval "sk ${FZF_DEFAULT_OPTS} --header='[find:path]'")
 
   if [[ -d $loc ]]; then
-    echo "$(rg --files $loc | rev | cut -d"/" -f1 | rev)" | eval "sk ${FZF_DEFAULT_OPTS} --header='[find:exe] => ${loc}' >/dev/null"
+    # shellcheck disable=SC2005
+    echo "$(rg --files "$loc" | rev | cut -d"/" -f1 | rev)" | eval "sk ${FZF_DEFAULT_OPTS} --header='[find:exe] => ${loc}' >/dev/null"
     fp
   fi
 }
 
 function kp() {
-  local pid=$(ps -ef | sed 1d | eval "sk ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
+  local pid
+  pid=$(ps -ef | sed 1d | eval "sk ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
 
   if [ "x$pid" != "x" ]; then
-    echo $pid | xargs kill -${1:-9}
-    kp
+    echo "$pid" | xargs kill "-${1:-9}"
+    kp "$@"
   fi
 }
 
 # TODO: do not work
 function fgl() {
-  sk --ansi --header='[find:git-commit]' \
-    --cmd 'git log --oneline --graph --color' \
-    --preview "echo git show --stat $(echo '{}' sed -E \"s/^[ *|]* [a-z0-9]{7} (.*)/\1/g\")"
+  >&2 echo "NOT IMPLEMENTED"
+  # sk --ansi --header='[find:git-commit]' \
+  #   --cmd 'git log --oneline --graph --color' \
+  #   --preview "echo git show --stat $(echo '{}' sed -E \"s/^[ *|]* [a-z0-9]{7} (.*)/\1/g\")"
 }
 
 function start-patch-number() {
-  local patch_folder=$(if [ "$#" -eq 1 ]; then echo "$1"; else echo "patches"; fi)
-  local patch_number=0001
+  local patch_folder
+  local patch_number
+
+  patch_folder=$(if [ "$#" -eq 1 ]; then echo "$1"; else echo "patches"; fi)
+  patch_number=0001
 
   if [ -d "$patch_folder" ]; then 
+    # shellcheck disable=SC2012
     patch_number=$(echo "1 + $(ls "$patch_folder" | sed -E 's/([0-9]*)-.*/\1/' | sort --numeric-sort --reverse | head -n1)" | bc | xargs printf "%04d")
   fi
 
@@ -120,11 +150,17 @@ function start-patch-number() {
 }
 
 function new-patch() {
-  local patch_folder=$(if [ "$#" -eq 2 ]; then echo "$1"; else echo "patches"; fi)
-  local patch_name=$(if [ "$#" -eq 2 ]; then echo "$2"; else echo "$1"; fi)
-  local patch_number=$(start-patch-number "$patch_folder")
+  local patch_folder
+  local patch_name
+  local patch_number
 
-  echo "$patch_folder/$patch_number-$(echo $patch_name | sed 's/ /-/g').patch"
+  patch_folder=$(if [ "$#" -eq 2 ]; then echo "$1"; else echo "patches"; fi)
+  patch_name=$(if [ "$#" -eq 2 ]; then echo "$2"; else echo "$1"; fi)
+  patch_number=$(start-patch-number "$patch_folder")
+
+  # TODO: try ${variable//search/replace} instead.
+  # shellcheck disable=SC2001
+  echo "$patch_folder/$patch_number-$(echo "$patch_name" | sed 's/ /-/g').patch"
 }
 
 function sha256sum-dir() {
@@ -135,10 +171,11 @@ function sha256sum-dir() {
 }
 
 # CPE
-function gccpe() { gcc "$1" -o "$2" -Wall -Wextra -g }
+function gccpe() { gcc "$1" -o "$2" -Wall -Wextra -g; }
 
 # ls
-alias ls="${CUSTOM_LS:-lsd}"
+# shellcheck disable=SC2139
+alias ls="${CUSTOM_LS:-$(if command -v lsd >/dev/null; then echo lsd; else echo ls; fi)}"
 alias ll="ls -l"
 alias la="ls -al"
 alias lh="ls -alh"
@@ -160,8 +197,8 @@ alias gm="git merge"
 alias gb="git branch"
 alias gf="git fetch"
 alias gp="git pull"
-function gPu () { git push -u origin $(git branch | grep '^\*' | sed -E 's/( |\*)//g') }
-function gBu () { git branch --set-upstream-to="origin/$(git branch | grep '^\*' | sed -E 's/( |\*)//g')" $(git branch | grep '^\*' | sed -E 's/( |\*)//g') }
+function gPu () { git push -u origin "$(git branch | grep '^\*' | sed -E 's/( |\*)//g')"; }
+function gBu () { git branch --set-upstream-to="origin/$(git branch | grep '^\*' | sed -E 's/( |\*)//g')" "$(git branch | grep '^\*' | sed -E 's/( |\*)//g')"; }
 alias gst="git status"
 alias gsh="git show"
 alias gl="git log"
@@ -192,17 +229,23 @@ autoload -Uz add-zsh-hook
 add-zsh-hook precmd set-title-precmd
 add-zsh-hook preexec set-title-preexec
 
+# --- Tools sourcing ---
+if command -v broot >/dev/null; then
+  source /home/kuro/.config/broot/launcher/bash/br
+fi
+
 # --- ASDF ---
 ASDF_PATH="$HOME/.asdf/asdf.sh"
 if [ -f "$ASDF_PATH" ]; then
   source "$ASDF_PATH"
+  # shellcheck disable=SC2206
   fpath=(${ASDF_DIR}/completions $fpath)
   export PATH="$PATH:$ASDF_USER_SHIMS"
 fi
 ## Load JAVA_HOME
 set_java_home_file=~/.asdf/plugins/java/set-java-home.zsh
 if [ -f $set_java_home_file ]; then
-  . $set_java_home_file
+  source $set_java_home_file
 fi
 
 # Support bash completions
@@ -281,3 +324,4 @@ export DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 bashcompinit
 compinit
+
