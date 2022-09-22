@@ -10,8 +10,8 @@ M.general = {
   i = {
 
     -- go to  beginning and end
-    ['<C-b>'] = { '<ESC>^i', '論 beginning of line' },
-    ['<C-e>'] = { '<End>', '壟 end of line' },
+    ['<C-b>'] = { '<ESC>^i', ' beginning of line' },
+    ['<C-e>'] = { '<End>', ' end of line' },
 
     -- navigate within insert mode
     ['<C-h>'] = { '<Left>', '  move left' },
@@ -20,18 +20,18 @@ M.general = {
     ['<C-k>'] = { '<Up>', ' move up' },
 
     -- Move
-    ['<C-Left>'] = { '<Esc>lbi', ' beginning of the word' },
-    ['<C-Right>'] = { '<Esc>ea', ' end of the word' },
+    ['<C-Left>'] = { '<Esc>lbi', ' beginning of the word' },
+    ['<C-Right>'] = { '<Esc>ea', ' end of the word' },
 
     -- Delete
-    ['<C-Backspace>'] = { '<Esc>vbdi', ' delete previous word' },
-    ['<C-Del>'] = { '<Esc>vedi', ' delete next word' },
+    ['<C-Backspace>'] = { '<Esc>vbda', ' delete previous word' },
+    ['<C-Del>'] = { '<Esc>vedi', ' delete next word' },
   },
 
   n = {
     -- Move
-    ['<C-Left>'] = { 'b', ' beginning of the word' },
-    ['<C-Right>'] = { 'e', ' end of the word' },
+    ['<C-Left>'] = { 'b', ' beginning of the word' },
+    ['<C-Right>'] = { 'e', ' end of the word' },
 
     ['<ESC>'] = { '<cmd> noh <CR>', '  no highlight' },
 

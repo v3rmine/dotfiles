@@ -41,6 +41,14 @@ local plugins = {
     end,
   },
 
+  ['hood/popui.nvim'] = {
+    config = function()
+      vim.g.popui_border_style = "rounded"
+      vim.ui.select = require('popui.ui-overrider')
+      vim.ui.input = require('popui.input-overrider')
+    end,
+  },
+
   -- Syntax
   ['nvim-treesitter/nvim-treesitter'] = {
     event = 'InsertEnter',
@@ -87,8 +95,44 @@ local plugins = {
     end,
   },
 
+  -- Completion
+  ['hrsh7th/nvim-cmp'] = {
+    event = 'InsertEnter',
+    config = function()
+      require 'plugins.configs.cmp'
+    end,
+  },
+
+  ['L3MON4D3/LuaSnip'] = {
+    after = 'nvim-cmp',
+    config = function()
+      require('plugins.configs.others').luasnip()
+    end,
+  },
+
+  ['saadparwaiz1/cmp_luasnip'] = {
+    after = 'LuaSnip',
+  },
+
+  ['hrsh7th/cmp-nvim-lua'] = {
+    after = 'cmp_luasnip',
+  },
+
+  ['hrsh7th/cmp-nvim-lsp'] = {
+    after = 'cmp-nvim-lua',
+  },
+
+  ['hrsh7th/cmp-buffer'] = {
+    after = 'cmp-nvim-lsp',
+  },
+
+  ['hrsh7th/cmp-path'] = {
+    after = 'cmp-buffer',
+  },
+
   -- Lsp
   ['neovim/nvim-lspconfig'] = {
+    wants = 'nvim-cmp',
     ft = {
       'sh',
       'lua',
@@ -103,9 +147,15 @@ local plugins = {
       'php',
       'c',
       'cpp',
+      'nix',
     },
     config = function()
-      require 'plugins.configs.lspconfig'
+      local lspconfig = require('plugins.configs.lspconfig')
+      if vim.bo.filetype == 'javascript' or vim.bo.filetype == 'javascriptreact' or vim.bo.filetype == 'javascript.jsx' then
+        -- NOTE: If typescript we load tsserver using jose-elias-alvarez/typescript.nvim
+        -- TODO: Need to refactor typescript / javascript lsp loading 
+        lspconfig.setup_tsserver()
+      end
     end,
   },
   ['williamboman/mason.nvim'] = {
@@ -121,6 +171,7 @@ local plugins = {
   --     require("plugins.configs.lspothers").mason_lspconfig()
   --   end,
   -- },
+
 
   ['jubnzv/virtual-types.nvim'] = {
     after = 'nvim-lspconfig',
@@ -177,41 +228,6 @@ local plugins = {
     config = function()
       require('plugins.configs.lspothers').typescript_tools()
     end,
-  },
-
-  -- Completion
-  ['hrsh7th/nvim-cmp'] = {
-    event = 'InsertEnter',
-    config = function()
-      require 'plugins.configs.cmp'
-    end,
-  },
-
-  ['L3MON4D3/LuaSnip'] = {
-    after = 'nvim-cmp',
-    config = function()
-      require('plugins.configs.others').luasnip()
-    end,
-  },
-
-  ['saadparwaiz1/cmp_luasnip'] = {
-    after = 'LuaSnip',
-  },
-
-  ['hrsh7th/cmp-nvim-lua'] = {
-    after = 'cmp_luasnip',
-  },
-
-  ['hrsh7th/cmp-nvim-lsp'] = {
-    after = 'cmp-nvim-lua',
-  },
-
-  ['hrsh7th/cmp-buffer'] = {
-    after = 'cmp-nvim-lsp',
-  },
-
-  ['hrsh7th/cmp-path'] = {
-    after = 'cmp-buffer',
   },
 
   -- Misc

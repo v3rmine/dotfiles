@@ -1,6 +1,2 @@
-*.lock
 **/tags
-config/nvim/plugged
-config/nvim/.netrwhist
-config/kak/plugins
 history.txt

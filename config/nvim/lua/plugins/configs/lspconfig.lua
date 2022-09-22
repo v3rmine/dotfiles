@@ -43,6 +43,12 @@ M.on_attach_virtual_types = function(client, bufnr)
 end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
+-- Updating capabilities https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
+local cmp_present, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+
+if cmp_present then
+  M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
+end
 
 M.capabilities.textDocument.completion.completionItem = {
   documentationFormat = { 'markdown', 'plaintext' },
@@ -110,22 +116,24 @@ lspconfig.nimls.setup {
   capabilities = M.capabilities,
 }
 
--- lspconfig.eslint.setup({
---   on_attach = M.on_attach,
---   capabilities = M.capabilities,
--- })
-
-lspconfig.tsserver.setup {
-  on_attach = M.on_attach,
-  capabilities = M.capabilities,
-}
-
 lspconfig.phpactor.setup {
  on_attach = M.on_attach,
  capabilities = M.capabilities,
 }
 
 lspconfig.clangd.setup {
+  on_attach = M.on_attach,
+  capabilities = M.capabilities,
+}
+
+M.setup_tsserver = function()
+  lspconfig.tsserver.setup {
+    on_attach = M.on_attach,
+    capabilities = M.capabilities,
+  }
+end
+
+lspconfig.nil_ls.setup {
   on_attach = M.on_attach,
   capabilities = M.capabilities,
 }

@@ -55,22 +55,41 @@ end
 
 M.rust_tools = function()
   local present, rust_tools = pcall(require, 'rust-tools')
+  local lspconfig_present, lspconfig = pcall(require, 'plugins.configs.lspconfig')
 
-  if not present then
+  if not present or not lspconfig_present then
     return
   end
 
-  rust_tools.setup()
+  rust_tools.setup({
+    server = {
+      settings = {
+        on_attach = lspconfig.on_attach,
+        capabilities = lspconfig.capabilities,
+        ["rust-analyzer"] = {
+          checkOnSave = {
+            command = "clippy",
+          },
+        },
+      },
+    },
+  })
 end
 
 M.typescript_tools = function()
   local present, typescript = pcall(require, 'typescript')
+  local lspconfig_present, lspconfig = pcall(require, 'plugins.configs.lspconfig')
 
-  if not present then
+  if not present or not lspconfig_present then
     return
   end
 
-  -- typescript.setup()
+  typescript.setup({
+    server = {
+      on_attach = lspconfig.on_attach,
+      capabilities = lspconfig.capabilities,
+    }
+  })
 end
 
 return M
