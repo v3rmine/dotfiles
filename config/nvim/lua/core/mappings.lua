@@ -24,7 +24,8 @@ M.general = {
     ['<C-Right>'] = { '<Esc>ea', ' end of the word' },
 
     -- Delete
-    ['<C-Backspace>'] = { '<Esc>vbda', ' delete previous word' },
+    -- TODO: Fix delete "something.deleteme" 
+    ['<C-Backspace>'] = { '<Esc>vbdi', ' delete previous word' },
     ['<C-Del>'] = { '<Esc>vedi', ' delete next word' },
   },
 
