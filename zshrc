@@ -231,7 +231,7 @@ add-zsh-hook preexec set-title-preexec
 
 # --- Tools sourcing ---
 if command -v broot >/dev/null; then
-  source /home/kuro/.config/broot/launcher/bash/br
+  source "$HOME/.config/broot/launcher/bash/br"
 fi
 
 # --- ASDF ---
