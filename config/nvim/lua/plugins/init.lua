@@ -113,19 +113,18 @@ local plugins = {
   ['saadparwaiz1/cmp_luasnip'] = {
     after = 'LuaSnip',
   },
-
   ['hrsh7th/cmp-nvim-lua'] = {
     after = 'cmp_luasnip',
   },
-
   ['hrsh7th/cmp-nvim-lsp'] = {
     after = 'cmp-nvim-lua',
   },
-
+  ['hrsh7th/cmp-nvim-lsp-signature-help'] = {
+    after = 'cmp-nvim-lsp',
+  },
   ['hrsh7th/cmp-buffer'] = {
     after = 'cmp-nvim-lsp',
   },
-
   ['hrsh7th/cmp-path'] = {
     after = 'cmp-buffer',
   },

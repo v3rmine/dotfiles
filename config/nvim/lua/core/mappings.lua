@@ -34,7 +34,7 @@ M.general = {
     ['<C-Left>'] = { 'b', ' beginning of the word' },
     ['<C-Right>'] = { 'e', ' end of the word' },
 
-    ['<ESC>'] = { '<cmd> noh <CR>', '  no highlight' },
+    ['<ESC>'] = { '<cmd> noh <CR>', ' no highlight' },
 
     -- switch between windows
     ['<C-h>'] = { '<C-w>h', ' window left' },
@@ -43,14 +43,19 @@ M.general = {
     ['<C-k>'] = { '<C-w>k', ' window up' },
 
     -- save
-    ['<C-s>'] = { '<cmd> w <CR>', '﬚  save file' },
+    ['<C-s>'] = { '<cmd> w <CR>', '﬚ save file' },
 
     -- Copy all
-    ['<C-c>'] = { '<cmd> %y+ <CR>', '  copy whole file' },
+    ['<C-c>'] = { '<cmd> %y+ <CR>', ' copy whole file' },
 
     -- line numbers
-    ['<leader>n'] = { '<cmd> set nu! <CR>', '   toggle line number' },
-    ['<leader>rn'] = { '<cmd> set rnu! <CR>', '   toggle relative number' },
+    ['<leader>n'] = { '<cmd> set nu! <CR>', ' toggle line number' },
+    ['<leader>rn'] = { '<cmd> set rnu! <CR>', ' toggle relative number' },
+
+    -- Folds
+    ['<leader><Tab>q'] = { 'zA', 'toggle fold recursively' },
+    ['<leader><Tab>o'] = { 'zR', 'open all the folds' },
+    ['<leader><Tab>c'] = { 'zM', 'close all the folds' },
 
     -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
     -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
@@ -274,7 +279,7 @@ M.telescope = {
     ['<leader>gt'] = { '<cmd> Telescope git_status <CR>', '  git status' },
 
     -- pick a hidden term
-    ['<leader>pt'] = { '<cmd> Telescope terms <CR>', '   pick hidden term' },
+    ['<leader>pt'] = { '<cmd> Telescope terms <CR>', ' pick hidden term' },
 
     -- theme switcher
     ['<leader>th'] = { '<cmd> Telescope themes <CR>', '   nvchad themes' },
@@ -287,7 +292,7 @@ M.whichkey = {
       function()
         vim.cmd 'WhichKey'
       end,
-      '   which-key all keymaps',
+      ' which-key all keymaps',
     },
     ['<leader>wk'] = {
       function()
