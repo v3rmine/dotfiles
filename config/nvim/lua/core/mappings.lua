@@ -8,25 +8,23 @@ local M = {}
 
 M.general = {
   i = {
-
     -- go to  beginning and end
     ['<C-b>'] = { '<ESC>^i', ' beginning of line' },
     ['<C-e>'] = { '<End>', ' end of line' },
 
     -- navigate within insert mode
-    ['<C-h>'] = { '<Left>', '  move left' },
+    ['<C-h>'] = { '<Left>', ' move left' },
     ['<C-l>'] = { '<Right>', ' move right' },
     ['<C-j>'] = { '<Down>', ' move down' },
     ['<C-k>'] = { '<Up>', ' move up' },
 
     -- Move
-    ['<C-Left>'] = { '<Esc>lbi', ' beginning of the word' },
-    ['<C-Right>'] = { '<Esc>ea', ' end of the word' },
+    ['<C-Left>'] = { '<ESC>lbi', ' beginning of the word' },
+    ['<C-Right>'] = { '<ESC>ea', ' end of the word' },
 
     -- Delete
-    -- TODO: Fix delete "something.deleteme" 
-    ['<C-Backspace>'] = { '<Esc>vbdi', ' delete previous word' },
-    ['<C-Del>'] = { '<Esc>vedi', ' delete next word' },
+    ['<C-Backspace>'] = { '<C-w>', ' delete previous word' },
+    ['<C-Del>'] = { '<ESC>vedi', ' delete next word' },
   },
 
   n = {
@@ -53,9 +51,9 @@ M.general = {
     ['<leader>rn'] = { '<cmd> set rnu! <CR>', ' toggle relative number' },
 
     -- Folds
-    ['<leader><Tab>q'] = { 'zA', 'toggle fold recursively' },
-    ['<leader><Tab>o'] = { 'zR', 'open all the folds' },
-    ['<leader><Tab>c'] = { 'zM', 'close all the folds' },
+    ['<leader><Tab>q'] = { 'zA', '<=> toggle fold recursively' },
+    ['<leader><Tab>o'] = { 'zR', '<<< open all the folds' },
+    ['<leader><Tab>c'] = { 'zM', '>>> close all the folds' },
 
     -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
     -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
@@ -68,7 +66,7 @@ M.general = {
   },
 
   t = {
-    ['<C-x>'] = { termcodes '<C-\\><C-N>', '   escape terminal mode' },
+    ['<C-x>'] = { termcodes '<C-\\><C-N>', ' escape terminal mode' },
   },
 
   v = {
@@ -83,225 +81,246 @@ M.general = {
 }
 
 M.tabufline = {
-
   n = {
+    ['<leader>b'] = '- buffer management',
     -- new buffer
-    ['<S-b>'] = { '<cmd> enew <CR>', '烙 new buffer' },
-
+    ['<leader>bo'] = { '<cmd> enew <CR>', '烙new buffer' },
     -- cycle through buffers
-    -- ["<TAB>"] = { "<cmd> Tbufnext <CR>", "  goto next buffer" },
-    -- ["<S-Tab>"] = { "<cmd> Tbufprev <CR> ", "  goto prev buffer" },
+    ["<leader>bN"] = { "<cmd> Tbufnext <CR>", " goto next buffer" },
+    ["<leader>bn"] = { "<cmd> Tbufprev <CR> ", " goto prev buffer" },
+
 
     -- cycle through tabs
-    ['<leader>tp'] = { '<cmd> tabprevious <CR>', '  goto next tab' },
-    ['<leader>tn'] = { '<cmd> tabnext <CR> ', '  goto prev tab' },
+    ['<leader>t'] = '- tabs management',
+    ['<leader>tN'] = { '<cmd> tabprevious <CR>', ' goto next tab' },
+    ['<leader>tn'] = { '<cmd> tabnext <CR> ', ' goto prev tab' },
 
     -- close buffer + hide terminal buffer
     ['<leader>x'] = {
       function()
         require('core.utils').close_buffer()
       end,
-      '   close buffer',
+      ' close buffer',
     },
   },
 }
 
+-- leader + /
 M.comment = {
-
   -- toggle comment in both modes
   n = {
-    ['<leader>/'] = {
-      function()
-        require('Comment.api').toggle_current_linewise()
-      end,
-
-      '蘒  toggle comment',
-    },
+    ['<leader>/'] = { 'gcc', '蘒toggle comment' },
   },
-
   v = {
-    ['<leader>/'] = {
-      "<ESC><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>",
-      '蘒  toggle comment',
-    },
+    ['<leader>/'] = { "<ESC>gbc<CR>", '蘒toggle comment' },
   },
 }
 
+-- leader + c
 M.lspconfig = {
   -- See `<cmd> :help vim.lsp.*` for documentation on any of the below functions
-
   n = {
-    ['gD'] = {
-      function()
-        vim.lsp.buf.declaration()
-      end,
-      '   lsp declaration',
-    },
-
-    ['gd'] = {
-      function()
-        vim.lsp.buf.definition()
-      end,
-      '   lsp definition',
-    },
-
     ['K'] = {
       function()
         vim.lsp.buf.hover()
       end,
-      '   lsp hover',
+      ' lsp hover',
     },
-
-    ['gi'] = {
+    ['<leader>c'] = ' lsp actions',
+    ['<leader>cD'] = {
+      function()
+        vim.lsp.buf.declaration()
+      end,
+      ' lsp declaration',
+    },
+    ['<leader>cd'] = {
+      function()
+        vim.lsp.buf.definition()
+      end,
+      ' lsp definition',
+    },
+    ['<leader>ci'] = {
       function()
         vim.lsp.buf.implementation()
       end,
-      '   lsp implementation',
+      ' lsp implementation',
     },
-
-    ['<leader>ls'] = {
+    ['<leader>cs'] = {
       function()
         vim.lsp.buf.signature_help()
       end,
-      '   lsp signature_help',
+      ' lsp signature_help',
     },
-
-    ['<leader>D'] = {
+    ['<leader>ct'] = {
       function()
         vim.lsp.buf.type_definition()
       end,
-      '   lsp definition type',
+      ' lsp definition type',
     },
-
-    ['<leader>ra'] = {
+    ['<leader>cr'] = {
       function()
         vim.lsp.buf.rename()
       end,
-      '   lsp rename',
+      ' lsp rename',
     },
-
     ['<leader>ca'] = {
       function()
         vim.lsp.buf.code_action()
       end,
-      '   lsp code_action',
+      ' lsp code_action',
     },
-
-    ['gr'] = {
+    ['<leader>cR'] = {
       function()
         vim.lsp.buf.references()
       end,
-      '   lsp references',
+      ' lsp references',
     },
-
-    ['<leader>f'] = {
-      function()
-        vim.diagnostic.open_float()
-      end,
-      '   floating diagnostic',
-    },
-
-    ['[d'] = {
-      function()
-        vim.diagnostic.goto_prev()
-      end,
-      '   goto prev',
-    },
-
-    ['d]'] = {
-      function()
-        vim.diagnostic.goto_next()
-      end,
-      '   goto_next',
-    },
-
-    ['<leader>q'] = {
-      function()
-        vim.diagnostic.setloclist()
-      end,
-      '   diagnostic setloclist',
-    },
-
-    ['<leader>fm'] = {
+    ['<leader>cf'] = {
       function()
         vim.lsp.buf.formatting()
       end,
-      '   lsp formatting',
+      ' lsp formatting',
     },
 
-    ['<leader>wa'] = {
+    ['<leader>ce'] = ' diagnostics',
+    ['<leader>ceo'] = {
+      function()
+        vim.diagnostic.open_float()
+      end,
+      ' floating diagnostic',
+    },
+    ['<leader>cen'] = {
+      function()
+        vim.diagnostic.goto_prev()
+      end,
+      ' goto prev',
+    },
+    ['<leader>ceN'] = {
+      function()
+        vim.diagnostic.goto_next()
+      end,
+      ' goto_next',
+    },
+    ['<leader>ces'] = {
+      function()
+        vim.diagnostic.setloclist()
+      end,
+      ' diagnostic setloclist',
+    },
+
+    ['<leader>cw'] = ' workspace management',
+    ['<leader>cwa'] = {
       function()
         vim.lsp.buf.add_workspace_folder()
       end,
-      '   add workspace folder',
+      ' add workspace folder',
     },
-
-    ['<leader>wr'] = {
+    ['<leader>cwr'] = {
       function()
         vim.lsp.buf.remove_workspace_folder()
       end,
-      '   remove workspace folder',
+      ' remove workspace folder',
     },
-
-    ['<leader>wl'] = {
+    ['<leader>cwl'] = {
       function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
       end,
-      '   list workspace folders',
+      ' list workspace folders',
     },
   },
 }
 
+-- leader + t
 M.nvimtree = {
-
   n = {
+    ['<leader>t'] = ' nvimtree',
     -- toggle
-    ['<C-n>'] = { '<cmd> NvimTreeToggle <CR>', '   toggle nvimtree' },
-
+    ['<leader>tt'] = { '<cmd> NvimTreeToggle <CR>', ' toggle nvimtree' },
     -- focus
-    ['<leader>e'] = { '<cmd> NvimTreeFocus <CR>', '   focus nvimtree' },
+    ['<leader>tf'] = { '<cmd> NvimTreeFocus <CR>', ' focus nvimtree' },
   },
 }
 
 M.telescope = {
   n = {
-    -- find
-    ['<leader>ff'] = { '<cmd> Telescope find_files <CR>', '  find files' },
-    ['<leader>fa'] = { '<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>', '  find all' },
-    ['<leader>fw'] = { '<cmd> Telescope live_grep <CR>', '   live grep' },
-    ['<leader>fb'] = { '<cmd> Telescope buffers <CR>', '  find buffers' },
-    ['<leader>fh'] = { '<cmd> Telescope help_tags <CR>', '  help page' },
-    ['<leader>fo'] = { '<cmd> Telescope oldfiles <CR>', '   find oldfiles' },
-    ['<leader>tk'] = { '<cmd> Telescope keymaps <CR>', '   show keys' },
+    ['<leader>f'] = ' finding things',
+    -- find => leader + f
+    ['<leader>ff'] = { '<cmd> Telescope find_files <CR>', ' find files' },
+    ['<leader>fa'] = { '<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>', ' find all' },
+    ['<leader>fc'] = { '<cmd> Telescope live_grep <CR>', ' live grep' },
+    ['<leader>fb'] = { '<cmd> Telescope buffers <CR>', ' find buffers' },
+    ['<leader>fh'] = { '<cmd> Telescope help_tags <CR>', ' help page' },
+    ['<leader>fo'] = { '<cmd> Telescope oldfiles <CR>', ' find oldfiles' },
+    ['<leader>fk'] = { '<cmd> Telescope keymaps <CR>', ' show keys' },
+    ['<leader>fm'] = { '<cmd> Telescope man_pages <CR>', ' find man page' },
 
-    -- git
-    ['<leader>cm'] = { '<cmd> Telescope git_commits <CR>', '   git commits' },
-    ['<leader>gt'] = { '<cmd> Telescope git_status <CR>', '  git status' },
+    -- git => leader + g
+    ['<leader>g'] = ' Git',
+    ['<leader>gc'] = { '<cmd> Telescope git_commits <CR>', ' git commits' },
+    ['<leader>gt'] = { '<cmd> Telescope git_status <CR>', ' git status' },
 
-    -- pick a hidden term
-    ['<leader>pt'] = { '<cmd> Telescope terms <CR>', ' pick hidden term' },
+    -- pick a hidden term 
+    -- TODO: What is this
+    -- ['<leader>ht'] = { '<cmd> Telescope terms <CR>', ' pick hidden term' },
 
     -- theme switcher
-    ['<leader>th'] = { '<cmd> Telescope themes <CR>', '   nvchad themes' },
+    -- TODO: How to configure this?
+    -- ['<leader>th'] = { '<cmd> Telescope themes <CR>', ' themes' },
   },
 }
 
+-- leader + s
+M.hop = {
+  n = {
+    ['<leader>s'] = '- jump anywhere',
+    ['<leader>sw'] = { '<cmd> HopWord <CR>', '- go to word' },
+    ['<leader>sc'] = { '<cmd> HopChar <CR>', '- go to char' },
+    ['<leader>sp'] = { '<cmd> HopPattern <CR>', '- go to pattern' },
+    ['<leader>sW'] = { '<cmd> Hop*MW <CR>', '- go to multi windows' },
+    ['<leader>sl'] = { '<cmd> HopLineStart <CR>', '- go to line' },
+  },
+}
+
+-- leader + hw
 M.whichkey = {
   n = {
-    ['<leader>wK'] = {
+    ['<leader>hw'] = { ' WhichKey' },
+    ['<leader>hwK'] = {
       function()
         vim.cmd 'WhichKey'
       end,
       ' which-key all keymaps',
     },
-    ['<leader>wk'] = {
+    ['<leader>hwk'] = {
       function()
         local input = vim.fn.input 'WhichKey: '
         vim.cmd('WhichKey ' .. input)
       end,
-      '   which-key query lookup',
+      ' which-key query lookup',
     },
   },
 }
+
+-- leader + h
+M.helpers = {
+  n = {
+    ['<leader>hR'] = {
+      function()
+        for name,_ in pairs(package.loaded) do
+          if name:match('^core') or name:match('^lsp') or name:match('^plugins') then
+            package.loaded[name] = nil
+          end
+        end
+
+        -- REVIEW: https://ustrajunior.com/posts/reloading-neovim-config-with-telescope/
+        dofile(vim.env.MYVIMRC)
+        vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)
+      end,
+      '🗘  Reload config',
+    },
+  },
+}
+
+
 
 return M

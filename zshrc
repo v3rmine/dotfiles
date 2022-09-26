@@ -43,7 +43,7 @@ function sudo() {
   # NOTE: Use full path to support user utils
   local cmd
   cmd="$(which "$1")"
-  fullcmd="/usr/bin/sudo $cmd ${*[*]:2}"
+  fullcmd="$cmd ${*[*]:2}"
 
   if echo "$cmd" | grep -q "not found"; then
     >&2 echo "Error command $1 not found"
@@ -51,7 +51,7 @@ function sudo() {
   fi
 
   if echo "$cmd" | grep -Pq ".*?\s?\(\)\s?\{"; then
-    fullcmd="/usr/bin/sudo bash -c '$cmd; $1 ${*[*]:2}'"
+    fullcmd="bash -c '$cmd; $1 ${*[*]:2}'"
   fi
 
   printf "${bold}sudo${reset} ${red}%s %s${reset}\n" "$fullcmd" 
@@ -64,7 +64,7 @@ function sudo() {
     fi
   fi
 
-  eval "$fullcmd"
+  eval "/usr/bin/sudo $fullcmd"
 }
 
 # shortcuts
