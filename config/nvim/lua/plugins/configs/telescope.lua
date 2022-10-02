@@ -53,6 +53,7 @@ local options = {
     buffer_previewer_maker = require('telescope.previewers').buffer_previewer_maker,
     mappings = {
       -- n = { ["q"] = require("telescope.actions").close },
+      i = { ['<C-Backspace>'] = { "<c-s-w>", type = "command" } }
     },
   },
 

@@ -2,11 +2,6 @@
 # shellcheck disable=SC1090,SC1091
 # NOTE: SC1090, SC1091 because we dont need to check linked shellscripts
 
-# colors
-bold="\033[1m"
-red="\033[31m"
-reset="\033[0m"
-
 # imports
 source "$HOME/.profile"
 

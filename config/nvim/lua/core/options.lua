@@ -54,6 +54,11 @@ opt.updatetime = 250
 -- when cursor reaches end/beginning of line
 opt.whichwrap:append '<>[]hl'
 
+-- By default, Ctrl-W only deletes previous words in the text 
+-- entered after last starting insert mode, and stops deleting
+-- text at the beginning of a line.
+opt.backspace = "indent,eol,start"
+
 g.mapleader = ' '
 
 -- disable some builtin vim plugins

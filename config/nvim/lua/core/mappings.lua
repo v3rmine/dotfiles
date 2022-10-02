@@ -51,6 +51,7 @@ M.general = {
     ['<leader>rn'] = { '<cmd> set rnu! <CR>', ' toggle relative number' },
 
     -- Folds
+    ['<leader><Tab>'] = '> < Control folds',
     ['<leader><Tab>q'] = { 'zA', '<=> toggle fold recursively' },
     ['<leader><Tab>o'] = { 'zR', '<<< open all the folds' },
     ['<leader><Tab>c'] = { 'zM', '>>> close all the folds' },
@@ -86,15 +87,16 @@ M.tabufline = {
     -- new buffer
     ['<leader>bo'] = { '<cmd> enew <CR>', '烙new buffer' },
     -- cycle through buffers
-    ["<leader>bN"] = { "<cmd> Tbufnext <CR>", " goto next buffer" },
-    ["<leader>bn"] = { "<cmd> Tbufprev <CR> ", " goto prev buffer" },
+    ["<leader>bN"] = { "<cmd> bnext <CR>", " goto next buffer" },
+    ["<leader>bn"] = { "<cmd> bprevious <CR> ", " goto prev buffer" },
 
 
     -- cycle through tabs
     ['<leader>t'] = '- tabs management',
-    ['<leader>tN'] = { '<cmd> tabprevious <CR>', ' goto next tab' },
-    ['<leader>tn'] = { '<cmd> tabnext <CR> ', ' goto prev tab' },
-
+    ['<leader>t<Left>'] = { '<cmd> BufferLineCyclePrev <CR>', ' goto next tab' },
+    ['<leader>t<Right>'] = { '<cmd> BufferLineCycleNext <CR> ', ' goto prev tab' },
+    ['<leader>t<S-Right>'] = { '<cmd> BufferLineMoveNext <CR>', ' move tab right' },
+    ['<leader>t<S-Left>'] = { '<cmd> BufferLineMovePrev <CR>', ' move tab left' },
     -- close buffer + hide terminal buffer
     ['<leader>x'] = {
       function()
@@ -233,11 +235,11 @@ M.lspconfig = {
 -- leader + t
 M.nvimtree = {
   n = {
-    ['<leader>t'] = ' nvimtree',
+    ['<leader>T'] = ' nvimtree',
     -- toggle
-    ['<leader>tt'] = { '<cmd> NvimTreeToggle <CR>', ' toggle nvimtree' },
+    ['<leader>Tt'] = { '<cmd> NvimTreeToggle <CR>', ' toggle nvimtree' },
     -- focus
-    ['<leader>tf'] = { '<cmd> NvimTreeFocus <CR>', ' focus nvimtree' },
+    ['<leader>Tf'] = { '<cmd> NvimTreeFocus <CR>', ' focus nvimtree' },
   },
 }
 
@@ -274,7 +276,7 @@ M.hop = {
   n = {
     ['<leader>s'] = '- jump anywhere',
     ['<leader>sw'] = { '<cmd> HopWord <CR>', '- go to word' },
-    ['<leader>sc'] = { '<cmd> HopChar <CR>', '- go to char' },
+    ['<leader>sc'] = { '<cmd> HopChar1 <CR>', '- go to char' },
     ['<leader>sp'] = { '<cmd> HopPattern <CR>', '- go to pattern' },
     ['<leader>sW'] = { '<cmd> Hop*MW <CR>', '- go to multi windows' },
     ['<leader>sl'] = { '<cmd> HopLineStart <CR>', '- go to line' },
@@ -304,6 +306,7 @@ M.whichkey = {
 -- leader + h
 M.helpers = {
   n = {
+    ['<leader>h'] = '? helpers',
     ['<leader>hR'] = {
       function()
         for name,_ in pairs(package.loaded) do
