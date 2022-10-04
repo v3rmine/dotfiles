@@ -48,7 +48,7 @@ M.general = {
 
     -- line numbers
     ['<leader>n'] = { '<cmd> set nu! <CR>', ' toggle line number' },
-    ['<leader>rn'] = { '<cmd> set rnu! <CR>', ' toggle relative number' },
+    ['<leader>N'] = { '<cmd> set rnu! <CR>', ' toggle relative number' },
 
     -- Folds
     ['<leader><Tab>'] = '> < Control folds',
@@ -75,6 +75,11 @@ M.general = {
     ['k'] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
     ['<Up>'] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
     ['<Down>'] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+
+    -- Move
+    ['<C-Left>'] = { 'b', ' beginning of the word' },
+    ['<C-Right>'] = { 'e', ' end of the word' },
+
     -- Don't copy the replaced text after pasting in visual mode
     -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
     ['p'] = { 'p:let @+=@0<CR>:let @"=@0<CR>', opts = { silent = true } },
@@ -89,6 +94,13 @@ M.tabufline = {
     -- cycle through buffers
     ["<leader>bN"] = { "<cmd> bnext <CR>", " goto next buffer" },
     ["<leader>bn"] = { "<cmd> bprevious <CR> ", " goto prev buffer" },
+    -- close buffer + hide terminal buffer
+    ['<leader>bx'] = {
+      function()
+        require('core.utils').close_buffer()
+      end,
+      ' close buffer',
+    },
 
 
     -- cycle through tabs
@@ -97,13 +109,6 @@ M.tabufline = {
     ['<leader>t<Right>'] = { '<cmd> BufferLineCycleNext <CR> ', ' goto prev tab' },
     ['<leader>t<S-Right>'] = { '<cmd> BufferLineMoveNext <CR>', ' move tab right' },
     ['<leader>t<S-Left>'] = { '<cmd> BufferLineMovePrev <CR>', ' move tab left' },
-    -- close buffer + hide terminal buffer
-    ['<leader>x'] = {
-      function()
-        require('core.utils').close_buffer()
-      end,
-      ' close buffer',
-    },
   },
 }
 
