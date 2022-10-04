@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 echo Removing old profile file
 rm "$HOME/.profile" || true
