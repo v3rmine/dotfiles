@@ -49,7 +49,9 @@ function sudo() {
     fullcmd="bash -c '$cmd; $1 ${*[*]:2}'"
   fi
 
-  printf "${bold}sudo${reset} ${red}%s %s${reset}\n" "$fullcmd" 
+  # Because linked in functions-utils.bash
+  # shellcheck disable=SC2154
+  printf "${c_bold}sudo${c_reset} ${c_red}%s %s${c_reset}\n" "$fullcmd" 
   if [[ "$cmd" == "rm" ]]; then
     REPLY=$(bash -c 'read -p "Are you sure? [y/n] " -n 1 -r; echo $REPLY')
     echo
@@ -182,6 +184,9 @@ alias ecw="emacsclient -t"
 alias ecc="emacsclient -c"
 alias eccw="emacsclient -c -t"
 
+# Nvim
+alias nv-purge-swap="rm ~/.local/share/nvim/swap/*"
+
 # git
 alias ga="git add"
 alias gc="git commit"
@@ -201,6 +206,19 @@ alias gd="git diff --minimal -B -M -C --color-moved=zebra"
 alias gsl="git stash list"
 alias gsa="git-stash-apply"
 alias gs="git stash"
+function git-nuke() {
+  root="$(git rev-parse --show-toplevel)"
+  # Because linked in functions-utils.bash
+  # shellcheck disable=SC2154
+  printf "${c_red}You are going to nuke your git working directory: ${c_bold}%s${c_reset}\n" "$root" 
+  REPLY=$(bash -c 'read -p "Are you sure? [y/n] " -n 1 -r; echo $REPLY')
+  echo
+  if [[ ! $REPLY =~ ^[Yy]$ ]]
+  then
+    return 1
+  fi
+  git reset --hard HEAD && git clean -fd
+}
 
 # --- Colored LESS E.G for man ---
 export LESS_TERMCAP_mb=$'\e[1;32m'
@@ -224,9 +242,22 @@ autoload -Uz add-zsh-hook
 add-zsh-hook precmd set-title-precmd
 add-zsh-hook preexec set-title-preexec
 
+# REVIEW: Clean completion cache
+rm ~/.zcompdump*;
+# Support bash completions
+autoload bashcompinit
+bashcompinit
+# ZSH Completions
+autoload -Uz compinit
+compinit
+
 # --- Tools sourcing ---
-if command -v broot >/dev/null; then
+if test_command broot -V; then
   source "$HOME/.config/broot/launcher/bash/br"
+fi
+
+if test_command zoxide -V; then
+  eval "$(zoxide init zsh)"
 fi
 
 # --- ASDF ---
@@ -243,14 +274,6 @@ if [ -f $set_java_home_file ]; then
   source $set_java_home_file
 fi
 
-# Support bash completions
-autoload bashcompinit
-bashcompinit
-
-# ZSH Completions
-autoload -Uz compinit
-compinit
-
 # --- Antigen ---
 ANTIGEN_PATH="$HOME/.local/antigen.zsh"
 if [ ! -f "$ANTIGEN_PATH" ]; then
@@ -259,7 +282,6 @@ fi
 source "$ANTIGEN_PATH"
 
 # plugins
-antigen bundle mfaerevaag/wd
 antigen bundle MichaelAquilina/zsh-you-should-use
 antigen bundle hlissner/zsh-autopair
 antigen bundle Aloxaf/fzf-tab
