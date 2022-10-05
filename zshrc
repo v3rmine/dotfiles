@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # shellcheck disable=SC1090,SC1091
 # NOTE: SC1090, SC1091 because we dont need to check linked shellscripts
 
@@ -27,42 +27,42 @@ source "$DOTFILES_PATH/install-scripts/functions-utils.bash"
 
 # --- Rebinds ---
 function vim() {
-  if command -v nvim >/dev/null; then 
+  if test_command nvim -v; then 
     nvim "$@" 
   else 
     vim "$@"
   fi
 }
 # upgrade
-function sudo() {
-  # NOTE: Use full path to support user utils
-  local cmd
-  cmd="$(which "$1")"
-  fullcmd="$cmd ${*[*]:2}"
-
-  if echo "$cmd" | grep -q "not found"; then
-    >&2 echo "Error command $1 not found"
-    return 1
-  fi
-
-  if echo "$cmd" | grep -Pq ".*?\s?\(\)\s?\{"; then
-    fullcmd="bash -c '$cmd; $1 ${*[*]:2}'"
-  fi
-
-  # Because linked in functions-utils.bash
-  # shellcheck disable=SC2154
-  printf "${c_bold}sudo${c_reset} ${c_red}%s %s${c_reset}\n" "$fullcmd" 
-  if [[ "$cmd" == "rm" ]]; then
-    REPLY=$(bash -c 'read -p "Are you sure? [y/n] " -n 1 -r; echo $REPLY')
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]
-    then
-      return 1
-    fi
-  fi
-
-  eval "/usr/bin/sudo $fullcmd"
-}
+# function sudo() {
+#   # NOTE: Use full path to support user utils
+#   local cmd
+#   cmd="$(which "$1")"
+#   fullcmd="$cmd ${@:2}"
+#
+#   if echo "$cmd" | grep -q "not found"; then
+#     >&2 echo "Error command $1 not found"
+#     return 1
+#   fi
+#
+#   if echo "$cmd" | grep -Pq ".*?\s?\(\)\s?\{"; then
+#     fullcmd="bash -c '$cmd; $1 ${@:2}'"
+#   fi
+#
+#   # Because linked in functions-utils.bash
+#   # shellcheck disable=SC2154
+#   printf "${c_bold}sudo${c_reset} ${c_red}%s %s${c_reset}\n" "$fullcmd" 
+#   if [[ "$cmd" == "rm" ]]; then
+#     REPLY=$(bash -c 'read -p "Are you sure? [y/n] " -n 1 -r; echo $REPLY')
+#     echo
+#     if [[ ! $REPLY =~ ^[Yy]$ ]]
+#     then
+#       return 1
+#     fi
+#   fi
+#
+#   eval "sudo $fullcmd"
+# }
 
 # shortcuts
 # shellcheck disable=SC2139 

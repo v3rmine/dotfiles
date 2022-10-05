@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/usr/bin/env bash
 xrandr --output HDMI-0 --same-as eDP-1-1

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # FZF or Skim
 if command sk -h >/dev/null 2>&1; then

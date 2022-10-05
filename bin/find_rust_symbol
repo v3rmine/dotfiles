@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 RUST_LIB_DIR=${RUST_LIB_DIR:-$(rustc --print target-libdir)}
 
 fd_shim() {

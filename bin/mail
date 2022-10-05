@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # shellcheck disable=2016
 # Port of https://raw.githubusercontent.com/callumacrae/dotfiles/master/zsh/mail.zsh
 # Last update: 2022-08-22
