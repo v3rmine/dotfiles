@@ -9,7 +9,7 @@ local M = {}
 M.general = {
   i = {
     -- go to  beginning and end
-    ['<C-b>'] = { '<ESC>^i', ' beginning of line' },
+    ['<C-b>'] = { '<Esc>^i', ' beginning of line' },
     ['<C-e>'] = { '<End>', ' end of line' },
 
     -- navigate within insert mode
@@ -19,12 +19,12 @@ M.general = {
     ['<C-k>'] = { '<Up>', ' move up' },
 
     -- Move
-    ['<C-Left>'] = { '<ESC>lbi', ' beginning of the word' },
-    ['<C-Right>'] = { '<ESC>ea', ' end of the word' },
+    ['<C-Left>'] = { '<Esc>lbi', ' beginning of the word' },
+    ['<C-Right>'] = { '<Esc>ea', ' end of the word' },
 
     -- Delete
-    ['<C-Backspace>'] = { '<C-w>', ' delete previous word' },
-    ['<C-Del>'] = { '<ESC>vedi', ' delete next word' },
+    ['<C-BS>'] = { '<C-w>', ' delete previous word' },
+    ['<C-Del>'] = { '<Esc>vedi', ' delete next word' },
   },
 
   n = {
@@ -32,7 +32,7 @@ M.general = {
     ['<C-Left>'] = { 'b', ' beginning of the word' },
     ['<C-Right>'] = { 'e', ' end of the word' },
 
-    ['<ESC>'] = { '<cmd> noh <CR>', ' no highlight' },
+    ['<Esc>'] = { '<cmd> noh <CR>', ' no highlight' },
 
     -- switch between windows
     ['<C-h>'] = { '<C-w>h', ' window left' },
@@ -119,7 +119,7 @@ M.comment = {
     ['<leader>/'] = { 'gcc', '蘒toggle comment' },
   },
   v = {
-    ['<leader>/'] = { "<ESC>gbc<CR>", '蘒toggle comment' },
+    ['<leader>/'] = { "<Esc>gbc<CR>", '蘒toggle comment' },
   },
 }
 

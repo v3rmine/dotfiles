@@ -112,7 +112,7 @@ local options = {
     { name = 'nvim_lsp_signatuer_help' },
     { name = 'nvim_lua', keyword_length = 2 },
     { name = 'buffer', keyword_length = 2 },
-    { name = 'luasnip', keyword_length = 2 },
+    -- { name = 'luasnip', keyword_length = 2 },
   },
 }
 
