@@ -22,6 +22,7 @@
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
     ~/.xbindkeyrc: xbindkeyrc
+    /etc/nixos/configuration.nix: config/nixos/configuration.nix
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
