@@ -7,7 +7,7 @@ source "$HOME/.profile"
 
 if [ ! -d "$HOME/.local" ]; then mkdir "$HOME/.local"; fi
 
-export TERM="xterm-256color"
+# export TERM="xterm-256color"
 export SHELL="zsh"
 
 # --- Cross platform management ---
@@ -187,6 +187,16 @@ alias eccw="emacsclient -c -t"
 # Nvim
 alias nv-purge-swap="rm ~/.local/share/nvim/swap/*"
 
+# Nix
+function nix-patch-bin() {
+  if [ ! -f "$1" ]; then
+    echo "Usage: nix-patch-bin <path to the binary>"
+    return 0
+  fi
+  patchelf --set-interpreter "/nix/var/nix/profiles/system/sw/lib/ld-linux-x86-64.so.2" "$1" 
+  patchelf --set-rpath "/nix/var/nix/profiles/system/sw/lib:$HOME/.nix-profile/lib:/lib:/usr/lib:/lib64:/usr/lib64" "$1"
+}
+
 # git
 alias ga="git add"
 alias gc="git commit"
@@ -243,7 +253,7 @@ add-zsh-hook precmd set-title-precmd
 add-zsh-hook preexec set-title-preexec
 
 # REVIEW: Clean completion cache
-rm ~/.zcompdump*;
+rm -f ~/.zcompdump* >/dev/null 2>&1
 # Support bash completions
 autoload bashcompinit
 bashcompinit
@@ -320,6 +330,8 @@ bindkey "^H" backward-delete-word
 bindkey "^[[A" history-substring-search-up
 # fish search down
 bindkey "^[[B" history-substring-search-down
+# search histoty
+bindkey '^R' history-incremental-search-backward
 
 # --- ZSH ---
 # Default: *?_-.[]~=/&;!#$%^(){}<>

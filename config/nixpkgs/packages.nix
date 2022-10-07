@@ -9,19 +9,24 @@ let
 in {
   home.packages = with pkgs; [
     firefox
-    kate
     thunderbird
     vscode
-    kitty
-    asdf-vm
-    nodejs
-    yarn
-    starship
+    # Rust
     rustup
+    # Node
+    # nodejs
+    # yarn
+    # Nix
+    nil
+    # Git
     lazygit
+    # Shell
+    starship
     httpie
+    kitty
     fzf
     shellcheck
+    # Communication
     slack
   ] ++ python3WithPackages;
 }

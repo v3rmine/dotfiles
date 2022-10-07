@@ -23,7 +23,7 @@ M.general = {
     ['<C-Right>'] = { '<Esc>ea', ' end of the word' },
 
     -- Delete
-    ['<C-BS>'] = { '<C-w>', ' delete previous word' },
+    ['<C-BS>'] = { '<C-W>', ' delete previous word' },
     ['<C-Del>'] = { '<Esc>vedi', ' delete next word' },
   },
 

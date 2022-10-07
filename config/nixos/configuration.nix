@@ -12,11 +12,14 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  boot.kernelPackages = pkgs.linuxPackages_5_15_hardened;
+  boot.kernelPackages = pkgs.linuxPackages_5_15;
   boot.extraModulePackages = with config.boot.kernelPackages; [
     rtl8821ce
     perf
   ];
+  # https://github.com/NixOS/nixpkgs/issues/97682#issuecomment-691295299
+  # boot.kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
+  # security.allowUserNamespaces = true;
 
   networking.hostName = "johan-nixos-simplx"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -125,7 +128,10 @@
     git
     bash
     zsh
+    plocate
+    file
     gcc
+    stdenv.bootstrapTools
     gnumake
     bintools-unwrapped
     man-pages
@@ -134,6 +140,7 @@
     unzip
     ripgrep
     xclip
+    tailscale
   ];
   environment.shells = with pkgs; [ zsh ];
 
@@ -156,6 +163,11 @@
 
   # Enable the gnome keyring (E.G for VSCode)
   services.gnome.gnome-keyring.enable = true;
+
+  # Enable the tailscale service
+  services.tailscale.enable = true;
+  # warning: Strict reverse path filtering breaks Tailscale exit node use and some subnet routing setups. Consider setting `networking.firewall.checkReversePath` = 'loose'
+  networking.firewall.checkReversePath = "loose"; 
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
