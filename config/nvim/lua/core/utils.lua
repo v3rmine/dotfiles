@@ -10,16 +10,8 @@ M.close_buffer = function(bufnr)
     print 'save the file bruh'
   else
     bufnr = bufnr or api.nvim_get_current_buf()
-    require('core.utils').tabuflinePrev()
     vim.cmd('bd' .. bufnr)
   end
-end
-
-M.load_config = function()
-  local config = require 'core.default_config'
-
-  config.mappings.disabled = nil
-  return config
 end
 
 M.load_mappings = function(mappings, mapping_opt)
@@ -41,7 +33,7 @@ M.load_mappings = function(mappings, mapping_opt)
     end
   end
 
-  mappings = mappings or vim.deepcopy(M.load_config().mappings)
+  mappings = mappings or {}
   mappings.lspconfig = nil
 
   for _, section in pairs(mappings) do
@@ -63,11 +55,6 @@ end
 
 -- merge default/user plugin tables
 M.merge_plugins = function(default_plugins)
-  local user_plugins = M.load_config().plugins.user
-
-  -- merge default + user plugin table
-  default_plugins = merge_tb('force', default_plugins, user_plugins)
-
   local final_table = {}
 
   for key, _ in pairs(default_plugins) do
@@ -76,63 +63,6 @@ M.merge_plugins = function(default_plugins)
   end
 
   return final_table
-end
-
-M.load_override = function(default_table, plugin_name)
-  local user_table = M.load_config().plugins.override[plugin_name] or {}
-  user_table = type(user_table) == 'table' and user_table or user_table()
-  return merge_tb('force', default_table, user_table)
-end
-
-M.bufilter = function()
-  local bufs = vim.t.bufs
-
-  for i = #bufs, 1, -1 do
-    if not vim.api.nvim_buf_is_valid(bufs[i]) then
-      table.remove(bufs, i)
-    end
-  end
-
-  return bufs
-end
-
-M.tabuflineNext = function()
-  local bufs = M.bufilter() or {}
-
-  for i, v in ipairs(bufs) do
-    if api.nvim_get_current_buf() == v then
-      vim.cmd(i == #bufs and 'b' .. bufs[1] or 'b' .. bufs[i + 1])
-      break
-    end
-  end
-end
-
-M.tabuflinePrev = function()
-  local bufs = M.bufilter() or {}
-
-  for i, v in ipairs(bufs) do
-    if api.nvim_get_current_buf() == v then
-      vim.cmd(i == 1 and 'b' .. bufs[#bufs] or 'b' .. bufs[i - 1])
-      break
-    end
-  end
-end
-
--- closes tab + all of its buffers
-M.closeAllBufs = function(action)
-  local bufs = vim.t.bufs
-
-  if action == 'closeTab' then
-    vim.cmd 'tabclose'
-  end
-
-  for _, buf in ipairs(bufs) do
-    M.close_buffer(buf)
-  end
-
-  if action ~= 'closeTab' then
-    vim.cmd 'enew'
-  end
 end
 
 return M

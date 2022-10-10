@@ -1,10 +1,9 @@
 local opt = vim.opt
 local g = vim.g
-local config = require('core.utils').load_config()
 
 g.vim_version = vim.version().minor
 g.toggle_theme_icon = '   '
-g.transparency = config.ui.transparency
+g.transparency = false
 g.theme_switcher_loaded = false
 
 -- use filetype.lua instead of filetype.vim. it's enabled by default in neovim 0.8 (nightly)
@@ -57,6 +56,9 @@ opt.whichwrap:append '<>[]hl'
 -- entered after last starting insert mode, and stops deleting
 -- text at the beginning of a line.
 opt.backspace = "indent,eol,start"
+
+--- Disable automatic folding
+opt.foldenable = false
 
 g.mapleader = ' '
 

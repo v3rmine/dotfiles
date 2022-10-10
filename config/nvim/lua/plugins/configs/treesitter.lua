@@ -34,8 +34,6 @@ M.setup_treesitter = function()
     }
   }
 
-  -- check for any override
-  options = require('core.utils').load_override(options, 'nvim-treesitter/nvim-treesitter')
   vim.wo.foldmethod = 'expr'
   vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 
@@ -52,8 +50,6 @@ M.setup_treesitter_context = function()
   local options = {
     enable = true,
   }
-
-  options = require('core.utils').load_override(options, 'nvim-treesitter/nvim-treesitter-context')
 
   treesitter_context.setup(options)
 end

@@ -2,8 +2,7 @@ local plugins = {
   -- Libs
   ['nvim-lua/plenary.nvim'] = { module = 'plenary' },
   ['wbthomason/packer.nvim'] = {},
-  -- ["NvChad/extensions"] = { module = { "telescope" } },
-  ['rktjmp/lush.nvim'] = {},
+  -- ['rktjmp/lush.nvim'] = {},
   ['RishabhRD/popfix'] = { module = 'popfix' },
 
   -- Ui
@@ -22,19 +21,6 @@ local plugins = {
     wants = 'folke/tokyonight.nvim',
     config = function()
       require 'plugins.configs.lualine'
-    end,
-  },
-
-  ['akinsho/bufferline.nvim'] = {
-    wants = 'nvim-web-devicons',
-    tag = 'v2.*',
-    event = 'InsertEnter',
-    config = function()
-      require('bufferline').setup({
-        options = {
-          diagnostics = 'nvim_lsp',
-        },
-      })
     end,
   },
 
@@ -269,7 +255,6 @@ local plugins = {
 
   -- file managing , picker etc
   ['kyazdani42/nvim-tree.lua'] = {
-    ft = 'alpha',
     cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
     config = function()
       require 'plugins.configs.nvimtree'

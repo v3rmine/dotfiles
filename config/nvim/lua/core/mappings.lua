@@ -101,14 +101,6 @@ M.tabufline = {
       end,
       ' close buffer',
     },
-
-
-    -- cycle through tabs
-    ['<leader>t'] = '- tabs management',
-    ['<leader>t<Left>'] = { '<cmd> BufferLineCyclePrev <CR>', ' goto next tab' },
-    ['<leader>t<Right>'] = { '<cmd> BufferLineCycleNext <CR> ', ' goto prev tab' },
-    ['<leader>t<S-Right>'] = { '<cmd> BufferLineMoveNext <CR>', ' move tab right' },
-    ['<leader>t<S-Left>'] = { '<cmd> BufferLineMovePrev <CR>', ' move tab left' },
   },
 }
 
