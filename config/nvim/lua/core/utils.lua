@@ -33,8 +33,8 @@ M.load_mappings = function(mappings, mapping_opt)
     end
   end
 
-  mappings = mappings or {}
-  mappings.lspconfig = nil
+  mappings = mappings or vim.deepcopy(require('core.mappings'))
+  -- mappings.lspconfig = nil
 
   for _, section in pairs(mappings) do
     for mode, mode_values in pairs(section) do

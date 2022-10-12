@@ -99,15 +99,36 @@ M.null_ls = function()
   local present, null_ls = pcall(require, 'null-ls')
 
   if present then
+    local fmt = null_ls.builtins.formatting
+    local dgn = null_ls.builtins.diagnostics
+    local cda = null_ls.builtins.code_actions
     null_ls.setup {
       sources = {
-        -- null_ls.builtins.diagnostics.eslint_d,
-        -- null_ls.builtins.code_actions.eslint_d,
-        -- null_ls.builtins.formatting.eslint_d,
-        null_ls.builtins.diagnostics.shellcheck,
-        null_ls.builtins.code_actions.shellcheck,
-        null_ls.builtins.diagnostics.selene,
-        null_ls.builtins.formatting.stylua,
+        -- -- --
+        -- Formatting
+        -- -- --
+        fmt.trim_whitespace.with({
+          filetypes = { 'text', 'zsh', 'toml', 'make', 'lua' },
+        }),
+        fmt.prettierd,
+        fmt.eslint_d,
+        fmt.rustfmt,
+        fmt.stylua,
+        fmt.zigfmt,
+        -- -- --
+        -- Code Actions
+        -- -- --
+        cda.eslint_d,
+        cda.shellcheck,
+        -- -- --
+        -- Diagnostics
+        -- -- --
+        dgn.eslint_d,
+        dgn.shellcheck,
+        dgn.selene,
+        dgn.luacheck.with({
+          extra_args = { '--globals', 'vim', '--std', 'luajit' },
+        }),
       },
     }
   end

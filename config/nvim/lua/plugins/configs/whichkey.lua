@@ -35,8 +35,4 @@ local options = {
   },
 }
 
-local utils = require('core.utils')
-local mapping_groups = { groups = {} }
-utils.load_mappings(mapping_groups)
-
 wk.setup(options)

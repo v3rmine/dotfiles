@@ -86,14 +86,16 @@ M.general = {
   },
 }
 
-M.tabufline = {
+M.buffers = {
   n = {
     ['<leader>b'] = '- buffer management',
     -- new buffer
     ['<leader>bo'] = { '<cmd> enew <CR>', '烙new buffer' },
     -- cycle through buffers
     ["<leader>bN"] = { "<cmd> bnext <CR>", " goto next buffer" },
+    ["<leader>b<Left>"] = { "<cmd> bnext <CR>", " goto next buffer" },
     ["<leader>bn"] = { "<cmd> bprevious <CR> ", " goto prev buffer" },
+    ["<leader>b<Right>"] = { "<cmd> bprevious <CR> ", " goto prev buffer" },
     -- close buffer + hide terminal buffer
     ['<leader>bx'] = {
       function()
@@ -320,7 +322,5 @@ M.helpers = {
     },
   },
 }
-
-
 
 return M
