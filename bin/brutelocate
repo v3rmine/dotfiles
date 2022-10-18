@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+fd --type file --type symlink --follow --unrestricted --glob "$1" "${2:-/}"

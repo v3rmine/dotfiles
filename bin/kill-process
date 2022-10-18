@@ -1,0 +1,7 @@
+#!/bin/env sh
+pid=$(ps -ef | sed 1d | eval "sk ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
+
+if [ "x$pid" != "x" ]; then
+	echo "$pid" | xargs kill "-${1:-9}"
+	kp "$@"
+fi

@@ -5,6 +5,7 @@ let
     pip
     setuptools
     pynvim
+    # lief
   ];
 in {
   home.packages = with pkgs; [

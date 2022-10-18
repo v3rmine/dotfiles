@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+dir=$1
+if [ -d "$dir" ]; then
+  mkdir "bak.$dir"
+  find "$dir" -type f -name '*.jpg' -exec sh -c 'cp -p $1 "bak.$2"/$(basename $1) && magick $1 -compress jpeg -quality 82 $1' -- {} "$dir" \;
+  find "$dir" -type f -name '*.png' -exec sh -c 'cp -p $1 "bak.$2"/$(basename $1) && magick $1 -depth 24 -define png:compression-filter=2 -define png:compression--level=9 -define png:compression-strategy=1 $1' -- {} "$dir" \;
+  tar -czf "backup-$dir.tgz" "bak.$dir"
+  rm -rf "bak.$dir"
+else
+  echo "$dir is not a directory"
+fi

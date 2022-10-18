@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+# shellcheck disable=SC1083,SC2182
+  sk --ansi --header='[ripfind:print]' \
+    --cmd 'rg --column --line-number --no-heading --color=always .' \
+    --delimiter ':' --nth '4..' \
+    --preview "$(printf \"bat -f -H {2} --pager='less +%s -RF'\" {1})" | cut -d: -f1-3

@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+if [ ! -f "$1" ] || [ -z "$2" ]; then
+	echo "Usage: nix-add-needed-bin <path to the binary> <lib required>"
+	return 0
+fi
+
+patchelf --add-needed "$2" "$1"

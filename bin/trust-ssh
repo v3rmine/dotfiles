@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+ssh -o UserKnownHostsFile=/dev/null -T "$1" /bin/sh -i

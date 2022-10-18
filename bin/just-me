@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+resp=$(
+	curl -sL --fail \
+		"https://api-prod.downfor.cloud/httpcheck/$1" \
+		--user-agent 'Mozilla/5.0'
+)
+# shellcheck disable=SC2181
+if [ "$?" -ne 0 ]; then
+	echo "Meeeh your shitty internet seems down (curl failed)"
+	return 1
+fi
+
+if echo "$resp" | grep '"isDown":true' > /dev/null; then
+	echo "It's not just you $1 is dead for everyone!"
+else
+	echo "It's just you and your shitty computer $1 is up"
+fi

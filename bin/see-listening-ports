@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+if command lsof >/dev/null 2>&1; then
+    lsof -i -P -n | grep LISTEN
+elif command ss >/dev/null 2>&1; then
+    ss -lntup
+else
+    echo "No port command found please add it to me!"
+fi

@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+git branch --set-upstream-to="origin/$(git branch | grep '^\*' | sed -E 's/( |\*)//g')" "$(git branch | grep '^\*' | sed -E 's/( |\*)//g')"

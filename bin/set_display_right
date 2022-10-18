@@ -1,2 +1,3 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
+# TODO: Need cross device
 xrandr --output eDP-1-1 --auto --pos 0x0 --output HDMI-0 --auto --pos 1920x-1080

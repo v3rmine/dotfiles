@@ -66,63 +66,7 @@ function vim() {
 
 # shortcuts
 # shellcheck disable=SC2139 
-alias findfile="$HOME/.cargo/bin/fd"
-# shellcheck disable=SC2139 
 alias sz="source $HOME/.zshrc"
-function trust-ssh() { ssh -o UserKnownHostsFile=/dev/null -T "$1" /bin/bash -i; }
-function brutelocate() { "$HOME/.cargo/bin/fd" --type file --type symlink --follow --unrestricted --glob "$1" "${2:-/}" }
-
-function just-me() {
-  resp=$(
-    curl -sL --fail \
-      "https://api-prod.downfor.cloud/httpcheck/$1" \
-      --user-agent 'Mozilla/5.0'
-  )
-  # shellcheck disable=SC2181
-  if [ "$?" -ne 0 ]; then
-    echo "Meeeh your shitty internet seems down (curl failed)"
-    return 1
-  fi
-
-  if echo "$resp" | grep '"isDown":true' > /dev/null; then
-    echo "It's not just you $1 is dead for everyone!"
-  else
-    echo "It's just you and your shitty computer $1 is up"
-  fi
-}
-
-function fdp() {
-  fd --color 'always' | sk --ansi --header='[find:print]' --preview 'bat --color "always" {}'
-}
-
-function rdp() {
-  # shellcheck disable=SC1083,SC2182
-  sk --ansi --header='[ripfind:print]' \
-    --cmd 'rg --column --line-number --no-heading --color=always .' \
-    --delimiter ':' --nth '4..' \
-    --preview "$(printf \"bat -f -H {2} --pager='less +%s -RF'\" {1})" | cut -d: -f1-3
-}
-
-function fp() {
-  local loc
-  loc=$(echo "$PATH" | sed -e $'s/:/\\\n/g' | eval "sk ${FZF_DEFAULT_OPTS} --header='[find:path]'")
-
-  if [[ -d $loc ]]; then
-    # shellcheck disable=SC2005
-    echo "$(rg --files "$loc" | rev | cut -d"/" -f1 | rev)" | eval "sk ${FZF_DEFAULT_OPTS} --header='[find:exe] => ${loc}' >/dev/null"
-    fp
-  fi
-}
-
-function kp() {
-  local pid
-  pid=$(ps -ef | sed 1d | eval "sk ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
-
-  if [ "x$pid" != "x" ]; then
-    echo "$pid" | xargs kill "-${1:-9}"
-    kp "$@"
-  fi
-}
 
 # TODO: do not work
 function fgl() {
@@ -161,13 +105,6 @@ function new-patch() {
   echo "$patch_folder/$patch_number-$(echo "$patch_name" | sed 's/ /-/g').patch"
 }
 
-function sha256sum-dir() {
-  find "$1" -type f -print0 \
-    | sort -z \
-    | xargs -0 sha256sum \
-    | sha256sum
-}
-
 # CPE
 function gccpe() { gcc "$1" -o "$2" -Wall -Wextra -g; }
 
@@ -188,26 +125,6 @@ alias eccw="emacsclient -c -t"
 # Nvim
 alias nv-purge-swap="rm ~/.local/share/nvim/swap/*"
 
-# Nix
-function nix-patch-bin() {
-  if [ ! -f "$1" ]; then
-    echo "Usage: nix-patch-bin <path to the binary> [<extended rpath>]"
-    return 0
-  fi
-  extended_rpath="$(if [ -z "$2" ]; then echo ""; else echo "$2:"; fi)"
-
-  patchelf --set-interpreter "/nix/var/nix/profiles/system/sw/lib/ld-linux-x86-64.so.2" "$1" 
-  patchelf --set-rpath "${extended_rpath}/nix/var/nix/profiles/system/sw/lib:$HOME/.nix-profile/lib:/lib:/usr/lib:/lib64:/usr/lib64" "$1"
-}
-function nix-add-needed-bin() {
-  if [ ! -f "$1" ] || [ -z "$2" ]; then
-    echo "Usage: nix-patch-bin <path to the binary> <lib required>"
-    return 0
-  fi
-
-  patchelf --add-needed "$2" "$1"
-}
-
 # git
 alias ga="git add"
 alias gc="git commit"
@@ -218,8 +135,8 @@ alias gm="git merge"
 alias gb="git branch"
 alias gf="git fetch"
 alias gp="git pull"
-function gPu () { git push -u origin "$(git branch | grep '^\*' | sed -E 's/( |\*)//g')"; }
-function gBu () { git branch --set-upstream-to="origin/$(git branch | grep '^\*' | sed -E 's/( |\*)//g')" "$(git branch | grep '^\*' | sed -E 's/( |\*)//g')"; }
+alias gPu="git-push-upstream"
+alias gBu="git-branch-set-upstream"
 alias gst="git status"
 alias gsh="git show"
 alias gl="git log"
@@ -227,19 +144,6 @@ alias gd="git diff --minimal -B -M -C --color-moved=zebra"
 alias gsl="git stash list"
 alias gsa="git-stash-apply"
 alias gs="git stash"
-function git-nuke() {
-  root="$(git rev-parse --show-toplevel)"
-  # Because linked in functions-utils.bash
-  # shellcheck disable=SC2154
-  printf "${c_red}You are going to nuke your git working directory: ${c_bold}%s${c_reset}\n" "$root" 
-  REPLY=$(bash -c 'read -p "Are you sure? [y/n] " -n 1 -r; echo $REPLY')
-  echo
-  if [[ ! $REPLY =~ ^[Yy]$ ]]
-  then
-    return 1
-  fi
-  git reset --hard HEAD && git clean -fd
-}
 
 # --- Colored LESS E.G for man ---
 export LESS_TERMCAP_mb=$'\e[1;32m'

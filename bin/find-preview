@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+fd --color 'always' | sk --ansi --header='[find:print]' --preview 'bat --color "always" {}'
