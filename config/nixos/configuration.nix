@@ -30,6 +30,9 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  # HACK: https://github.com/NixOS/nixpkgs/issues/180175
+  systemd.services.NetworkManager-wait-online.enable = false;
+  networking.networkmanager.unmanaged = [ "interface-name:tailscale*" ];
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -130,7 +133,7 @@
     zsh
     plocate
     file
-    gcc
+    gcc-unwrapped
     stdenv.bootstrapTools
     gnumake
     bintools-unwrapped
@@ -160,6 +163,9 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+
+  # Enable docker daemon
+  virtualisation.docker.enable = true;
 
   # Enable the gnome keyring (E.G for VSCode)
   services.gnome.gnome-keyring.enable = true;

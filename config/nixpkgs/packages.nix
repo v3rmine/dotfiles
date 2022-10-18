@@ -11,6 +11,7 @@ in {
     firefox
     thunderbird
     vscode
+    dbeaver
     # Rust
     rustup
     # Node
