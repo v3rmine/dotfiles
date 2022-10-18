@@ -70,6 +70,7 @@ alias findfile="$HOME/.cargo/bin/fd"
 # shellcheck disable=SC2139 
 alias sz="source $HOME/.zshrc"
 function trust-ssh() { ssh -o UserKnownHostsFile=/dev/null -T "$1" /bin/bash -i; }
+function brutelocate() { "$HOME/.cargo/bin/fd" --type file --type symlink --follow --unrestricted --glob "$1" "${2:-/}" }
 
 function just-me() {
   resp=$(
@@ -190,11 +191,21 @@ alias nv-purge-swap="rm ~/.local/share/nvim/swap/*"
 # Nix
 function nix-patch-bin() {
   if [ ! -f "$1" ]; then
-    echo "Usage: nix-patch-bin <path to the binary>"
+    echo "Usage: nix-patch-bin <path to the binary> [<extended rpath>]"
     return 0
   fi
+  extended_rpath="$(if [ -z "$2" ]; then echo ""; else echo "$2:"; fi)"
+
   patchelf --set-interpreter "/nix/var/nix/profiles/system/sw/lib/ld-linux-x86-64.so.2" "$1" 
-  patchelf --set-rpath "/nix/var/nix/profiles/system/sw/lib:$HOME/.nix-profile/lib:/lib:/usr/lib:/lib64:/usr/lib64" "$1"
+  patchelf --set-rpath "${extended_rpath}/nix/var/nix/profiles/system/sw/lib:$HOME/.nix-profile/lib:/lib:/usr/lib:/lib64:/usr/lib64" "$1"
+}
+function nix-add-needed-bin() {
+  if [ ! -f "$1" ] || [ -z "$2" ]; then
+    echo "Usage: nix-patch-bin <path to the binary> <lib required>"
+    return 0
+  fi
+
+  patchelf --add-needed "$2" "$1"
 }
 
 # git
