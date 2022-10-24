@@ -134,11 +134,13 @@
     plocate
     file
     gcc-unwrapped
+    clang
     stdenv.bootstrapTools
     gnumake
     bintools-unwrapped
     man-pages
     openssl
+    pkg-config-unwrapped
     jq
     unzip
     ripgrep
@@ -146,6 +148,9 @@
     tailscale
   ];
   environment.shells = with pkgs; [ zsh ];
+  environment.sessionVariables = {
+    PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";   
+  };
 
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
