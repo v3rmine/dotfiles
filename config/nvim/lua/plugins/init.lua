@@ -61,16 +61,17 @@ local plugins = {
       vim.ui.input = require('popui.input-overrider')
     end,
   },
-  ['folke/noice.nvim'] = {
-    requires = {
-      -- if you lazy-load any plugin below, make sure to add proper `module='...'` entries
-      'MunifTanjim/nui.nvim',
-      'rcarriga/nvim-notify',
-    },
-    config = function()
-      require('noice').setup()
-    end,
-  },
+  -- REVIEW: Break lualine
+  -- ['folke/noice.nvim'] = {
+  --   requires = {
+  --     -- if you lazy-load any plugin below, make sure to add proper `module='...'` entries
+  --     'MunifTanjim/nui.nvim',
+  --     'rcarriga/nvim-notify',
+  --   },
+  --   config = function()
+  --     require('noice').setup()
+  --   end,
+  -- },
   ['numToStr/FTerm.nvim'] = { event = 'CursorHold' },
   -- -- --
   -- Treesitter
@@ -93,7 +94,7 @@ local plugins = {
   ['windwp/nvim-ts-autotag'] = { after = 'nvim-treesitter' },
   ['JoosepAlviste/nvim-ts-context-commentstring'] = { after = 'nvim-treesitter' },
   -- -- --
-  -- Syntax Highlighting 
+  -- Syntax Highlighting
   -- -- --
   ['norcalli/nvim-colorizer.lua'] = {
     event = 'CursorHold',
@@ -108,7 +109,7 @@ local plugins = {
     end,
   },
   -- -- --
-  -- Git niceties 
+  -- Git niceties
   -- -- --
   ['lewis6991/gitsigns.nvim'] = {
     ft = 'gitcommit',
@@ -124,7 +125,7 @@ local plugins = {
   --   end,
   -- },
   -- -- --
-  -- Completions 
+  -- Completions
   -- -- --
   ['hrsh7th/nvim-cmp'] = {
     module = 'cmp',
@@ -174,9 +175,13 @@ local plugins = {
     event = 'BufRead',
     config = function()
       local lspconfig = require('plugins.configs.lspconfig')
-      if vim.bo.filetype == 'javascript' or vim.bo.filetype == 'javascriptreact' or vim.bo.filetype == 'javascript.jsx' then
+      if
+        vim.bo.filetype == 'javascript'
+        or vim.bo.filetype == 'javascriptreact'
+        or vim.bo.filetype == 'javascript.jsx'
+      then
         -- NOTE: If typescript we load tsserver using jose-elias-alvarez/typescript.nvim
-        -- TODO: Need to refactor typescript / javascript lsp loading 
+        -- TODO: Need to refactor typescript / javascript lsp loading
         lspconfig.setup_tsserver()
       end
     end,
@@ -308,6 +313,7 @@ local plugins = {
     after = 'telescope.nvim',
     run = 'make',
     config = function()
+      ---@diagnostic disable-next-line: different-requires
       require('telescope').load_extension('fzf')
     end,
   },

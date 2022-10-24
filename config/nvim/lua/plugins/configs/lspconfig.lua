@@ -58,7 +58,7 @@ M.capabilities = vim.lsp.protocol.make_client_capabilities()
 local cmp_present, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 
 if cmp_present then
-  M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
+  M.capabilities = cmp_nvim_lsp.default_capabilities()
 end
 
 lspconfig.sumneko_lua.setup {
