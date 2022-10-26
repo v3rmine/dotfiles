@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+if [ -z "$1" ]; then
+  echo "Usage: git nrebase <distance from HEAD>"
+  exit 0
+fi
+
+git rebase -i "$(git log --oneline --no-merges -n"$1" | tail -n1 | cut -d' ' -f1)"

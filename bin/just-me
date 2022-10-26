@@ -7,7 +7,7 @@ resp=$(
 # shellcheck disable=SC2181
 if [ "$?" -ne 0 ]; then
 	echo "Meeeh your shitty internet seems down (curl failed)"
-	return 1
+	exit 1
 fi
 
 if echo "$resp" | grep '"isDown":true' > /dev/null; then

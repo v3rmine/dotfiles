@@ -8,28 +8,29 @@ M.setup_treesitter = function()
   end
 
   local options = {
-    ensure_installed = {
-      'lua',
-      'javascript',
-      'typescript',
-      'tsx',
-      'rust',
-      'toml'
-    },
-    auto_install = true,
+    enabled = false,
+    -- ensure_installed = {
+    --   'lua',
+    --   'javascript',
+    --   'typescript',
+    --   'tsx',
+    --   'rust',
+    --   'toml'
+    -- },
+    auto_install = false,
     highlight = {
-      enable = true,
+      enable = false,
       use_languagetree = true,
       additional_vim_regex_highlighting = false,
     },
-    ident = { enable = true },
+    ident = { enable = false },
     rainbow = {
-      enable = true,
+      enable = false,
       extended_mode = true,
       max_file_lines = nil,
     },
     textobjects = {
-      enable = true,
+      enable = false,
       lookahead = true,
     }
   }

@@ -6,6 +6,7 @@ let
     setuptools
     pynvim
     # lief
+    ipykernel
   ];
 in {
   home.packages = with pkgs; [
