@@ -138,7 +138,7 @@
     zsh
     plocate
     file
-    gcc-unwrapped
+    gcc
     clang
     stdenv.bootstrapTools
     gnumake

@@ -5,6 +5,8 @@ let
     setuptools
     pynvim
     # lief
+    jupyter
+    ipython
     ipykernel
   ]);
   python3WithPackages = pkgs.python3.withPackages pythonPackages;
@@ -16,6 +18,8 @@ in {
     dbeaver
     # Rust
     rustup
+    # Python
+    python3WithPackages
     # Node
     # nodejs
     # yarn
