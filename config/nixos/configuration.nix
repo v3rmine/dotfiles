@@ -12,7 +12,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  boot.kernelPackages = pkgs.linuxPackages_5_15;
+  # boot.kernelPackages = pkgs.linuxPackages_5_15;
   # boot.extraModulePackages = with config.boot.kernelPackages; [
   #   rtl8821ce
   #   perf
@@ -151,6 +151,8 @@
     ripgrep
     xclip
     tailscale
+    google-chrome
+    via
   ];
   environment.shells = with pkgs; [ zsh ];
   environment.sessionVariables = {
@@ -172,7 +174,10 @@
   # List services that you want to enable:
 
   services.ratbagd.enable = true;
-  services.blueman.enable = false;
+  services.blueman.enable = true;
+
+  # Enable via device detection
+  services.udev.packages = [ pkgs.via ];
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;

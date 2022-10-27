@@ -1,10 +1,34 @@
 { pkgs, ... }:
 let
+  buildPythonPackage = pkgs.python3Packages.buildPythonPackage;
+  fetchPypi = pkgs.python3Packages.fetchPypi;
+  instaloader = buildPythonPackage rec {
+    pname = "instaloader";
+    version = "4.9.5";
+    format = "wheel";
+    src = fetchPypi rec {
+      inherit pname version format;
+      sha256 = "";
+      dist = python;
+      python = "py3";
+    };
+  };
+  ov_lief = buildPythonPackage rec {
+    pname = "lief";
+    version = "0.12.2";
+    format = "wheel";
+    src = fetchPypi rec {
+      inherit pname version format;
+      sha256 = "";
+      dist = python;
+      python = "py3";
+    };
+  };
   pythonPackages = python-packages: (with python-packages; [
     pip
     setuptools
+    wheel
     pynvim
-    # lief
     jupyter
     ipython
     ipykernel
