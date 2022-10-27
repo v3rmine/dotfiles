@@ -13,10 +13,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.kernelPackages = pkgs.linuxPackages_5_15;
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    rtl8821ce
-    perf
-  ];
+  # boot.extraModulePackages = with config.boot.kernelPackages; [
+  #   rtl8821ce
+  #   perf
+  # ];
   # https://github.com/NixOS/nixpkgs/issues/97682#issuecomment-691295299
   # boot.kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
   # security.allowUserNamespaces = true;
@@ -95,6 +95,10 @@
   # Enable bluetooth
   hardware.bluetooth.enable = true;
 
+  # Enable logitech receiver
+  hardware.logitech.wireless.enable = true;
+  hardware.logitech.wireless.enableGraphical = true;
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -118,6 +122,7 @@
       plasma5Packages.qtstyleplugin-kvantum
       sweet
       home-manager
+      piper
     ];
   };
 
@@ -166,8 +171,19 @@
 
   # List services that you want to enable:
 
+  services.ratbagd.enable = true;
+  services.blueman.enable = false;
+
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+
+  # Cron jobs
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "*/5 * * * *    johan    /home/johan/sysmet-update --db /home/johan/sysmet.db"
+    ];
+  };
 
   # Enable docker daemon
   virtualisation.docker.enable = true;

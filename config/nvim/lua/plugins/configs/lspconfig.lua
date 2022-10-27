@@ -123,7 +123,8 @@ local standard_servers = {
   'zls', -- Zig
   'phpactor', -- PHP
   'clangd', -- C / C++
-  'nil_ls', -- Nix
+  -- 'nil_ls', -- Nix unofficial
+  'rnix', -- Nix official
   'html', -- HTML,
   'cssls', -- CSS,
   'jsonls', -- JSON,
