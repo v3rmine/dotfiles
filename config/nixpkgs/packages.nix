@@ -42,6 +42,7 @@ in {
     dbeaver
     # Rust
     rustup
+    mold
     # Python
     python3WithPackages
     # Node
@@ -65,6 +66,8 @@ in {
     shellcheck
     # Communication
     slack
+    # Notes
+    obsidian
   ]);
   
   #nixpkgs.overlays = [

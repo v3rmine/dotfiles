@@ -153,6 +153,7 @@
     tailscale
     google-chrome
     via
+    syncthing
   ];
   environment.shells = with pkgs; [ zsh ];
   environment.sessionVariables = {
@@ -200,6 +201,14 @@
   services.tailscale.enable = true;
   # warning: Strict reverse path filtering breaks Tailscale exit node use and some subnet routing setups. Consider setting `networking.firewall.checkReversePath` = 'loose'
   networking.firewall.checkReversePath = "loose"; 
+
+  # Enable syncthing
+  services.syncthing = {
+    enable = true;
+    user = "johan";
+    dataDir = "/home/johan/Documents";
+    configDir = "/home/johan/Documents/.syncthing";
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
