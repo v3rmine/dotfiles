@@ -115,7 +115,7 @@
   users.users.johan = {
     isNormalUser = true;
     description = "johan";
-    shell = pkgs.zsh;
+    shell = pkgs.nushell;
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       gnome.gnome-keyring
@@ -136,6 +136,7 @@
     git
     bash
     zsh
+    nushell
     plocate
     file
     gcc

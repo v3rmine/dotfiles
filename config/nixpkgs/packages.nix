@@ -48,8 +48,6 @@ in {
     # Node
     # nodejs
     # yarn
-    # Python
-    python3WithPackages
     # Lua
     selene
     luaPackages.luacheck
@@ -68,6 +66,8 @@ in {
     slack
     # Notes
     obsidian
+    # Keyboard
+    qmk
   ]);
   
   #nixpkgs.overlays = [
