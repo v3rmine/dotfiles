@@ -1,0 +1,11 @@
+#!/bin/bash
+if [ -z "$1" ]; then
+  echo "Usage: cat <file> | line-context <line number> <offset>"
+fi
+
+if [ -z "$2" ]; then
+  offset=5
+else
+  offset=$2
+fi
+awk "NR>$(($1 - offset))&&NR<$(($1 + offset))"

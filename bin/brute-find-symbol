@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+fd_shim() {
+	command=$1
+  dir=$2
+  glob=$3
+
+	if command -v fd >/dev/null; then
+		# shellcheck disable=SC2086
+		fd -I --full-path --type file --glob "**/$glob" "$dir" --exec bash -c "${command}" ";"
+	else
+		# shellcheck disable=SC2086
+		find "$dir" -t f -name "$glob" -exec stdbuf -o0 bash -c "stdbuf -o0 ${command}" ";"
+	fi
+}
+if [ $# -eq 3 ]; then
+	fd_shim "nm --quiet --defined-only --print-file-name {} | grep '$3'" "$2" "$1"
+else
+	echo "Usage: $0 <file glob> <search dir> <symbol>"
+fi

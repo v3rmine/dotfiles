@@ -130,6 +130,7 @@ local standard_servers = {
   'jsonls', -- JSON,
   'yamlls', -- YAML
   'bashls', -- Bash
+  'pylsp', -- Python
 }
 
 for _, server in ipairs(standard_servers) do

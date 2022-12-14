@@ -7,7 +7,8 @@ source "$HOME/.profile"
 
 if [ ! -d "$HOME/.local" ]; then mkdir "$HOME/.local"; fi
 
-# export TERM="xterm-256color"
+# Compat
+export TERM="xterm-kitty"
 export SHELL="zsh"
 
 # --- Cross platform management ---
@@ -104,6 +105,9 @@ function new-patch() {
   # shellcheck disable=SC2001
   echo "$patch_folder/$patch_number-$(echo "$patch_name" | sed 's/ /-/g').patch"
 }
+
+# SSH fix
+alias ssh="env TERM='xterm-256color' ssh"
 
 # CPE
 function gccpe() { gcc "$1" -o "$2" -Wall -Wextra -g; }
