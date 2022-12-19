@@ -148,6 +148,10 @@ local plugins = {
   ['hrsh7th/cmp-nvim-lsp-signature-help'] = { after = 'cmp-nvim-lsp' },
   ['hrsh7th/cmp-buffer'] = { after = 'cmp-nvim-lsp' },
   ['hrsh7th/cmp-path'] = { after = 'nvim-cmp' },
+  ['PaterJason/cmp-conjure'] = {
+    wants = 'conjure',
+    after = 'nvim-cmp',
+  },
   -- ['github/copilot.vim'] = {
   --   after = 'nvim-cmp',
   -- },
@@ -325,7 +329,19 @@ local plugins = {
     ft = { 'nim' },
   },
   ['LnL7/vim-nix'] = {
-    ft = { 'nix' }
+    ft = { 'nix' },
+  },
+  ['rktjmp/hotpot.nvim'] = {
+    ft = { 'fennel' },
+    config = function()
+      require('hotpot').setup({
+        provide_require_fennel = false,
+        enable_hotpot_diagnostics = true,
+      })
+    end,
+  },
+  ['Olical/conjure'] = {
+    ft = { 'fennel' },
   },
   -- -- --
   -- Whichkey

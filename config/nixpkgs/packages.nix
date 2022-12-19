@@ -51,9 +51,14 @@ in {
     # Lua
     selene
     luaPackages.luacheck
+    luaPackages.readline
     # Nix
     nil
     rnix-lsp
+    # Fennel lang
+    fennel
+    fnlfmt
+    luaPackages.fennel
     # Git
     lazygit
     # Shell

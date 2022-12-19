@@ -8,7 +8,7 @@ M.setup_treesitter = function()
   end
 
   local options = {
-    enabled = false,
+    enabled = true,
     -- ensure_installed = {
     --   'lua',
     --   'javascript',
@@ -19,18 +19,18 @@ M.setup_treesitter = function()
     -- },
     auto_install = false,
     highlight = {
-      enable = false,
+      enable = true,
       use_languagetree = true,
       additional_vim_regex_highlighting = false,
     },
-    ident = { enable = false },
+    ident = { enable = true },
     rainbow = {
-      enable = false,
+      enable = true,
       extended_mode = true,
       max_file_lines = nil,
     },
     textobjects = {
-      enable = false,
+      enable = true,
       lookahead = true,
     }
   }
