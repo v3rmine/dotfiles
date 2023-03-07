@@ -6,6 +6,8 @@
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
+      # Use binary cache to speedup things
+      /etc/nixos/cachix.nix
     ];
 
   # Bootloader.
@@ -104,6 +106,9 @@
 
   nixpkgs.overlays = [
     (self: super: {
+      pinentry = super.pinentry.override {
+        enabledFlavors = [ "gnome3" "curses" "tty" ];
+      };
       neovim = super.neovim.override {
         viAlias = false;
         vimAlias = false;
@@ -115,7 +120,7 @@
   users.users.johan = {
     isNormalUser = true;
     description = "johan";
-    shell = pkgs.nushell;
+    shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       gnome.gnome-keyring
@@ -123,6 +128,7 @@
       sweet
       home-manager
       piper
+      ark
     ];
   };
 
@@ -155,6 +161,10 @@
     google-chrome
     via
     syncthing
+    gparted
+    libnotify
+    pass
+    gnupg
   ];
   environment.shells = with pkgs; [ zsh ];
   environment.sessionVariables = {
@@ -173,13 +183,21 @@
   #   enableSSHSupport = true;
   # };
 
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryFlavor = "gnome3";
+  };
+
   # List services that you want to enable:
 
   services.ratbagd.enable = true;
   services.blueman.enable = true;
 
   # Enable via device detection
-  services.udev.packages = [ pkgs.via ];
+  services.udev.packages = [ pkgs.via pkgs.qmk-udev-rules ];
+  services.udev.extraRules = ''
+  KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", TAG+="uaccess", TAG+="udev-acl", GROUP="johan"
+  '';
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;

@@ -3,7 +3,12 @@ if [ ! -f "$1" ]; then
 	echo "Usage: nix-patch-bin <path to the binary> [<extended rpath>]"
 	exit 0
 fi
-extended_rpath="$(if [ -z "$2" ]; then echo ""; else echo "$2:"; fi)"
+# extended_rpath="$(if [ -z "$2" ]; then echo ""; else echo "$2:"; fi)"
 
-patchelf --set-interpreter "/nix/var/nix/profiles/system/sw/lib/ld-linux-x86-64.so.2" "$1" 
-patchelf --set-rpath "${extended_rpath}/nix/var/nix/profiles/system/sw/lib:$HOME/.nix-profile/lib:/lib:/usr/lib:/lib64:/usr/lib64" "$1"
+gcc_libs="$(nix eval --raw 'nixpkgs#stdenv.cc.cc.lib.outPath')/lib"
+# system_libs="${extended_rpath}/nix/var/nix/profiles/system/sw/lib"
+nix_linker="$(nix eval --raw 'nixpkgs#stdenv.cc.outPath')/nix-support/dynamic-linker"
+interpreter="$(cat "$nix_linker")"
+
+patchelf --set-interpreter "$interpreter" "$1" 
+patchelf --set-rpath "${gcc_libs}:$HOME/.nix-profile/lib:/lib:/usr/lib:/lib64:/usr/lib64" "$1"
