@@ -172,7 +172,7 @@ add-zsh-hook precmd set-title-precmd
 add-zsh-hook preexec set-title-preexec
 
 # REVIEW: Clean completion cache
-rm -f ~/.zcompdump* >/dev/null 2>&1
+rm -f ~/.zcompdump >/dev/null 2>&1
 # Support bash completions
 autoload bashcompinit
 bashcompinit

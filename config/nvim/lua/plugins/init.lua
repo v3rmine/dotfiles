@@ -250,6 +250,18 @@ local plugins = {
       require('plugins.configs.lspothers').typescript_tools()
     end,
   },
+  ['Olical/conjure'] = {
+    ft = { 'fennel' },
+  },
+  ['rktjmp/hotpot.nvim'] = {
+    ft = { 'fennel' },
+    config = function()
+      require('hotpot').setup({
+        provide_require_fennel = false,
+        enable_hotpot_diagnostics = true,
+      })
+    end,
+  },
   -- -- --
   -- Edit niceties
   -- -- --

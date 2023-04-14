@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -o pipefail
+
+pager=${PAGER:=less -r}
+output=$(script -q -e /dev/null bash -c "2>&1 nix $*" | tee /dev/stderr) 
+# shellcheck disable=2181
+if [ $? -ne 0 ]; then 
+  eval "$(echo "$output" | tail -n 1 | perl -pe "s/(^.*?'|'.*?$|\x1b\[1m|\x1b\[0m)//g") | $pager"
+fi
+
+set +o pipefail

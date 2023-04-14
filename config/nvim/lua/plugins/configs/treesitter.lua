@@ -21,7 +21,7 @@ M.setup_treesitter = function()
     highlight = {
       enable = true,
       use_languagetree = true,
-      additional_vim_regex_highlighting = false,
+      additional_vim_regex_highlighting = true,
     },
     ident = { enable = true },
     rainbow = {

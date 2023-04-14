@@ -45,18 +45,3 @@ test_command() {
 }
 
 # Colored strace
-strace_color() {
-  LC_ALL=C strace -f -yy "$@" 2>&1 | 
-    perl -pe "s/([A-Z_]{3,})/${c_yellow}\1${c_reset}/g" |
-    perl -pe "s/(strace:.*?)([0-9]+)(.*?attached)/${c_black}\1${c_purple}\2${c_black}\3${c_reset}/g" |
-    perl -pe "s/(\".*?\")/${c_green}\1${c_reset}/g" |
-    perl -pe "s/(?<syscode>[a-z0-9_]*?)(?<params>\(.*(\)|>))/${c_red}$+{syscode}${c_reset}$+{params}/g" |
-    perl -pe "s/NULL/${c_cyan}NULL${c_reset}/g" |
-    perl -pe "s/(\/\*.*?\*\/)/${c_purple}\1${c_reset}/g" |
-    perl -pe "s/(?<addr>0x[0-9a-z]*)/${c_cyan}$+{addr}${c_reset}/g" |
-    perl -pe "s/([a-z_]+)=/${c_blue}\1${c_reset}=/g" |
-    perl -pe "s/\+{3}(.*?)\+{3}/${c_black}+++${c_purple}\1${c_black}+++${c_reset}/g" |
-    perl -pe "s/<\.\.\. ([a-z0-9_]+) resumed>/${c_black}<... ${c_red}\1 ${c_black}resumed>${c_reset}/g" |
-    perl -pe "s/<unfinished \.\.\.>/${c_black}<unfinished ...>${c_reset}/g" |
-    perl -pe "s/^\[pid ([0-9]+)\]/${c_black}[pid ${c_purple}\1${c_black}]${c_reset}/g"
-}; export strace_color
