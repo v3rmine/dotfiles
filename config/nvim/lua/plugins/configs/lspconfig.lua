@@ -61,7 +61,7 @@ if cmp_present then
   M.capabilities = cmp_nvim_lsp.default_capabilities()
 end
 
-lspconfig.sumneko_lua.setup {
+lspconfig.lua_ls.setup {
   flags = flags,
   on_attach = M.on_attach,
   capabilities = M.capabilities,
