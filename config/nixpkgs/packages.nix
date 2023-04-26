@@ -32,6 +32,7 @@ let
     jupyter
     ipython
     ipykernel
+    openai
   ]);
   python3WithPackages = pkgs.python3.withPackages pythonPackages;
 in {
@@ -40,6 +41,7 @@ in {
     thunderbird
     vscode
     dbeaver
+    lapce
     # Rust
     rustup
     mold

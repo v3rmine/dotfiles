@@ -8,4 +8,5 @@
     layout = "us,fr";
     variant = "";
   };
+  home.stateVersion = "18.09";
 }
