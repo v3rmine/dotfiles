@@ -9,7 +9,7 @@ if [ ! -d "$HOME/.local" ]; then mkdir "$HOME/.local"; fi
 
 # Compat
 export TERM="xterm-kitty"
-export SHELL="zsh"
+# export SHELL="zsh"
 
 # --- Cross platform management ---
 # Preferred editor for local and remote sessions
@@ -107,7 +107,7 @@ function new-patch() {
 }
 
 # SSH fix
-alias ssh="env TERM='xterm-256color' ssh"
+alias ssh="env SHELL=/bin/sh TERM=xterm-256color ssh"
 
 # CPE
 function gccpe() { gcc "$1" -o "$2" -Wall -Wextra -g; }
@@ -261,6 +261,7 @@ export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=1000
 export SAVEHIST=1000
 setopt inc_append_history
+setopt histignorespace
 # Highlights
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor root line)
 export ZSH_HIGHLIGHT_PATTERNS=('rm *\*' 'fg=white,bold,bg=red')

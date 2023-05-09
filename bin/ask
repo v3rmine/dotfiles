@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+if [ -z "$OPENAI_API_KEY" ]; then
+  echo "[error]: please provide an api key in the env variable OPENAI_API_KEY" >&2
+  exit 1
+fi
+
+if ! command -v openai >/dev/null 2>&1; then
+  echo "[error]: please install the pip tool openai" >&2
+  exit 1
+fi
+
+if [ -z "$1" ] || (echo "$*" | grep -Eq "(-h|--help)"); then
+  echo "usage: ask 'List all the files in the home directory'" >&2
+  exit 0
+fi
+
+openai api chat_completions.create \
+  -n 1 \
+  --model "${OPENAI_MODEL:=gpt-3.5-turbo}" \
+  --max-tokens "${OPENAI_MAX_TOKENS:=50}" \
+  -g assistant "I will respond in a really short answer with a command for the system $(uname) that will solve what the user wants, I will briefly explain what the flags of the command are doing." \
+  -g user "$1" | grep --invert-match "\`\`\`"
+echo
