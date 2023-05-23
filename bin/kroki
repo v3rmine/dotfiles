@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+kroki_server=${KROKI_SERVER:=https://kroki.io}
+type="plantuml"
+
+if [ ! -z "$1" ]; then
+  type="$1"
+fi
+
+cat | python -c "import sys; import base64; import zlib; print(base64.urlsafe_b64encode(zlib.compress(sys.stdin.read().encode('utf-8'), 9)).decode('ascii'))" | xargs printf "$kroki_server/$type/png/%s" | tee >(xclip -sel clip)
+

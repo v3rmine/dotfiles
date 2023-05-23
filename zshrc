@@ -203,6 +203,11 @@ if [ -f $set_java_home_file ]; then
   source $set_java_home_file
 fi
 
+# Load Nix
+if [ -d "$HOME/.nix-profile/bin" ]; then
+  export PATH="$PATH:$HOME/.nix-profile/bin"
+fi
+
 # --- Antigen ---
 ANTIGEN_PATH="$HOME/.local/antigen.zsh"
 if [ ! -f "$ANTIGEN_PATH" ]; then
