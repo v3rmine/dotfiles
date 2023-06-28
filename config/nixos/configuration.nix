@@ -8,6 +8,8 @@
       /etc/nixos/hardware-configuration.nix
       # Use binary cache to speedup things
       /etc/nixos/cachix.nix
+      # home-manager
+      <home-manager/nixos>
     ];
 
   # Bootloader.
@@ -165,6 +167,9 @@
     libnotify
     pass
     gnupg
+    # Bevy
+    alsa-lib
+    vulkan-loader
   ];
   environment.shells = with pkgs; [ zsh ];
   environment.sessionVariables = {
