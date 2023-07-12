@@ -37,6 +37,7 @@ let
   python3WithPackages = pkgs.python3.withPackages pythonPackages;
 in {
   home.packages = (with pkgs; [
+    vlc
     firefox
     thunderbird
     vscode
@@ -45,6 +46,7 @@ in {
     # Rust
     rustup
     mold
+    lld
     # Python
     python3WithPackages
     # Node
@@ -75,6 +77,7 @@ in {
     obsidian
     # Keyboard
     qmk
+    espanso
   ]);
   
   #nixpkgs.overlays = [

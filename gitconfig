@@ -11,6 +11,7 @@
 [alias]
   files = !git diff --name-only $(git merge-base HEAD \"${REVIEW_BASE:-development}\")
   stat = !git diff --stat $(git merge-base HEAD \"${REVIEW_BASE:-development}\")
+  oui = !git commit -m \"$(curl -s https://whatthecommit.com/index.txt)\"
 
 [diff]
   colorMoved = default
