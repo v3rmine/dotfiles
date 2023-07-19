@@ -38,9 +38,9 @@
       french = {
         matches = [
           { trigger = "a`"; replace = "à"; }
-          { trigger = "A`"; replace = "à"; }
-          { trigger = "A^"; replace = "Â"; }
+          { trigger = "A`"; replace = "À"; }
           { trigger = "a^"; replace = "â"; }
+          { trigger = "A^"; replace = "Â"; }
           { trigger = ".:a"; replace = "ä"; }
           { trigger = ".:A"; replace = "Ä"; }
           { trigger = "e`"; replace = "è"; }
