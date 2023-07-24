@@ -15,8 +15,8 @@
 
 [diff]
   colorMoved = default
-  tool = difftastic
-	external = difft
+ ;  tool = difftastic
+	; external = difft
 
 [http]
   postBuffer = 524288000

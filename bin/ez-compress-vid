@@ -1,2 +1,28 @@
 #!/usr/bin/env sh
-ffmpeg -i $1 -vcodec h264 -acodec aac $2
+# preset = veryfast, faster, fast, medium, slow, slower, veryslow
+# b:v = bitrate video 700k, 1000k, 2000k
+# b:a = bitrate audio 96k, 128k
+# crf = 0 lossless, 51 look like shit (sane range 17-28)
+preset=${PRESET:=slow}
+crf=${CRF:=28}
+vbr=${VIDEO_BITRATE}
+abr=${AUDIO_BITRATE:=96k}
+
+if [ -z "$2" ] || $(echo "$@" | grep -Eq " (-h|--help)( |$)"); then
+  echo "usage: ez-compress-vid <input file> <output file>" >&2
+  echo >&2
+  echo "env params:" >&2
+  echo "- PRESET [default: slow]" >&2
+  echo "- CRF [default: 28]" >&2
+  echo "- VIDEO_BITRATE" >&2
+  echo "- AUDIO_BITRATE [default: 96k]" >&2
+  exit 1
+fi
+
+if [ ! -f  "$1" ]; then
+  echo "$1 must be a readable file" >&2
+  exit 1
+fi
+
+ffmpeg -i $1 -preset "$preset" -crf "$crf" -vcodec h264 -acodec aac $(if [ ! -z "$vbr" ]; then echo "-b:v $vbr"; fi) -b:a "$abr" $2
+
