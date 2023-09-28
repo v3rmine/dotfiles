@@ -78,6 +78,9 @@ in {
     # Keyboard
     qmk
     espanso
+    # FS
+    fuse
+    fuse3
   ]);
   
   #nixpkgs.overlays = [
