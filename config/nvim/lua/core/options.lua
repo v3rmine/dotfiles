@@ -1,64 +1,87 @@
 local opt = vim.opt
-local g = vim.g
+local cache_dir = vim.env.HOME .. '/.cache/nvim/'
 
-g.vim_version = vim.version().minor
-g.toggle_theme_icon = '   '
-g.transparency = false
-g.theme_switcher_loaded = false
-
--- use filetype.lua instead of filetype.vim. it's enabled by default in neovim 0.8 (nightly)
-if g.vim_version < 8 then
-  g.did_load_filetypes = 0
-  g.do_filetype_lua = 1
-end
-
-opt.laststatus = 3 -- global statusline
-opt.showmode = false
-
+opt.termguicolors = true
+opt.hidden = true
+opt.magic = true
+opt.virtualedit = 'block'
 opt.clipboard = 'unnamedplus'
-opt.cul = true -- cursor line
-
--- Indenting
-opt.expandtab = true
-opt.shiftwidth = 2
-opt.smartindent = true
-opt.tabstop = 2
-opt.softtabstop = 2
-
-opt.fillchars = { eob = ' ' }
+opt.wildignorecase = true
+opt.swapfile = false
+opt.directory = cache_dir .. 'swap/'
+opt.undodir = cache_dir .. 'undo/'
+opt.backupdir = cache_dir .. 'backup/'
+opt.viewdir = cache_dir .. 'view/'
+opt.spellfile = cache_dir .. 'spell/en.uft-8.add'
+opt.history = 2000
+opt.timeout = true
+opt.ttimeout = true
+opt.timeoutlen = 500
+opt.ttimeoutlen = 10
+opt.updatetime = 100
+opt.redrawtime = 1500
 opt.ignorecase = true
 opt.smartcase = true
-opt.mouse = 'a'
+opt.infercase = true
 
--- Numbers
-opt.number = true
-opt.numberwidth = 2
+if vim.fn.executable('rg') == 1 then
+  opt.grepformat = '%f:%l:%c:%m,%f:%l:%m'
+  opt.grepprg = 'rg --vimgrep --no-heading --smart-case'
+end
+
+opt.completeopt = 'menu,menuone,noselect'
+opt.showmode = false
+opt.shortmess = 'aoOTIcF'
+opt.scrolloff = 2
+opt.sidescrolloff = 5
 opt.ruler = false
+opt.showtabline = 0
+opt.winwidth = 30
+opt.pumheight = 15
+opt.showcmd = false
 
--- disable nvim intro
-opt.shortmess:append 'sI'
-
-opt.signcolumn = 'yes'
-opt.splitbelow = true
-opt.splitright = true
-opt.termguicolors = true
-opt.timeoutlen = 400
+opt.cmdheight = 0
+opt.laststatus = 3
+opt.list = true
+opt.listchars = 'tab:»·,nbsp:+,trail:·,extends:→,precedes:←'
+opt.pumblend = 10
+opt.winblend = 10
 opt.undofile = true
 
--- interval for writing swap file to disk, also used by gitsigns
-opt.updatetime = 250
+opt.smarttab = true
+opt.expandtab = true
+opt.autoindent = true
+opt.tabstop = 2
+opt.shiftwidth = 2
 
--- go to previous/next line with h,l,left arrow and right arrow
--- when cursor reaches end/beginning of line
-opt.whichwrap:append '<>[]hl'
+-- wrap
+opt.linebreak = true
+opt.whichwrap = 'h,l,<,>,[,],~'
+opt.breakindentopt = 'shift:2,min:20'
+opt.showbreak = '↳ '
 
--- By default, Ctrl-W only deletes previous words in the text 
--- entered after last starting insert mode, and stops deleting
--- text at the beginning of a line.
-opt.backspace = "indent,eol,start"
+opt.foldlevelstart = 99
+opt.foldmethod = 'marker'
 
---- Disable automatic folding
-opt.foldenable = false
+opt.number = true
+opt.signcolumn = 'yes'
+opt.spelloptions = 'camel'
 
-g.mapleader = ' '
-
+opt.textwidth = 100
+opt.colorcolumn = '100'
+if vim.loop.os_uname().sysname == 'Darwin' then
+  vim.g.clipboard = {
+    name = 'macOS-clipboard',
+    copy = {
+      ['+'] = 'pbcopy',
+      ['*'] = 'pbcopy',
+    },
+    paste = {
+      ['+'] = 'pbpaste',
+      ['*'] = 'pbpaste',
+    },
+    cache_enabled = 0,
+  }
+  vim.g.python_host_prog = '/usr/bin/python'
+  vim.g.python3_host_prog = '/usr/local/bin/python3'
+end

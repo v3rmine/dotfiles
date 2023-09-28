@@ -53,6 +53,7 @@ in {
     # nodejs
     # yarn
     # Lua
+    lua
     selene
     luaPackages.luacheck
     luaPackages.readline

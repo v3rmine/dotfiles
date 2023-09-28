@@ -1,6 +1,0 @@
-# Source: https://github.com/neovim/nvim-lspconfig/blob/47a521e621570da77e25c31988e2b74412db25e4/selene.toml
-std = "neovim"
-
-[rules]
-global_usage = "allow"
-multiple_statements = "allow"
