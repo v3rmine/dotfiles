@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Conky Right Spacer
-Comment=Start conky script
-Exec=/bin/bash -c '/usr/bin/conky -d -c "$HOME/.config/conky/conky-right.conf"'
-OnlyShowIn=GNOME;
-X-GNOME-Autostart-Phase=Application

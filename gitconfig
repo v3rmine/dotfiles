@@ -47,3 +47,5 @@
   # minus-style = normal "#340001"
   syntax-theme = Monokai Extended
   map-styles = bold purple => syntax magenta, bold cyan => syntax blue
+[init]
+	defaultBranch = main

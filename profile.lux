@@ -23,3 +23,7 @@ export DOTFILES_PATH="$HOME/dotfiles"
 if [ -e "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
   source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
 fi
+
+if [ -f "$HOME/.cargo/env" ]; then
+  . "$HOME/.cargo/env"
+fi

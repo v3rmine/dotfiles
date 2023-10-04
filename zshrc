@@ -7,10 +7,6 @@ source "$HOME/.profile"
 
 if [ ! -d "$HOME/.local" ]; then mkdir "$HOME/.local"; fi
 
-# Compat
-export TERM="xterm-kitty"
-# export SHELL="zsh"
-
 # --- Cross platform management ---
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -196,6 +192,8 @@ if [ -f "$ASDF_PATH" ]; then
   # shellcheck disable=SC2206
   fpath=(${ASDF_DIR}/completions $fpath)
   export PATH="$PATH:$ASDF_USER_SHIMS"
+elif [ -f "/opt/asdf-vm/asdf.sh" ]; then
+  . /opt/asdf-vm/asdf.sh
 fi
 ## Load JAVA_HOME
 set_java_home_file=~/.asdf/plugins/java/set-java-home.zsh
@@ -211,7 +209,7 @@ fi
 # --- Antigen ---
 ANTIGEN_PATH="$HOME/.local/antigen.zsh"
 if [ ! -f "$ANTIGEN_PATH" ]; then
-  curl -L git.io/antigen > "$ANTIGEN_PATH"
+  curl -L git.io/antigen -o "$ANTIGEN_PATH"
 fi
 source "$ANTIGEN_PATH"
 
