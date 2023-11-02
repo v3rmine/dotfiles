@@ -17,6 +17,7 @@
         glob: true
         path: bin/**
     ~/.gitconfig: gitconfig
+    ~/.gitattributes: gitattributes
     ~/.gitignore: gitignore
     ~/.xbindkeyrc: xbindkeyrc
     /etc/nixos/configuration.nix: config/nixos/configuration.nix

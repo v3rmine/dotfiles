@@ -34,6 +34,10 @@
 [difftool "difftastic"]
   cmd = difft "$LOCAL" "$REMOTE"
 
+[diff "sqlite3"]
+  binary = true
+  textconv = "echo .dump | sqlite3"
+
 [mergetool "vscode"]
   cmd = code --wait --reuse-window $MERGED
 
