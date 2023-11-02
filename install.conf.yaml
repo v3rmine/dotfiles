@@ -2,9 +2,11 @@
     link:
         relink: true
 
-- clean: ["~"]
-
 - clean:
+    ~/:
+        force: true
+    ~/.config:
+        recursive: true
     ~/.local/bin:
         force: true
 
@@ -15,13 +17,17 @@
         path: config/*
     ~/.local/bin/:
         glob: true
+        create: true
         path: bin/**
     ~/.gitconfig: gitconfig
     ~/.gitattributes: gitattributes
     ~/.gitignore: gitignore
     ~/.xbindkeyrc: xbindkeyrc
-    /etc/nixos/configuration.nix: config/nixos/configuration.nix
+    /etc/nixos/configuration.nix: 
+        if: uname -v | grep -q NixOS
+        path: config/nixos/configuration.nix
+        create: true
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
-  - [install-scripts/os-prepare.bash, Preparing the os specifics]
+    - [git submodule update --init --recursive, Installing submodules]
+    - [install-scripts/os-prepare.bash, Preparing the os specifics]

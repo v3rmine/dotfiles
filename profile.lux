@@ -1,14 +1,7 @@
 #!/bin/bash
 
-# --- void linux --- 
-# User service dir
-export SVDIR="$HOME/service"
-
 # Local executables
 export PATH="$PATH:$HOME/.local/bin"
-
-# Emacs
-export PATH="$PATH:$HOME/.emacs.d/bin"
 
 # Rust
 export PATH="$PATH:$HOME/.cargo/bin"
