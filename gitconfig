@@ -1,22 +1,23 @@
 [user]
 	name = Johan Planchon
 	email = dev@planchon.dev
+  email = johan.planchon@simplx.fr
 
 [core]
   excludesfile = $HOME/.gitignore
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
 
 [pull]
-  rebase = true
-
-[alias]
-  files = !git diff --name-only $(git merge-base HEAD \"${REVIEW_BASE:-development}\")
-  stat = !git diff --stat $(git merge-base HEAD \"${REVIEW_BASE:-development}\")
-  oui = !git commit -m \"$(curl -s https://whatthecommit.com/index.txt)\"
+  ff-only = true
+  rebase = false
 
 [diff]
   colorMoved = default
- ;  tool = difftastic
-	; external = difft
+  tool = difftastic
+  external = difft
 
 [http]
   postBuffer = 524288000
@@ -31,13 +32,16 @@
 [difftool]
   prompt = false
 
-[difftool "difftastic"]
-  cmd = difft "$LOCAL" "$REMOTE"
-
 [diff "sqlite3"]
   binary = true
   textconv = "echo .dump | sqlite3"
 
+
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
+
+[difftool "vscode"]
+  cmd = code --wait --diff "$LOCAL" "$REMOTE"
 [mergetool "vscode"]
   cmd = code --wait --reuse-window $MERGED
 
@@ -47,9 +51,12 @@
   light = false
   line-numbers = true
   side-by-side = true
-  # plus-style = syntax "#012800"
-  # minus-style = normal "#340001"
-  syntax-theme = Monokai Extended
-  map-styles = bold purple => syntax magenta, bold cyan => syntax blue
+
 [init]
-	defaultBranch = main
+  defaultBranch = main
+
+[alias]
+  files = !git diff --name-only $(git merge-base HEAD \"${REVIEW_BASE:-main}\")
+  stat = !git diff --stat $(git merge-base HEAD \"${REVIEW_BASE:-main}\")
+  oui = !git commit -m \"wip: $(curl -s https://whatthecommit.com/index.txt)\"
+
