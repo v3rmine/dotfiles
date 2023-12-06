@@ -5,10 +5,10 @@
 
 [core]
   excludesfile = $HOME/.gitignore
-  pager = delta
+  ; pager = delta
 
-[interactive]
-  diffFilter = delta --color-only
+;[interactive]
+;  diffFilter = delta --color-only
 
 [pull]
   ff-only = true
@@ -17,7 +17,7 @@
 [diff]
   colorMoved = default
   tool = difftastic
-  external = difft
+  ; external = difft
 
 [http]
   postBuffer = 524288000
