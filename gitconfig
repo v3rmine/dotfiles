@@ -11,8 +11,8 @@
 ;  diffFilter = delta --color-only
 
 [pull]
-  ff-only = true
-  rebase = false
+  ff-only = false
+  rebase = true
 
 [diff]
   colorMoved = default
@@ -35,7 +35,6 @@
 [diff "sqlite3"]
   binary = true
   textconv = "echo .dump | sqlite3"
-
 
 [difftool "difftastic"]
   cmd = difft "$LOCAL" "$REMOTE"
