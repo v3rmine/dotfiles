@@ -546,3 +546,5 @@ let-env config = {
 # Starship
 use ~/.cache/starship/init.nu
 use ~/.cache/zoxide.nu
+
+source /home/johan/.config/broot/launcher/nushell/br

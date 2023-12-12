@@ -1,7 +1,6 @@
 [user]
 	name = Johan Planchon
 	email = dev@planchon.dev
-  email = johan.planchon@simplx.fr
 
 [core]
   excludesfile = $HOME/.gitignore

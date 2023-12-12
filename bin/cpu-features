@@ -1,0 +1,2 @@
+#!/bin/sh
+cat /proc/cpuinfo | grep flags | head -n1 | cut -d':' -f 2 | sed -E 's/(^ | $)//g'

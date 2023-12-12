@@ -104,6 +104,7 @@ function new-patch() {
 
 # SSH fix
 alias ssh="env SHELL=/bin/sh TERM=xterm-256color ssh"
+alias tailscale-ssh="env SHELL=/bin/sh TERM=xterm-256color tailscale ssh"
 
 # CPE
 function gccpe() { gcc "$1" -o "$2" -Wall -Wextra -g; }
@@ -127,6 +128,7 @@ alias nv-purge-swap="rm ~/.local/share/nvim/swap/*"
 
 # git
 alias ga="git add"
+alias gu="git restore --staged"
 alias gc="git commit"
 alias gcm="gc -m"
 alias gk="git checkout"
@@ -200,10 +202,14 @@ set_java_home_file=~/.asdf/plugins/java/set-java-home.zsh
 if [ -f $set_java_home_file ]; then
   source $set_java_home_file
 fi
+## Load Rebar3
+if [ -d "$HOME/.cache/rebar3/bin" ]; then
+  export PATH="$PATH:$HOME/.cache/rebar3/bin"
+fi
 
 # Load Nix
-if [ -d "$HOME/.nix-profile/bin" ]; then
-  export PATH="$PATH:$HOME/.nix-profile/bin"
+if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+  . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 fi
 
 # --- Antigen ---
@@ -274,6 +280,7 @@ export DISABLE_UPDATE_PROMPT="true"
 export ENABLE_CORRECTION="true"
 export DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+fpath+=~/.local/share/zfunc
 bashcompinit
-compinit
+autoload -Uz compinit && compinit &&
 
