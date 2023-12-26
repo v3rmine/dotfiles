@@ -187,6 +187,14 @@ if test_command zoxide -V; then
   eval "$(zoxide init zsh)"
 fi
 
+if test_command kubectl version; then
+  eval "$(kubectl completion zsh)"
+fi
+
+if test_command k3s version; then 
+  eval "$(k3s completion zsh)"
+fi
+
 # --- ASDF ---
 ASDF_PATH="$HOME/.asdf/asdf.sh"
 if [ -f "$ASDF_PATH" ]; then
