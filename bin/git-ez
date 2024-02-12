@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -x
+
+openai_api_url="${OPENAI_API_URL:=https://openrouter.ai/api}"
+openai_api_key="$(secret-tool lookup git-ez openai-api-key)"
+
+if [ -z "$OPENAI_API_KEY" ] && [ -z "$openai_api_key" ]; then
+  echo "[error]: please provide an api key in the env variable OPENAI_API_KEY" >&2
+  exit 1
+elif [ ! -z "$OPENAI_API_KEY" ]; then
+  openai_api_key="$OPENAI_API_KEY"
+  echo "$openai_api_key" | secret-tool store --label='git-ez: OpenAI API key' git-ez openai-api-key
+fi
+
+if [ -z "$1" ] || (echo "$*" | grep -Eq "(-h|--help)"); then
+  echo "usage: git-ez 'feat: I rewrited the project in rust for fun and profit'" >&2
+  exit 0
+fi
+
+curl --silent "$openai_api_url/v1/chat/completions" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $openai_api_key" \
+  -d '{
+  "model": "'"${OPENAI_MODEL:=mistralai/mistral-7b-instruct:free}"'",
+  "temperature": 0.5,
+  "seed": '$(echo $RANDOM)',
+  "messages": [
+    {"role": "system", "content": "You are a commit assistant writer, the user send you the type and description of the commit and you help him write a good commit. You respect commitizen syntax for commit type using: `feat:` for features or corrections; `fix:` for bug fixes; `style:` for linter errors and code style/format issues; `refactor:` for code refactors. You must respond in a single line in the form `feat/fix/style/refactor: action verb at past participle followed by what the description of what changed`"},
+    {"role": "user", "content": "'"$*"'"}
+  ]
+}' | jq -r '.choices[0].message.content' | sed -E 's/(`|\\n)//g'
