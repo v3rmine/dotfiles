@@ -171,6 +171,7 @@ add-zsh-hook preexec set-title-preexec
 
 # REVIEW: Clean completion cache
 rm -f ~/.zcompdump >/dev/null 2>&1
+fpath+=~/.local/share/zfunc
 # Support bash completions
 autoload bashcompinit
 bashcompinit
@@ -195,12 +196,12 @@ if test_command k3s version; then
   eval "$(k3s completion zsh)"
 fi
 
-# --- ASDF ---
+# Load ASDF
 ASDF_PATH="$HOME/.asdf/asdf.sh"
 if [ -f "$ASDF_PATH" ]; then
   source "$ASDF_PATH"
   # shellcheck disable=SC2206
-  fpath=(${ASDF_DIR}/completions $fpath)
+  fpath+=(${ASDF_DIR}/completions $fpath)
   export PATH="$PATH:$ASDF_USER_SHIMS"
 elif [ -f "/opt/asdf-vm/asdf.sh" ]; then
   . /opt/asdf-vm/asdf.sh
@@ -214,10 +215,14 @@ fi
 if [ -d "$HOME/.cache/rebar3/bin" ]; then
   export PATH="$PATH:$HOME/.cache/rebar3/bin"
 fi
-
 # Load Nix
 if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
   . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+fi
+# Load fly.io
+if [ -d "$HOME/.fly" ]; then
+  export FLYCTL_INSTALL="$HOME/.fly"
+  export PATH="$PATH:$FLYCTL_INSTALL/bin"
 fi
 
 # --- Antigen ---
@@ -271,12 +276,12 @@ bindkey '^R' history-incremental-search-backward
 
 # --- ZSH ---
 # Default: *?_-.[]~=/&;!#$%^(){}<>
-export WORDCHARS="*?_.~&;!#$%^"
+export WORDCHARS="*?_~/&;!#$%^"
 
 # History
 export HISTFILE="$HOME/.zsh_history"
-export HISTSIZE=1000
-export SAVEHIST=1000
+export HISTSIZE=10000
+export SAVEHIST=10000
 setopt inc_append_history
 setopt histignorespace
 # Highlights
@@ -288,7 +293,6 @@ export DISABLE_UPDATE_PROMPT="true"
 export ENABLE_CORRECTION="true"
 export DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-fpath+=~/.local/share/zfunc
-bashcompinit
-autoload -Uz compinit && compinit &&
+#bashcompinit
+#autoload -Uz compinit && compinit &&
 

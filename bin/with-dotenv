@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+set -eu
+
+env $(cat .env | grep -Ev '^(#|$)' | xargs) "$@"
