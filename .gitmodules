@@ -1,15 +1,18 @@
 [submodule "dotbot"]
 	ignore = dirty
 	path = dotbot
-	url = https://github.com/anishathalye/dotbot
+	url = https://github.com/anishathalye/dotbot.git
 [submodule "config/doom"]
 	path = config/doom
-	url = https://github.com/joxcat/doom
-    branch = master
+	url = https://github.com/joxcat/doom.git
+	branch = master
 [submodule "navi"]
 	path = navi
-	url = https://github.com/joxcat/navi
-    branch = master
+	url = https://github.com/joxcat/navi.git
+	branch = master
 [submodule "config/leftwm/themes/catppuccin"]
 	path = config/leftwm/themes/catppuccin
 	url = https://github.com/di-effe/catppuccin.git
+[submodule "config/nvim"]
+	path = config/nvim
+	url = https://github.com/joxcat/kickstart.nvim.git
