@@ -58,3 +58,8 @@
   stat = !git diff --stat $(git merge-base HEAD \"${REVIEW_BASE:-main}\")
   oui = !git commit -m \"wip: $(curl -s https://whatthecommit.com/index.txt)\"
 
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

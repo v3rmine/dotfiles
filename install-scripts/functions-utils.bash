@@ -41,7 +41,7 @@ elapsed_time() {
 
 # Test if a command exist
 test_command() {
-  command "$@" >/dev/null 2>&1
+  command -v "$@" >/dev/null
 }
 
 # Colored strace

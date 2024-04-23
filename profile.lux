@@ -17,6 +17,14 @@ if [ -e "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
   source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
 fi
 
+# Android studio
+export JAVA_HOME="$HOME/android-studio/jbr"
+export ANDROID_HOME="$HOME/Android/Sdk"
+export NDK_HOME="$ANDROID_HOME/ndk/25.0.8775105"
+
 if [ -f "$HOME/.cargo/env" ]; then
   . "$HOME/.cargo/env"
+  export PATH="$HOME/.cargo/bin:$PATH"
 fi
+
+export KUBECONFIG=~/.kube/config

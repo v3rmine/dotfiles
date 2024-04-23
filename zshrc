@@ -24,7 +24,7 @@ source "$DOTFILES_PATH/install-scripts/functions-utils.bash"
 
 # --- Rebinds ---
 function vim() {
-  if test_command nvim -v; then 
+  if test_command nvim; then 
     nvim "$@" 
   else 
     vim "$@"
@@ -180,19 +180,19 @@ autoload -Uz compinit
 compinit
 
 # --- Tools sourcing ---
-if test_command broot -V; then
+if test_command broot; then
   source "$HOME/.config/broot/launcher/bash/br"
 fi
 
-if test_command zoxide -V; then
+if test_command zoxide; then
   eval "$(zoxide init zsh)"
 fi
 
-if test_command kubectl version; then
+if test_command kubectl; then
   eval "$(kubectl completion zsh)"
 fi
 
-if test_command k3s version; then 
+if test_command k3s; then 
   eval "$(k3s completion zsh)"
 fi
 
@@ -215,14 +215,25 @@ fi
 if [ -d "$HOME/.cache/rebar3/bin" ]; then
   export PATH="$PATH:$HOME/.cache/rebar3/bin"
 fi
-# Load Nix
-if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-  . "$HOME/.nix-profile/etc/profile.d/nix.sh"
-fi
-# Load fly.io
+## Load fly.io's flyctl
 if [ -d "$HOME/.fly" ]; then
   export FLYCTL_INSTALL="$HOME/.fly"
   export PATH="$PATH:$FLYCTL_INSTALL/bin"
+fi
+## Pulumi
+if [ -d "$HOME/.pulumi" ]; then
+   # add Pulumi to the PATH
+  export PATH="$PATH:$HOME/.pulumi/bin"
+fi
+## Proto
+if [ -d "$HOME/.proto" ]; then
+  export PROTO_HOME="$HOME/.proto"
+  export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
+fi
+
+# Load Nix
+if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+  . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 fi
 
 # --- Antigen ---
@@ -246,7 +257,7 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen apply
 
 # --- Sources ---
-if test_command starship -h; then
+if test_command starship; then
   eval "$(starship init zsh)"
 fi
 
@@ -295,4 +306,8 @@ export DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 #bashcompinit
 #autoload -Uz compinit && compinit &&
+
+if test_command moon; then
+  eval "$(moon completions)"
+fi
 
