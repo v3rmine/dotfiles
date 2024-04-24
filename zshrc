@@ -287,7 +287,7 @@ bindkey '^R' history-incremental-search-backward
 
 # --- ZSH ---
 # Default: *?_-.[]~=/&;!#$%^(){}<>
-export WORDCHARS="*?_~/&;!#$%^"
+export WORDCHARS="*?_.~&;!#$%^"
 
 # History
 export HISTFILE="$HOME/.zsh_history"
