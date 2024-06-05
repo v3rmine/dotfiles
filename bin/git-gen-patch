@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -eu
+
+function list_commits() {
+  git log --oneline --no-merges $@
+}
+
+function pick_commits() {
+  commits="$(list_commits --color)"
+
+  if [ $# -eq 1 ]; then
+    commits="$(echo "$commits" | sed -n "/$1/q;p")"
+  else
+    commits="$(echo "$commits" | tail -n +2)"
+  fi
+
+  echo "$commits"
+}
+
+first_commit="$(pick_commits | fzf --ansi \
+      --preview='git show --color "$(echo {} | grep -Eo "^[^ ]+")"' \
+      --header 'First patch commit' \
+    | grep -Eo '^[^ ]+')"
+
+second_commit="$(pick_commits $first_commit | fzf --ansi \
+      --preview='git show --color "$(echo {} | grep -Eo "^[^ ]+")"' \
+      --header 'Last patch commit' \
+    | grep -Eo '^[^ ]+')"
+
+count="$(list_commits | awk "/$second_commit/"'{flag=1;next}'"/$first_commit/"'{flag=0}flag' | wc -l)"
+
+git format-patch "-$(( count+2 ))" $second_commit --stdout
