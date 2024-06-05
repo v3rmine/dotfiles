@@ -1,5 +1,15 @@
 #!/usr/bin/env sh
 
-ps -eo size,pid,user,command --sort -size | \
-    awk '{ hr=$1/1024 ; printf("%13.2f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' |\
-    cut -d "" -f2 | cut -d "-" -f1 | head
+ps -A --sort -rss -o size,comm | \
+    awk '
+    NR == 1 { printf("\t%s\t%s\n", $1, $2); next }
+    { cumem[$2] += $1; total += $1 }
+    END {
+        printf("%10.2f Mb\tTOTAL\n", total/1024)
+        for (p in cumem) {
+            pmem = cumem[p]/1024;
+            if (pmem > 50) {
+                printf("%10.2f Mb\t%s\n", pmem, p) | "sort -rn"
+            }
+        }
+    }'
