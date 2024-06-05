@@ -9,9 +9,7 @@ function pick_commits() {
   commits="$(list_commits --color)"
 
   if [ $# -eq 1 ]; then
-    commits="$(echo "$commits" | sed -n "/$1/q;p")"
-  else
-    commits="$(echo "$commits" | tail -n +2)"
+    commits="$(echo "$commits" | sed "/$1/q")"
   fi
 
   echo "$commits"
@@ -27,6 +25,6 @@ second_commit="$(pick_commits $first_commit | fzf --ansi \
       --header 'Last patch commit' \
     | grep -Eo '^[^ ]+')"
 
-count="$(list_commits | awk "/$second_commit/"'{flag=1;next}'"/$first_commit/"'{flag=0}flag' | wc -l)"
+count="$(list_commits | awk "/$second_commit/,/$first_commit/" | wc -l)"
 
-git format-patch "-$(( count+2 ))" $second_commit --stdout
+git format-patch "-$(( count ))" $second_commit --stdout
