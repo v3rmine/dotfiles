@@ -5,7 +5,6 @@ ps -A --sort -rss -o size,comm | \
     NR == 1 { printf("\t%s\t%s\n", $1, $2); next }
     { cumem[$2] += $1; total += $1 }
     END {
-        printf("%10.2f Mb\tTOTAL\n", total/1024)
         for (p in cumem) {
             pmem = cumem[p]/1024;
             if (pmem > 50) {
