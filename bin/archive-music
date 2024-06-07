@@ -1,0 +1,2 @@
+#!/bin/sh
+youtube-dl -x --audio-quality 0 --add-metadata -o "%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s" $@
