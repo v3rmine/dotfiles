@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+p_code=${1:-Lyon}
+curl "wttr.in/${p_code}"
