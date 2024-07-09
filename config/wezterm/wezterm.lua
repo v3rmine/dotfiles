@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 
 local config = {
-	font = wezterm.font("Iosevka NFM"),
+	font = wezterm.font_with_fallback({ "Iosevka NFM", "Fira Code" }, { weight = "Regular" }),
 	audible_bell = "Disabled",
 	font_size = 15,
 	max_fps = 30,
@@ -14,6 +14,8 @@ local config = {
 	enable_wayland = false,
 	window_decorations = "TITLE|RESIZE",
 
+	custom_block_glyphs = false,
+	font_shaper = "Harfbuzz",
 	allow_square_glyphs_to_overflow_width = "WhenFollowedBySpace",
 }
 
