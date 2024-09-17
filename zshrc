@@ -311,3 +311,10 @@ if test_command moon; then
   eval "$(moon completions)"
 fi
 
+
+# bun completions
+[ -s "/home/johan/.bun/_bun" ] && source "/home/johan/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

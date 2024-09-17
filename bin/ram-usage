@@ -1,14 +1,21 @@
 #!/usr/bin/env sh
 
-ps -A --sort -rss -o size,comm | \
-    awk '
-    NR == 1 { printf("\t%s\t%s\n", $1, $2); next }
-    { cumem[$2] += $1; total += $1 }
-    END {
-        for (p in cumem) {
-            pmem = cumem[p]/1024;
-            if (pmem > 50) {
-                printf("%10.2f Mb\t%s\n", pmem, p) | "sort -rn"
+is_root=$(test "$(id -u)" -eq "0" && echo 1 || echo 0)
+has_ps_mem=$(command -v ps_mem > /dev/null && echo 1 || echo 0)
+
+if test "$is_root" = 1 -a "$has_ps_mem" = 1; then
+    sudo ps_mem | tail -n 15
+else
+    ps -A --sort -rss -o size,comm | \
+        awk '
+        NR == 1 { printf("\t%s\t%s\n", $1, $2); next }
+        { cumem[$2] += $1; total += $1 }
+        END {
+            for (p in cumem) {
+                pmem = cumem[p]/1024;
+                if (pmem > 50) {
+                    printf("%10.2f Mb\t%s\n", pmem, p) | "sort -rn"
+                }
             }
-        }
-    }'
+        }'
+fi
