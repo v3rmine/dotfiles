@@ -1,35 +1,30 @@
-[user]
-	name = Johan Planchon
-	email = dev@johan.moe
+[advice]
+  diverging = false
+
+[alias]
+  files = "!git diff --name-only $(git merge-base HEAD \"${REVIEW_BASE:-main}\")"
+  stat = "!git diff --stat $(git merge-base HEAD \"${REVIEW_BASE:-main}\")"
+  oui = "!git commit -m \"wip: $(curl -s https://whatthecommit.com/index.txt)\""
+
+[branch]
+  sort = "-committerdate"
+
+[commit]
+  gpgSign = false
+  verbose = true
 
 [core]
-  excludesfile = $HOME/.gitignore
-  ; pager = delta
-
-;[interactive]
-;  diffFilter = delta --color-only
-
-[pull]
-  ff-only = false
-  rebase = true
+  excludesfile = ~/.gitignore
+  fsmonitor = true
+  hookspath = "/dev/null"
+  untrackedCache = true
 
 [diff]
-  colorMoved = default
+  algorithm = "histogram"
+  colorMoved = "plain"
+  mnemonicPrefix = true
+  renames = true
   tool = difftastic
-  ; external = difft
-
-[http]
-  postBuffer = 524288000
-
-[merge]
-  tool = vscode
-  conflictstyle = diff3
-
-[pager]
-  difftool = true
-
-[difftool]
-  prompt = false
 
 [diff "sqlite3"]
   binary = true
@@ -37,29 +32,52 @@
 
 [difftool "difftastic"]
   cmd = difft "$LOCAL" "$REMOTE"
-
 [difftool "vscode"]
   cmd = code --wait --diff "$LOCAL" "$REMOTE"
-[mergetool "vscode"]
-  cmd = code --wait --reuse-window $MERGED
 
-[delta]
-  paging = always
-  navigate = true
-  light = false
-  line-numbers = true
-  side-by-side = true
+[fetch]
+  all = true
+  prune = true
+  pruneTags = true
 
 [init]
   defaultBranch = main
 
-[alias]
-  files = !git diff --name-only $(git merge-base HEAD \"${REVIEW_BASE:-main}\")
-  stat = !git diff --stat $(git merge-base HEAD \"${REVIEW_BASE:-main}\")
-  oui = !git commit -m \"wip: $(curl -s https://whatthecommit.com/index.txt)\"
+;[interactive]
+;  diffFilter = delta --color-only
 
-[filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
+[pager]
+  difftool = true
+
+[pull]
+  rebase = true
+
+[push]
+  default = simple
+  autoSetupRemote = true
+  followTags = true
+
+[merge]
+  tool = vscode
+  conflictstyle = diff3
+
+[mergetool "vscode"]
+  cmd = "code --wait --reuse-window $MERGED"
+
+[rebase]
+  autoSquash = true
+  autoStash = true
+  updateRefs = true
+
+[rerere]
+  autoupdate = true
+  enabled = true
+
+[tag]
+  sort = "version:refname"
+
+[user]
+  name = Astrid Planchon
+  email = v3rmine@astriiid.fr
+	signingkey = 7C8D293D1F08D15CA3E57C1542A136B250ED52AD
+

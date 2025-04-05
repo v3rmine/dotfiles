@@ -7,6 +7,11 @@ source "$HOME/.profile"
 
 if [ ! -d "$HOME/.local" ]; then mkdir "$HOME/.local"; fi
 
+# home-manager
+source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+export PATH="$PATH:$HOME/.nix-profile/bin"
+# home-manager end
+
 # --- Cross platform management ---
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -196,34 +201,13 @@ if test_command k3s; then
   eval "$(k3s completion zsh)"
 fi
 
-# Load ASDF
-ASDF_PATH="$HOME/.asdf/asdf.sh"
-if [ -f "$ASDF_PATH" ]; then
-  source "$ASDF_PATH"
-  # shellcheck disable=SC2206
-  fpath+=(${ASDF_DIR}/completions $fpath)
-  export PATH="$PATH:$ASDF_USER_SHIMS"
-elif [ -f "/opt/asdf-vm/asdf.sh" ]; then
-  . /opt/asdf-vm/asdf.sh
-fi
-## Load JAVA_HOME
-set_java_home_file=~/.asdf/plugins/java/set-java-home.zsh
-if [ -f $set_java_home_file ]; then
-  source $set_java_home_file
-fi
-## Load Rebar3
-if [ -d "$HOME/.cache/rebar3/bin" ]; then
-  export PATH="$PATH:$HOME/.cache/rebar3/bin"
+if test_command mise; then
+  eval "$(mise activate zsh)"
 fi
 ## Load fly.io's flyctl
 if [ -d "$HOME/.fly" ]; then
   export FLYCTL_INSTALL="$HOME/.fly"
   export PATH="$PATH:$FLYCTL_INSTALL/bin"
-fi
-## Pulumi
-if [ -d "$HOME/.pulumi" ]; then
-   # add Pulumi to the PATH
-  export PATH="$PATH:$HOME/.pulumi/bin"
 fi
 ## Proto
 if [ -d "$HOME/.proto" ]; then
@@ -311,10 +295,17 @@ if test_command moon; then
   eval "$(moon completions)"
 fi
 
-
 # bun completions
 [ -s "/home/johan/.bun/_bun" ] && source "/home/johan/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/home/johan/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
