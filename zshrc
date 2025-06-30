@@ -195,15 +195,30 @@ fi
 
 if test_command kubectl; then
   eval "$(kubectl completion zsh)"
+  alias kubectl="kubecolor"
+  compdef kubecolor=kubectl
 fi
 
 if test_command k3s; then 
   eval "$(k3s completion zsh)"
 fi
 
+if test_command just; then
+  eval "$(just --completions zsh)"
+fi
+
 if test_command mise; then
   eval "$(mise activate zsh)"
 fi
+
+if test_command direnv; then
+  eval "$(direnv hook zsh)"
+fi
+
+if test_command flux; then
+  eval "$(flux completion zsh)"
+fi
+
 ## Load fly.io's flyctl
 if [ -d "$HOME/.fly" ]; then
   export FLYCTL_INSTALL="$HOME/.fly"
@@ -309,3 +324,7 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# add CloudyPad CLI PATH
+export PATH=$PATH:/home/johan/.cloudypad/bin
+
