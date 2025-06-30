@@ -18,6 +18,7 @@
   fsmonitor = true
   hookspath = "/dev/null"
   untrackedCache = true
+  attributesfile = ~/.gitattributes
 
 [diff]
   algorithm = "histogram"
@@ -58,8 +59,11 @@
   followTags = true
 
 [merge]
-  tool = vscode
   conflictstyle = diff3
+
+[merge "mergiraf"]
+    name = mergiraf
+    driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
 
 [mergetool "vscode"]
   cmd = "code --wait --reuse-window $MERGED"
