@@ -22,8 +22,8 @@ export PATH="$PATH:/usr/local/share/android-sdk/build-tools/30.0.3/"
 export PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
 
 # Import google SDK
-if [ -f '/Users/johan/Apps/google-cloud-sdk/path.zsh.inc' ]; then
-    source '/Users/johan/Apps/google-cloud-sdk/path.zsh.inc'
+if [ -f "$HOME/Apps/google-cloud-sdk/path.zsh.inc" ]; then
+    source "$HOME/Apps/google-cloud-sdk/path.zsh.inc"
 fi
 
 # Add code binary to the PATH
@@ -36,6 +36,6 @@ export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 # --- common ---
 export DOTFILES_PATH="$HOME/dotfiles"
 
-if [ -e /Users/johan/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/johan/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then . "$HOME/.nix-profile/etc/profile.d/nix.sh"; fi # added by Nix installer
 
 alias grep="ggrep"

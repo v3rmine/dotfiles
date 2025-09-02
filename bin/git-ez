@@ -2,13 +2,13 @@
 set -e
 
 openai_api_url="${OPENAI_API_URL:=https://openrouter.ai/api}"
-openai_api_key="$(secret-tool lookup git-ez openai-api-key)"
+openai_api_key="${OPENAI_API_KEY:=$(secret-tool lookup git-ez openai-api-key)}"
 seed="${SEED:=$RANDOM}"
 
 if [ -z "$OPENAI_API_KEY" ] && [ -z "$openai_api_key" ]; then
   echo "[error]: please provide an api key in the env variable OPENAI_API_KEY" >&2
   exit 1
-elif [ ! -z "$OPENAI_API_KEY" ]; then
+elif [ ! -z "$OPENAI_API_KEY" ] && [ -z "$openai_api_key" ]; then
   openai_api_key="$OPENAI_API_KEY"
   echo "$openai_api_key" | secret-tool store --label='git-ez: OpenAI API key' git-ez openai-api-key
 fi
@@ -24,9 +24,10 @@ if echo "$*" | grep -Eq "(-s|--staged)"; then
 fi
 
 system_prompt=$(cat <<-'EOF'
-You are a commit assistant writer, the user send you a git diff and an optional context and you help him write the commit message.
+You are a commit assistant writer.
+The user send you a git diff and an optional context (prioritize the diff, it's here mainly to help understand the diff) and you help him write the commit message.
 You respect conventional commits 1.0.0 for commit type using:
-- `feat:` for features or corrections (this correlates with MINOR in Semantic Versioning);
+- `feat:` for features (this correlates with MINOR in Semantic Versioning);
 - `fix:` for bug fixes (this correlates with PATCH in Semantic Versioning);
 - `BREAKING CHANGE:` or appends a ! after the type, introduces a breaking API change (correlating with MAJOR in Semantic Versioning);
 - `style:` for changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, linter errors, etc);
@@ -38,24 +39,32 @@ You respect conventional commits 1.0.0 for commit type using:
 
 Recommandation for the commit message:
 - Keep the message short: Makes the list of commits more readable (~50 chars).
-- Start the commit message with a lowercased action verb at past participle.
+- Start the commit message with a **lowercased** action verb at past participle.
 - Think about your future self/colleages: It's important for the reader to understand what happened.
 - Think about the CHANGELOG: The commits will may end up in the changelog, so try writing for it.
+- Keep some precision: Try to be precise in the commit message if it's a config value that changed.
 
-You must respond with the commits to create and their files (split as much as needed but do not duplicate the files):
-`feat/fix/style/refactor: <commit message>`
+You must respond only the full commit message (3 propositions) and then their included files (split in as much commits as needed but the files can only be in one commit):
+```
+feat: <commit message>
+feat: <variation of commit message>
+feat: <another proposition of commit message>
     - ./file/that/changed.txt
     - ./another/file/in-the-commit.txt
-`feat/fix/style/refactor: <another commit message>`
+fix: <commit message 2>
+fix: <variation of commit message 2>
+fix: <another proposition of commit message 2>
     - ./file/that/changed2.txt
-    - ./another/file/in-the-commit2.txt
+```
+
+If the diff is empty and no user context is provided return an error.
 EOF
 )
 
 user_prompt="$(echo "User context:\n $*\n\nCommit diff:\n" '```'"\n$(git diff $with_staged . | sed 's/"/\\"/g')\n"'```')"
 
 # echo '{
-# "model": "'"${OPENAI_MODEL:=google/gemini-2.5-flash-preview-05-20}"'",
+# "model": "'"${OPENAI_MODEL:=google/gemini-2.5-flash}"'",
 # "temperature": 0.5,
 # "seed": '$seed',
 # "messages": [
@@ -68,7 +77,7 @@ curl --silent "$openai_api_url/v1/chat/completions" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $openai_api_key" \
   -d '{
-  "model": "'"${OPENAI_MODEL:=google/gemini-2.5-flash-preview-05-20}"'",
+  "model": "'"${OPENAI_MODEL:=google/gemini-2.5-flash}"'",
   "temperature": 0.5,
   "seed": '$seed',
   "messages": [

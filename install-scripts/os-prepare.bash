@@ -11,10 +11,5 @@ if [ "$os" = Darwin ]; then
 elif [ "$os" = Linux ]; then
     echo Linking os profile file
     
-    user=$(whoami)
-    if [ "$user" = johan.planchon ]; then
-	ln -s "$PWD/no-perms.lux" "$HOME/.profile"
-    else
-    	ln -s "$PWD/profile.lux" "$HOME/.profile"
-    fi
+    ln -s "$PWD/profile.lux" "$HOME/.profile"
 fi

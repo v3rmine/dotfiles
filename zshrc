@@ -311,14 +311,14 @@ if test_command moon; then
 fi
 
 # bun completions
-[ -s "/home/johan/.bun/_bun" ] && source "/home/johan/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # pnpm
-export PNPM_HOME="/home/johan/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -326,5 +326,9 @@ esac
 # pnpm end
 
 # add CloudyPad CLI PATH
-export PATH=$PATH:/home/johan/.cloudypad/bin
+export PATH=$PATH:$HOME/.cloudypad/bin
 
+
+# Added by microsandbox installer
+export PATH="$HOME/.local/bin:$PATH"
+export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"

@@ -85,6 +85,16 @@
     awscli2
     # Ccache with Cloud Storage
     sccache
+    # Client library to multiplex connections from and to iOS devices
+    libusbmuxd
+    # Redirects the standard usbmuxd socket to allow connections to local and remote usbmuxd instances so remote devices appear connected locally
+    usbfluxd
+    # Socket daemon to multiplex connections from and to iOS devices
+    usbmuxd2
+    # Port of OpenAI's Whisper model in C/C++
+    whisper-cpp
+    # Portable command-line YAML processor
+    yq-go
 
     # --- GUI --- #
     # Swiss army knife of lossless video/audio editing
