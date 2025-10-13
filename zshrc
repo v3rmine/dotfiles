@@ -7,10 +7,12 @@ source "$HOME/.profile"
 
 if [ ! -d "$HOME/.local" ]; then mkdir "$HOME/.local"; fi
 
-# home-manager
-source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
-export PATH="$PATH:$HOME/.nix-profile/bin"
-# home-manager end
+if [ -d "$HOME/.nix-profile" ]; then
+  # home-manager
+  source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+  export PATH="$PATH:$HOME/.nix-profile/bin"
+  # home-manager end
+fi
 
 # --- Cross platform management ---
 # Preferred editor for local and remote sessions
@@ -28,13 +30,13 @@ fi
 source "$DOTFILES_PATH/install-scripts/functions-utils.bash"
 
 # --- Rebinds ---
-function vim() {
-  if test_command nvim; then 
-    nvim "$@" 
-  else 
-    vim "$@"
-  fi
-}
+# function vim() {
+#   if test_command nvim; then 
+#     nvim "$@" 
+#   else 
+#     vim "$@"
+#   fi
+# }
 # upgrade
 # function sudo() {
 #   # NOTE: Use full path to support user utils
@@ -108,7 +110,7 @@ function new-patch() {
 }
 
 # SSH fix
-alias ssh="env SHELL=/bin/sh TERM=xterm-256color ssh"
+# alias ssh="env SHELL=/bin/sh TERM=xterm-256color ssh"
 alias tailscale-ssh="env SHELL=/bin/sh TERM=xterm-256color tailscale ssh"
 
 # CPE
@@ -116,7 +118,7 @@ function gccpe() { gcc "$1" -o "$2" -Wall -Wextra -g; }
 
 # ls
 # shellcheck disable=SC2139
-alias ls="${CUSTOM_LS:-$(if command -v lsd >/dev/null; then echo lsd; else echo ls; fi)}"
+# alias ls="${CUSTOM_LS:-$(if command -v lsd >/dev/null; then echo lsd; else echo ls; fi)}"
 alias ll="ls -l"
 alias la="ls -al"
 alias lh="ls -alh"
@@ -224,6 +226,7 @@ if [ -d "$HOME/.fly" ]; then
   export FLYCTL_INSTALL="$HOME/.fly"
   export PATH="$PATH:$FLYCTL_INSTALL/bin"
 fi
+
 ## Proto
 if [ -d "$HOME/.proto" ]; then
   export PROTO_HOME="$HOME/.proto"
@@ -233,6 +236,32 @@ fi
 # Load Nix
 if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
   . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+fi
+
+if test_command moon; then
+  eval "$(moon completions)"
+fi
+
+# bun
+if [ -d "$HOME/.bun" ]; then
+  # bun completions
+  [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+fi
+
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+if [ -d "$HOME/.cloudypad/bin" ]; then
+  # add CloudyPad CLI PATH
+  export PATH=$PATH:$HOME/.cloudypad/bin
 fi
 
 # --- Antigen ---
@@ -306,29 +335,10 @@ export DISABLE_UNTRACKED_FILES_DIRTY="true"
 #bashcompinit
 #autoload -Uz compinit && compinit &&
 
-if test_command moon; then
-  eval "$(moon completions)"
-fi
-
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# pnpm
-export PNPM_HOME="$HOME/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-# add CloudyPad CLI PATH
-export PATH=$PATH:$HOME/.cloudypad/bin
-
-
 # Added by microsandbox installer
 export PATH="$HOME/.local/bin:$PATH"
 export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
+
+### bling.sh source start
+test -f /usr/share/bazzite-cli/bling.sh && source /usr/share/bazzite-cli/bling.sh
+### bling.sh source end
