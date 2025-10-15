@@ -86,6 +86,9 @@ unshare_groups=0
 unshare_netns=0
 unshare_process=0
 unshare_devsys=0
+unshare_home=0
+unshare_root=0
+home_overlay_opts="-"
 
 # Use cd + dirname + pwd so that we do not have relative paths in mount points
 # We're not using "realpath" here so that symlinks are not resolved this way
@@ -221,7 +224,12 @@ Options:
 	--unshare-ipc:          do not share ipc namespace with host
 	--unshare-netns:        do not share the net namespace with host
 	--unshare-process:          do not share process namespace with host
+	--unshare-home:		do not share host home
+	--unshare-root:		do not share host root
 	--unshare-all:          activate all the unshare flags below
+	--overlay-home:		overlay host home (incompatible with with --unshare-home) 
+				usage: --overlay-home <options>
+				where options are overlayfs options like "upperdir=<absolute path on host>,workdir=<absolute path on host>"
 	--compatibility/-C:	show list of compatible images
 	--help/-h:		show this message
 	--no-entry:		do not generate a container entry in the application list
@@ -334,6 +342,14 @@ while :; do
 			shift
 			unshare_devsys=1
 			;;
+		--unshare-home)
+			shift
+			unshare_home=1
+			;;
+		--unshare-root)
+			shift
+			unshare_root=1
+			;;
 		--unshare-all)
 			shift
 			unshare_devsys=1
@@ -341,6 +357,18 @@ while :; do
 			unshare_ipc=1
 			unshare_netns=1
 			unshare_process=1
+			unshare_home=1
+			unshare_root=1
+			;;
+		--overlay-home)
+			if [ -n "$2" ] && echo "$2" | grep -Eq "(workdir|upperdir)" ; then
+				home_overlay_opts=",$2"
+				shift
+				shift
+			else
+				home_overlay_opts=""
+				shift
+			fi
 			;;
 		-C | --compatibility)
 			show_compatibility
@@ -655,6 +683,10 @@ get_clone_image()
 #   unshare_ipc: bool unshare ipc
 #   unshare_netns: bool unshare netns
 #   unshare_process: bool unshare proc
+#   unshare_home: bool unshare host's user home
+#   unshare_root: bool unshare host's root
+#   home_overlay_opts: string home overlay options
+#
 # Expected env variables:
 #   None
 # Outputs:
@@ -688,6 +720,26 @@ generate_create_command()
 		result_command="${result_command}
 			--pid host"
 	fi
+
+	if [ -z "${container_user_custom_home}" ] && [ "${unshare_home}" -eq 1 ]; then
+		result_command="${result_command}
+			--env \"HOME=/home/${container_user_name}\"
+			--mount type=tmpfs,destination=\"${container_user_home}\""
+	fi
+
+	if [ -z "${container_user_custom_home}" ] && [ "${unshare_home}" -eq 0 ] && [ "${home_overlay_opts}" = "-" ]; then
+		result_command="${result_command}
+			--env \"HOME=${container_user_home}\"
+			--volume \"${container_user_home}\":\"${container_user_home}\":rslave"
+	fi
+	
+	if [ -z "${container_user_custom_home}" ] && [ "${unshare_home}" -eq 0 ] && [ "${home_overlay_opts}" != "-" ]; then
+		result_command="${result_command}
+			--env \"HOME=${container_user_home}\"
+			--volume \"${container_user_home}\":\"${container_user_home}\":\"O${home_overlay_opts}\""
+	fi
+
+
 	# Mount useful stuff inside the container.
 	# We also mount host's root filesystem to /run/host, to be able to syphon
 	# dynamic configurations from the host.
@@ -702,7 +754,6 @@ generate_create_command()
 		--label \"manager=distrobox\"
 		--label \"distrobox.unshare_groups=${unshare_groups}\"
 		--env \"SHELL=$(basename "${SHELL:-"/bin/bash"}")\"
-		--env \"HOME=${container_user_home}\"
 		--env \"container=${container_manager}\"
 		--env \"TERMINFO_DIRS=/usr/share/terminfo:/run/host/usr/share/terminfo\"
 		--env \"CONTAINER_ID=${container_name}\"
@@ -710,6 +761,48 @@ generate_create_command()
 		--volume \"${distrobox_entrypoint_path}\":/usr/bin/entrypoint:ro
 		--volume \"${distrobox_export_path}\":/usr/bin/distrobox-export:ro
 		--volume \"${distrobox_hostexec_path}\":/usr/bin/distrobox-host-exec:ro"
+
+	if [ "${unshare_root}" -eq 0 ]; then
+		# Due to breaking change in https://github.com/opencontainers/runc/commit/d4b670fca6d0ac606777376440ffe49686ce15f4
+		# now we cannot mount /:/run/host as before, as it will try to mount RO partitions as RW thus breaking things.
+		# This will ensure we will mount directories one-by-one thus avoiding this problem.
+		#
+		# This happens ONLY with podman+runc, docker and lilipod are unaffected, so let's do this only if we have podman AND runc.
+		if echo "${container_manager}" | grep -q "podman" && ${container_manager} info | grep -q runc; then
+			for rootdir in /*; do
+
+				# Skip symlinks
+				if [ -L "${rootdir}" ]; then
+					continue
+				fi
+
+				# Find if the directory belongs to a RO mount, if do, mount it as RO+Rslave
+				if findmnt --notruncate --noheadings --list --output OPTIONS --target "${rootdir}" |
+					tr ',' '\n' | grep -q "^ro$"; then
+
+					result_command="${result_command}
+					--volume ${rootdir}:/run/host${rootdir}:ro,rslave"
+					continue
+				fi
+
+				# Else we mount it RW+Rslave
+				result_command="${result_command}
+					--volume ${rootdir}:/run/host${rootdir}:rslave"
+			done
+		else
+			# We're either on podman+crun, docker or lilipod, let's keep old behaviour
+			result_command="${result_command}
+				--volume /:/run/host/:rslave"
+
+		fi
+	else
+		# Only mount distrobox-export required paths:
+		# - needed icons in /run/host/$host_home/.local/share/icons
+		# - needed desktop files in /run/host/$host_home/.local/share/applications
+		result_command="${result_command}
+			--volume \"${container_user_home}/.local/share/icons:/run/host${container_user_home}/.local/share/icons:rslave\"
+			--volume \"${container_user_home}/.local/share/applications:/run/host${container_user_home}/.local/share/applications:rslave\""
+	fi
 
 	if [ "${unshare_devsys}" -eq 0 ]; then
 		result_command="${result_command}
@@ -826,14 +919,30 @@ generate_create_command()
 	#	2- export the DISTROBOX_HOST_HOME env variable pointing to original HOME
 	# 	3- mount the custom home inside the container.
 	if [ -n "${container_user_custom_home}" ]; then
-		if [ ! -d "${container_user_custom_home}" ]; then
-			if ! mkdir -p "${container_user_custom_home}"; then
+		if [ ! -d "${container_user_custom_home}/.home" ]; then
+			if ! mkdir -p "${container_user_custom_home}/.home"; then
 				printf >&2 "Do you have permission to write to %s?\n" "${container_user_custom_home}"
 				exit 1
 			fi
 		fi
 		result_command="${result_command}
-			--volume \"${container_user_custom_home}\":\"/home/${container_user_name}\":rslave"
+			--env \"HOME=/home/${container_user_name}\"
+			--volume \"${container_user_custom_home}/.home\":\"/home/${container_user_name}\":rslave
+			--volume \"${container_user_custom_home}\":\"${container_user_custom_home}\":rslave"
+	fi
+
+	# Mount also the /var/home dir on ostree based systems
+	# do this only if $HOME was not already set to /var/home/username
+	if [ "${unshare_home}" -eq 0 ] && [ -z "${container_user_custom_home}" ] && [ "${home_overlay_opts}" = "-" ] && [ "${container_user_home}" != "/var/home/${container_user_name}" ] &&
+		[ -d "/var/home/${container_user_name}" ]; then
+
+		if [ "${home_overlay_opts}" = "-" ]; then
+			result_command="${result_command}
+				--volume \"/var/home/${container_user_name}\":\"/var/home/${container_user_name}\":rslave"
+		else
+			result_command="${result_command}
+				--volume \"/var/home/${container_user_name}\":\"/var/home/${container_user_name}\":\"O${home_overlay_opts}\""
+		fi
 	fi
 
 	# Mount also the XDG_RUNTIME_DIR to ensure functionality of the apps.
@@ -911,7 +1020,7 @@ generate_create_command()
 		--name \"${container_user_name}\"
 		--user ${container_user_uid}
 		--group ${container_user_gid}
-		--home \"${container_user_custom_home:-"${container_user_home}"}\"
+		--home \"${container_user_home}\"
 		--init \"${init}\"
 		--nvidia \"${nvidia}\"
 		--pre-init-hooks \"${container_pre_init_hook}\"
@@ -997,7 +1106,7 @@ if [ "${container_always_pull}" -eq 1 ] ||
 fi
 
 # Generate the create command and run it
-printf >&2 "Creating '%s' using image %s\t" "${container_name}" "${container_image}"
+printf >&2 "Creating '%s' using image %s\t" "${container_name}" "${container_image}\n"
 cmd="$(generate_create_command)"
 # Eval the generated command. If successful display an helpful message.
 # shellcheck disable=SC2086
