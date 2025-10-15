@@ -236,6 +236,8 @@ fi
 # Load Nix
 if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
   . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+elif [ -d "$HOME/DistroHome/Nix/.local/bin" ]; then
+  export PATH="$PATH:$HOME/DistroHome/Nix/.local/bin"	
 fi
 
 if test_command moon; then
