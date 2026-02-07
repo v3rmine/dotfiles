@@ -182,18 +182,18 @@ distrobox version: ${version}
 
 Usage:
 
-	distrobox create --image alpine:latest --name test --init-hooks "touch /var/tmp/test1 && touch /var/tmp/test2"
-	distrobox create --image fedora:39 --name test --additional-flags "--env MY_VAR-value"
-	distrobox create --image fedora:39 --name test --volume /opt/my-dir:/usr/local/my-dir:rw --additional-flags "--pids-limit 100"
-	distrobox create -i docker.io/almalinux/8-init --init --name test --pre-init-hooks "dnf config-manager --enable powertools && dnf -y install epel-release"
-	distrobox create --clone fedora-39 --name fedora-39-copy
-	distrobox create --image alpine my-alpine-container
-	distrobox create --image registry.fedoraproject.org/fedora-toolbox:latest --name fedora-toolbox-latest
-	distrobox create --pull --image centos:stream9 --home ~/distrobox/centos9
-	distrobox create --image alpine:latest --name test2 --additional-packages "git tmux vim"
-	distrobox create --image ubuntu:22.04 --name ubuntu-nvidia --nvidia
+	distrobox-isolated-create --image alpine:latest --name test --init-hooks "touch /var/tmp/test1 && touch /var/tmp/test2"
+	distrobox-isolated-create --image fedora:39 --name test --additional-flags "--env MY_VAR-value"
+	distrobox-isolated-create --image fedora:39 --name test --volume /opt/my-dir:/usr/local/my-dir:rw --additional-flags "--pids-limit 100"
+	distrobox-isolated-create -i docker.io/almalinux/8-init --init --name test --pre-init-hooks "dnf config-manager --enable powertools && dnf -y install epel-release"
+	distrobox-isolated-create --clone fedora-39 --name fedora-39-copy
+	distrobox-isolated-create --image alpine my-alpine-container
+	distrobox-isolated-create --image registry.fedoraproject.org/fedora-toolbox:latest --name fedora-toolbox-latest
+	distrobox-isolated-create --pull --image centos:stream9 --home ~/distrobox/centos9
+	distrobox-isolated-create --image alpine:latest --name test2 --additional-packages "git tmux vim"
+	distrobox-isolated-create --image ubuntu:22.04 --name ubuntu-nvidia --nvidia
 
-	DBX_NON_INTERACTIVE=1 DBX_CONTAINER_NAME=test-alpine DBX_CONTAINER_IMAGE=alpine distrobox-create
+	DBX_NON_INTERACTIVE=1 DBX_CONTAINER_NAME=test-alpine DBX_CONTAINER_IMAGE=alpine distrobox-isolated-create
 
 Options:
 
@@ -244,7 +244,7 @@ Compatibility:
 	for a list of compatible images and container managers, please consult the man page:
 		man distrobox-compatibility
 	or run
-		distrobox create --compatibility
+		distrobox-isolated-create --compatibility
 	or consult the documentation page on: https://github.com/89luca89/distrobox/blob/main/docs/compatibility.md
 EOF
 }
