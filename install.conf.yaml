@@ -19,6 +19,10 @@
         glob: true
         create: true
         path: bin/**
+    ~/DistroHome/:
+        glob: true
+        create: true
+        path: distrobox-templates/*
     ~/.gitconfig: gitconfig
     ~/.gitattributes: gitattributes
     ~/.gitignore: gitignore
