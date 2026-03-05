@@ -110,7 +110,7 @@ function new-patch() {
 }
 
 # SSH fix
-# alias ssh="env SHELL=/bin/sh TERM=xterm-256color ssh"
+alias ssh="env SHELL=/bin/sh TERM=xterm-256color ssh"
 alias tailscale-ssh="env SHELL=/bin/sh TERM=xterm-256color tailscale ssh"
 
 # CPE
