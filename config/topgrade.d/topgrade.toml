@@ -1,0 +1,5 @@
+[distrobox]
+containers = ["nix", "noncritical-dev", "void-dev"]
+
+[commands]
+"Nix Channels" = "~/DistroHome/Nix/.home/.local/bin/nix-channel --update"

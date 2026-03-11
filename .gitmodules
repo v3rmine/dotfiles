@@ -2,10 +2,6 @@
 	ignore = dirty
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot.git
-[submodule "config/doom"]
-	path = config/doom
-	url = https://github.com/joxcat/doom.git
-	branch = master
 [submodule "navi"]
 	path = navi
 	url = https://github.com/joxcat/navi.git
