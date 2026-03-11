@@ -1,7 +1,7 @@
 [submodule "dotbot"]
 	ignore = dirty
 	path = dotbot
-	url = https://github.com/anishathalye/dotbot.git
+	url = https://git.v3rm.in/v3rmine/dotbot.git
 [submodule "config/nvim"]
 	path = config/nvim
-	url = https://github.com/v3rmine/kickstart.nvim.git
+	url = https://git.v3rm.in/v3rmine/kickstart.nvim.git
