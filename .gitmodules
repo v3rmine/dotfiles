@@ -6,9 +6,6 @@
 	path = navi
 	url = https://github.com/joxcat/navi.git
 	branch = master
-[submodule "config/leftwm/themes/catppuccin"]
-	path = config/leftwm/themes/catppuccin
-	url = https://github.com/di-effe/catppuccin.git
 [submodule "config/nvim"]
 	path = config/nvim
 	url = https://github.com/v3rmine/kickstart.nvim.git
